@@ -13,67 +13,83 @@
       <div class="game-area">
         <!-- босс -->
         <div class="game-area__boss">
-          <div class="boss__hp"></div>
-          <div class="boss__img"></div>
+          <div class="boss health-bar-container">
+            <div class="boss health-bar-label">ЗДОРОВЬЕ</div>
+            <div class="boss health-bar">
+              <div class="boss health-bar-fill" id="boss-health-bar"></div>
+              <span class="boss health-text" id="boss-health-text">80 / 80</span>
+            </div>
+          </div>
+          <div class="boss__img"><img src="img/boss1.png" alt="" /></div>
         </div>
         <!-- Чат -->
         <div class="game-area__chat">
           <div class="chat__log">На пути вы встретели врага!</div>
           <div class="chat__log">Какой нибудь текст</div>
         </div>
-      
-      <!-- Игрок -->
-      <div class="game-area__player-section">
-        <div class="player-section__player-card">
-          <img src="img/ryasu1.png" alt="игрок" class="player-card__img" />
-          <div class="player-card__name">Рясу</div>
-        </div>
-        <div class="player-section__stats">
-          <div class="stats__class">Плут</div>
-          <div class="stats__health-bar">
-            <div class="health-bar__laber">ЗДОРОВЬЕ</div>
-            <div class="health-bar__line">
-              <div class="line__fill-hp" id="line__fill-hp"></div>
-              <span class="line__text-hp" id="line__text-hp">300/300</span>
-            </div>
-          </div>
-          <div class="stats__resourse">
-            <div class="resourse">
-              <div class="resourse__img"></div>
-              <span class="resourse__value" id="player-energy">3/3</span>
-              <div class="resourse__name">энергия</div>
-            </div>
-            <div class="resourse">
-              <div class="resourse__img"></div>
-              <span class="resourse__value" id="player-shild">3/3</span>
-              <div class="resourse__name">защита</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- рука игрока -->
-      <div class="game-area__hand" id="game-area__hand"></div>
 
-      <!-- управление игрока -->
-      <div class="game-area__controls">
-        <button class="btn controls__btn-end-turn" id="btn-end-turn" title="Передать ход врагу">
-          Закончить ход
-        </button>
-        <button class="btn controls__btn-draw" id="btn-draw" title="Взять карту из библиотеки">
-          Взять карту
-        </button>
-      </div>
+        <!-- Игрок -->
+        <div class="game-area__player-section">
+          <div class="player-section__player-card">
+            <img src="img/ryasu1.png" alt="игрок" class="player-card__img" />
+            <div class="player-card__name">Рясу</div>
+          </div>
+          <div class="player-section__stats">
+            <div class="stats__class">Плут</div>
+            <div class="player health-bar-container">
+            <div class="player health-bar-label">ЗДОРОВЬЕ</div>
+            <div class="player health-bar">
+              <div class="player health-bar-fill" id="boss-health-bar"></div>
+              <span class="player health-text" id="boss-health-text">80 / 80</span>
+            </div>
+          </div>
+            <div class="stats__resourse">
+              <div class="resourse">
+                <div class="resourse__img"></div>
+                <span class="resourse__value" id="player-energy">3/3</span>
+                <div class="resourse__name">энергия</div>
+              </div>
+              <div class="resourse">
+                <div class="resourse__img"></div>
+                <span class="resourse__value" id="player-shild">3/3</span>
+                <div class="resourse__name">защита</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- рука игрока -->
+        <div class="game-area__hand" id="game-area__hand"></div>
+
+        <!-- управление игрока -->
+        <div class="game-area__controls">
+          <button
+            class="btn controls__btn-end-turn"
+            id="btn-end-turn"
+            title="Передать ход врагу"
+          >
+            Закончить ход
+          </button>
+          <button
+            class="btn controls__btn-draw"
+            id="btn-draw"
+            title="Взять карту из библиотеки"
+          >
+            Взять карту
+          </button>
+        </div>
       </div>
     </main>
     <!-- окно победы/поражение -->
-     <div class="modal-overlay" id="modal-overlay">
-        <div class="modal-overlay__result">
-            <h2 class="result__title" id="result__title">Победа!</h2>
-            <p id="result__message"></p>
-            <button class="btn result__btn-next-game" id="result__btn-next-game">Идти дальше!</button>
-        </div>
-     </div>
-     
-     <script src="js/game.js"></script>
+    <div class="modal-overlay" id="modal-overlay">
+      <div class="modal-overlay__result">
+        <h2 class="result__title" id="result__title">Победа!</h2>
+        <p id="result__message"></p>
+        <button class="btn result__btn-next-game" id="result__btn-next-game">
+          Идти дальше!
+        </button>
+      </div>
+    </div>
+
+    <script src="js/game.js"></script>
   </body>
 </html>
