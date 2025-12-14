@@ -29,7 +29,8 @@ body {
     background: var(--background);
     color: var(--color-dark);
     overflow-x: hidden;
-    grid
+    display: grid;
+    grid-template-columns: 20rem auto;
 }
 
 a {
@@ -66,3 +67,69 @@ h6 {
     font-size: 0.67rem;
 }
 
+.left-menu {
+}
+.main {
+}
+.game-area {
+}
+.game-area__boss {
+}
+.boss__hp {
+}
+.boss__img {
+}
+.game-area__chat {
+}
+.chat__log {
+}
+.game-area__player-section {
+}
+.player-section__player-card {
+}
+.player-card__img {
+}
+.player-card__name {
+}
+.player-section__stats {
+}
+.stats__class {
+}
+.stats__health-bar {
+}
+.health-bar__laber {
+}
+.health-bar__line {
+}
+.line__fill-hp {
+}
+.line__text-hp {
+}
+.stats__resourse {
+}
+.resourse {
+}
+.resourse__img {
+}
+.resourse__value {
+}
+.resourse__name {
+}
+.game-area__hand {
+}
+.game-area__controls {
+}
+.btn {
+}
+.controls__btn-end-turn {
+}
+.controls__btn-draw {
+}
+.modal-overlay {
+}
+.modal-overlay__result {
+}
+.result__title {
+}
+.result__btn-next-game {
+}
