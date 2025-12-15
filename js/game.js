@@ -146,10 +146,10 @@ function initGame() {
     updateUI();
     
     // Показываем правила при первом запуске
-    if (!localStorage.getItem('newYearGameRulesShown')) {
-        showRules();
-        localStorage.setItem('newYearGameRulesShown', 'true');
-    }
+    // if (!localStorage.getItem('newYearGameRulesShown')) {
+    //     showRules();
+    //     localStorage.setItem('newYearGameRulesShown', 'true');
+    // }
 }
 
 // Перемешивание колоды
@@ -501,7 +501,7 @@ function updateUI() {
     // document.getElementById('boss-shield').textContent = Game.boss.shield;
     
     // Намерение босса
-    const intentContainer = document.getElementById('boss-intent');
+    const intentContainer = document.getElementById('boss__intent');
     if (Game.boss.nextAction) {
         intentContainer.innerHTML = `
             <i class="fas ${Game.boss.nextAction.type === 'attack' ? 'fa-fist-raised' : Game.boss.nextAction.type === 'defense' ? 'fa-shield-alt' : 'fa-star'}"></i>
