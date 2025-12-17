@@ -63,9 +63,9 @@ body {
      background-repeat: no-repeat;
     background-size:cover;
     color: var(--color-dark);
-    overflow-x: hidden;
-    display: grid;
-    grid-template-columns: 12rem auto;
+    /* overflow: hidden; */
+    /* display: grid;
+    grid-template-columns: 12rem auto; */
 }
 
 a {
@@ -104,35 +104,37 @@ h6 {
 
 .left-menu {
     background: rgba(0, 0, 0, 0.5);
+    display: none;
 }
+
+
 .main {
     display: flex;
     flex-direction: column;
-    gap: 30px;
 }
 .game-area {
+    display: flex;
+    width: 100%;
     
-   
 }
 .game-area__boss {
     width: 100%;
-    
-
-}
-/* полоски здоровье */
-.health-bar-container{
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    width: 100%;
+    align-items: center;
+}
+/* полоски здоровье */
+.health-bar-container, .armor-bar-container {
+    display: flex;
+    margin: auto;
+    flex-direction: column;
     align-items: center;
 }
 .stats__health-bar{
     flex-grow: 1;
     align-items: center;
 }
-.health-bar-label {
+.health-bar-label{
     
     font-size: 1rem;
     color: var(--color-red);
@@ -141,10 +143,10 @@ h6 {
     margin-bottom: 5px;
     font-weight: 500;
 }
-.health-bar {
+.health-bar, .armor-bar{
     
     height: 30px;
-    width: 30rem;
+    min-width: 15rem;
     background-color: #34495e;
     border-radius: var(--border-radius-1);
     overflow: hidden;
@@ -152,14 +154,23 @@ h6 {
     box-shadow: var(--box-shadow);
     border: 2px solid #2c3e50;
 }
-.health-bar-fill {
+
+.game-area__boss .health-bar{
+    min-width: 50rem;
+    height: 40px;
+}
+
+.health-bar-fill , .armor-bar-fill {
     height: 100%;
-    background: linear-gradient(to right, #e74c3c, #f1c40f);
+    background: linear-gradient(to right, #e92020, #61f70b);
     border-radius: var(--border-radius-1);
     transition: width 0.5s ease;
     width: 100%;
 }
-.health-text {
+.game-area__boss .health-bar-fill{
+    background: linear-gradient(to right, #e74c3c, #0f13f1);
+}
+.health-text , .armor-text{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -170,14 +181,18 @@ h6 {
     font-family: "Duality";
     font-weight: 600;
 }
-.boss__img {
-    height: 50rem;
-    display: flex;
-    position: absolute;
-    right: 25%;
-    z-index: -1;
 
+.armor-bar-fill{
+    background: linear-gradient(to right, #99aabb, #3f3f5c);
 }
+
+.boss__img {
+    display: flex;
+}
+.boss-img__item{
+    width: 50rem;
+}
+
 .boss__intent{
     padding: 0.8rem;
     margin-top: 10%;
@@ -211,16 +226,24 @@ h6 {
 .chat__log:last-child {
     border-bottom: none;
 }
+
+/* player */
 .game-area__player-section {
-    background-repeat: no-repeat;
-    background-size:contain;
-    width: 19rem;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: space-around;
+    align-items: end;
+    width: 100%;
+    height: 60%;
+    bottom: 0%;
+    position: absolute;
+    padding: 0 2rem;
 }
 .player-section__player-card {
-
+    display: flex;
+    flex-direction: column;
+    /* position: absolute;
+    left: 5%;
+    bottom: 10%; */
 }
 .player-card__img {
     width: 16rem;
@@ -238,14 +261,36 @@ h6 {
 
 }
 
-.player-card__name {
-    position: absolute;
-    z-index: 5;
-}
-.player-section__stats {
-}
 .stats__class {
+    z-index: 5;
+    height: 1px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    align-items: end;
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    font-family: "Duality";
+    color: white;
+    font-weight: 400;
 }
+.player-card__name {
+    padding-left:1rem ;
+    font-size: 5rem;
+    font-family: "Bakinskay";
+    font-weight: 400;
+    text-align: center;
+}
+
+.player-section__stats {
+    /* position: absolute;
+    left: 0%;
+    bottom: 0%; */
+}
+
+
+
 .stats__health-bar {
 }
 .health-bar__laber {
@@ -273,16 +318,13 @@ h6 {
     gap: 15px;
     flex-wrap: wrap;
     min-height: 200px;
-    width: 60%;
+    width: 50%;
     margin: auto;
     padding: 20px;
     background: rgba(44, 62, 80, 0.5);
     border-radius: 15px;
     margin-top: 20px;
     margin-bottom: 20px;
-    position: absolute;
-    bottom: 0%;
-    left: 25%
 
 }
 .game-area__controls {
@@ -291,9 +333,6 @@ h6 {
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
-    position: absolute;
-    bottom: 0%;
-    right: 0%;
     margin-bottom: 30px;
 }
 .btn {
@@ -325,6 +364,7 @@ h6 {
 .controls__btn-draw {
 }
 .modal-overlay {
+    display: none;
 }
 .modal-overlay__result {
 }

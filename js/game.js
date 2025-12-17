@@ -2,6 +2,7 @@
 const GAME_CONFIG = {
     player: {
         maxHealth: 60,
+        maxShield:20,
         startEnergy: 3,
         maxEnergy: 3,
         startDeck: ['snowball', 'snowball', 'snowball', 'frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine']
@@ -22,6 +23,7 @@ const Game = {
     player: {
         health: GAME_CONFIG.player.maxHealth,
         maxHealth: GAME_CONFIG.player.maxHealth,
+        maxShield: GAME_CONFIG.player.maxShield,
         shield: 0,
         energy: GAME_CONFIG.player.startEnergy,
         maxEnergy: GAME_CONFIG.player.maxEnergy,
@@ -112,6 +114,7 @@ function initGame() {
     Game.player = {
         health: GAME_CONFIG.player.maxHealth,
         maxHealth: GAME_CONFIG.player.maxHealth,
+        maxShield:GAME_CONFIG.player.maxShield,
         shield: 0,
         energy: GAME_CONFIG.player.startEnergy,
         maxEnergy: GAME_CONFIG.player.maxEnergy,
@@ -489,7 +492,9 @@ function updateUI() {
     document.getElementById('player-health-text').textContent = `${Game.player.health} / ${Game.player.maxHealth}`;
     
     // Защита и энергия игрока
-    document.getElementById('player-shild').textContent = Game.player.shield;
+    const playerShieldPercent = (Game.player.shield / Game.player.maxShield) * 100;
+    document.getElementById('player-armor-bar').style.width = `${playerShieldPercent}%`;
+    document.getElementById('player-armor-text').textContent = Game.player.shield;
     document.getElementById('player-energy').textContent = `${Game.player.energy} / ${Game.player.maxEnergy}`;
     
     // Здоровье босса
