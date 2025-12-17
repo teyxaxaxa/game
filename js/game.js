@@ -51,8 +51,8 @@ const CARDS = {
         name: 'Снежок',
         type: 'attack',
         cost: 1,
-        value: 5,
-        description: 'Наносит 5 урона',
+        value: 500,
+        description: 'Наносит 500 урона',
         icon: '❄️',
         color: '#e74c3c'
     },
@@ -491,10 +491,14 @@ function updateUI() {
     document.getElementById('player-health-bar').style.width = `${playerHealthPercent}%`;
     document.getElementById('player-health-text').textContent = `${Game.player.health} / ${Game.player.maxHealth}`;
     
-    // Защита и энергия игрока
+    // Защита игрока
     const playerShieldPercent = (Game.player.shield / Game.player.maxShield) * 100;
     document.getElementById('player-armor-bar').style.width = `${playerShieldPercent}%`;
-    document.getElementById('player-armor-text').textContent = Game.player.shield;
+    document.getElementById('player-armor-text').textContent = `${Game.player.shield} / ${Game.player.maxShield}`;
+
+    // Энергия игрока
+    // const playerEnergyPercent = (Game.player.energy / Game.player.maxEnergy) * 100;
+    // document.getElementById('player-energy-bar').style.width = `${playerEnergyPercent}%`;
     document.getElementById('player-energy').textContent = `${Game.player.energy} / ${Game.player.maxEnergy}`;
     
     // Здоровье босса
@@ -503,7 +507,9 @@ function updateUI() {
     document.getElementById('boss-health-text').textContent = `${Game.boss.health} / ${Game.boss.maxHealth}`;
     
     // Защита босса
-    // document.getElementById('boss-shield').textContent = Game.boss.shield;
+    const bossShieldPercent = Game.boss.shield * 10;
+    document.getElementById('boss-armor-bar').style.width = `${bossShieldPercent}%`;
+    document.getElementById('boss-armor-text').textContent = Game.boss.shield;
     
     // Намерение босса
     const intentContainer = document.getElementById('boss__intent');
@@ -579,10 +585,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // document.getElementById('close-rules-btn').addEventListener('click', hideRules);
     
     // Перезапуск игры из модального окна результата
-    // document.getElementById('restart-modal-btn').addEventListener('click', () => {
-    //     document.getElementById('result-modal').style.display = 'none';
-    //     initGame();
-    // });
+    document.getElementById('btn-next-game').addEventListener('click', () => {
+        document.getElementById('modal-overlay').style.display = 'none';
+        initGame();
+    });
     
     // Закрытие модальных окон при клике вне их
     document.querySelectorAll('.modal-overlay').forEach(modal => {
@@ -593,3 +599,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// открытие меню 
+const sideMenu = document.querySelector('.left-menu');
+
+const menuBtn = document.querySelector('#menu-btn');
+
+const closeBtn = document.querySelector('#close-btn');
+
+menuBtn.addEventListener('click', () => {
+    sideMenu.style.display = 'block';
+    menuBtn.style.display = "none";
+})
+
+closeBtn.addEventListener('click', () => {
+    sideMenu.style.display = 'none';
+    menuBtn.style.display = "block";
+})
