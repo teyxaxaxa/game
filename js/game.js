@@ -1,5 +1,9 @@
+// На каком уровне игрок
+let GAME_LEVEL = 1
+
 // Константы и настройки игры
-const GAME_CONFIG = {
+
+let GAME_CONFIG = {
     player: {
         maxHealth: 60,
         maxShield:20,
@@ -8,15 +12,52 @@ const GAME_CONFIG = {
         startDeck: ['snowball', 'snowball', 'snowball', 'frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine']
     },
     boss: {
-        maxHealth: 80,
-        actions: [
+                maxHealth: 80,
+                shield: 0,
+                name: "Гёрл",
+    actions: [
             { name: 'Ледяная Атака', type: 'attack', value: 10, description: 'Наносит 10 урона' },
             { name: 'Морозная Броня', type: 'defense', value: 10, description: 'Дает 10 защиты' },
             { name: 'Новогодняя Ярость', type: 'special', value: { damage: 5, shield: 5 }, description: 'Наносит 5 урона и дает 5 защиты' }
         ]
-    },
+            },
     cardDrawPerTurn: 5
 };
+
+
+// Рассчитывание характеристик босса по уровня прохождение игры
+function newStatsboss (){
+switch (GAME_LEVEL) {
+        case 1:
+            GAME_CONFIG.boss = {
+                maxHealth: 80,
+                shield: 0,
+                name: "Гёрл",
+    actions: [
+            { name: 'Милая атака', type: 'attack', value: 10, description: 'Наносит 10 урона' },
+            { name: 'Милия Броня', type: 'defense', value: 10, description: 'Дает 10 защиты' },
+            { name: 'Новогодняя Ярость', type: 'special', value: { damage: 5, shield: 5 }, description: 'Наносит 5 урона и дает 5 защиты' }
+            { name: 'Ледяная Атака', type: 'attack', value: 10, description: 'Наносит 10 урона' },
+            { name: 'Морозная Броня', type: 'defense', value: 10, description: 'Дает 10 защиты' },
+            { name: 'Новогодняя Ярость', type: 'special', value: { damage: 5, shield: 5 }, description: 'Наносит 5 урона и дает 5 защиты' }
+        ]
+            }
+            break;
+            case 2:
+            GAME_CONFIG.boss = {
+                maxHealth: 180,
+                shield: 20,
+                name: "Гёрл",
+    actions: [
+            { name: 'Ледяная Атака', type: 'attack', value: 10, description: 'Наносит 10 урона' },
+            { name: 'Морозная Броня', type: 'defense', value: 10, description: 'Дает 10 защиты' },
+            { name: 'Новогодняя Ярость', type: 'special', value: { damage: 5, shield: 5 }, description: 'Наносит 5 урона и дает 5 защиты' }
+        ]
+            }
+            break;
+    }}
+
+    newStatsboss();
 
 // Объект игры
 const Game = {
@@ -34,9 +75,9 @@ const Game = {
     boss: {
         health: GAME_CONFIG.boss.maxHealth,
         maxHealth: GAME_CONFIG.boss.maxHealth,
-        shield: 0,
+        shield: GAME_CONFIG.boss.shield,
         nextAction: null,
-        name: "Снеговик-Воин",
+        name: GAME_CONFIG.boss.name,
         image: "https://img.icons8.com/color/96/000000/snowman.png"
     },
     turn: 'player',
@@ -126,7 +167,7 @@ function initGame() {
     Game.boss = {
         health: GAME_CONFIG.boss.maxHealth,
         maxHealth: GAME_CONFIG.boss.maxHealth,
-        shield: 0,
+        shield: GAME_CONFIG.boss.shield,
         nextAction: null,
         name: "Снеговик-Воин",
         image: "https://img.icons8.com/color/96/000000/snowman.png"
@@ -587,7 +628,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Перезапуск игры из модального окна результата
     document.getElementById('btn-next-game').addEventListener('click', () => {
         document.getElementById('modal-overlay').style.display = 'none';
+        GAME_LEVEL +=1
+        newStatsboss()
         initGame();
+        
+        console.log(GAME_LEVEL)
     });
     
     // Закрытие модальных окон при клике вне их
