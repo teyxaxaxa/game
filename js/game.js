@@ -1,69 +1,104 @@
 // На каком уровне игрок
 let GAME_LEVEL = 1
+// поиск фотографии
+let bgimg = document.getElementById('body')
 
 // Константы и настройки игры
-let bgimg = document.getElementById('body')
 let GAME_CONFIG = {
     player: {
         maxHealth: 60,
-        maxShield:20,
+        maxShield: 20,
         startEnergy: 3,
         maxEnergy: 3,
         startDeck: ['snowball', 'snowball', 'snowball', 'frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine']
     },
     boss: {
-                maxHealth: 80,
-                shield: 0,
-                name: "Гёрл",
-                image:"",
-    actions: [
+        maxHealth: 80,
+        shield: 0,
+        name: "Гёрл",
+        image: "",
+        actions: [
             { name: 'Ледяная Атака', type: 'attack', value: 10, description: 'Наносит 10 урона' },
             { name: 'Морозная Броня', type: 'defense', value: 10, description: 'Дает 10 защиты' },
             { name: 'Новогодняя Ярость', type: 'special', value: { damage: 5, shield: 5 }, description: 'Наносит 5 урона и дает 5 защиты' }
         ]
-            },
+    },
     cardDrawPerTurn: 5
 };
 
 
 // Рассчитывание характеристик босса по уровня прохождение игры
-function newStatsboss (){
-switch (GAME_LEVEL) {
+function newStatsboss() {
+
+    switch (GAME_LEVEL) {
         case 1:
             GAME_CONFIG.boss = {
                 maxHealth: 80,
                 shield: 0,
-                name: "Гёрл",
-                image:"img/characterMil-hero-card.png",
-    actions: [
-            { name: 'Милая атака', type: 'attack', value: 10, description: 'Наносит 10 урона' },
-            { name: 'Милия Броня', type: 'defense', value: 10, description: 'Дает 10 защиты' },
-            { name: 'Новогодняя Ярость', type: 'special', value: { damage: 5, shield: 5 }, description: 'Наносит 5 урона и дает 5 защиты' }
-        ]
+                name: "Злой Тихон",
+                image: "img/boss-level1.png",
+                actions: [
+                    { name: 'Злобная атака', type: 'attack', value: 10, description: 'Наносит 10 урона' },
+                    { name: 'Злобная Броня', type: 'defense', value: 10, description: 'Дает 10 защиты' },
+                    { name: 'Новогодняя Ярость', type: 'special', value: { damage: 5, shield: 5 }, description: 'Наносит 5 урона и дает 5 защиты' }
+                ]
             }
-            bgimg.style.background=`url(img/location.jpg)`
-            bgimg.style.backgroundRepeat='no-repeat'
-            bgimg.style.backgroundSize='cover'
+            bgimg.style.background = `url(img/background-level1.png)`
+            bgimg.style.backgroundRepeat = 'no-repeat'
+            bgimg.style.backgroundSize = 'cover'
             break;
-            case 2:
+        case 2:
             GAME_CONFIG.boss = {
                 maxHealth: 180,
                 shield: 20,
-                name: "Гёрл2",
-                image:"img/ryasu1.png",
-    actions: [
-            { name: 'Ледяная Атака', type: 'attack', value: 10, description: 'Наносит 10 урона' },
-            { name: 'Морозная Броня', type: 'defense', value: 10, description: 'Дает 10 защиты' },
-            { name: 'Новогодняя Ярость', type: 'special', value: { damage: 5, shield: 5 }, description: 'Наносит 5 урона и дает 5 защиты' }
-        ]
+                name: "boss2",
+                image: "img/boss-level2.png",
+                actions: [
+                    { name: 'Ледяная Атака', type: 'attack', value: 10, description: 'Наносит 10 урона' },
+                    { name: 'Морозная Броня', type: 'defense', value: 10, description: 'Дает 10 защиты' },
+                    { name: 'Новогодняя Ярость', type: 'special', value: { damage: 5, shield: 5 }, description: 'Наносит 5 урона и дает 5 защиты' }
+                ]
             }
-            bgimg.style.background=`url(img/back-forest1.jpg)`
-            bgimg.style.backgroundRepeat='no-repeat'
-            bgimg.style.backgroundSize='cover'
+            bgimg.style.background = `url(img/background-level2.png)`
+            bgimg.style.backgroundRepeat = 'no-repeat'
+            bgimg.style.backgroundSize = 'cover'
             break;
-    }}
+        case 3:
+            GAME_CONFIG.boss = {
+                maxHealth: 120,
+                shield: 10,
+                name: "boss3",
+                image: "img/boss-level3.png",
+                actions: [
+                    { name: 'Ледяная Атака', type: 'attack', value: 10, description: 'Наносит 10 урона' },
+                    { name: 'Морозная Броня', type: 'defense', value: 10, description: 'Дает 10 защиты' },
+                    { name: 'Новогодняя Ярость', type: 'special', value: { damage: 5, shield: 5 }, description: 'Наносит 5 урона и дает 5 защиты' }
+                ]
+            }
+            bgimg.style.background = `url(img/background-level3.png)`
+            bgimg.style.backgroundRepeat = 'no-repeat'
+            bgimg.style.backgroundSize = 'cover'
+            break;
+        case 4:
+            GAME_CONFIG.boss = {
+                maxHealth: 180,
+                shield: 20,
+                name: "boss4",
+                image: "img/characterMil-hero-card.png",
+                actions: [
+                    { name: 'Ледяная Атака', type: 'attack', value: 10, description: 'Наносит 10 урона' },
+                    { name: 'Морозная Броня', type: 'defense', value: 10, description: 'Дает 10 защиты' },
+                    { name: 'Новогодняя Ярость', type: 'special', value: { damage: 5, shield: 5 }, description: 'Наносит 5 урона и дает 5 защиты' }
+                ]
+            }
+            bgimg.style.background = `url(img/background-level4.png)`
+            bgimg.style.backgroundRepeat = 'no-repeat'
+            bgimg.style.backgroundSize = 'cover'
+            break;
+    }
+}
 
-    newStatsboss();
+newStatsboss();
 
 // Объект игры
 const Game = {
@@ -102,7 +137,6 @@ const CARDS = {
         description: 'Наносит 500 урона',
         icon: '❄️',
         color: '#e74c3c',
-        image:'img/card-fight.png'
     },
     frostShield: {
         id: 'frostShield',
@@ -162,7 +196,7 @@ function initGame() {
     Game.player = {
         health: Game.player.health,
         maxHealth: GAME_CONFIG.player.maxHealth,
-        maxShield:GAME_CONFIG.player.maxShield,
+        maxShield: GAME_CONFIG.player.maxShield,
         shield: 0,
         energy: GAME_CONFIG.player.startEnergy,
         maxEnergy: GAME_CONFIG.player.maxEnergy,
@@ -170,7 +204,7 @@ function initGame() {
         hand: [],
         discard: []
     };
-    
+
     Game.boss = {
         health: GAME_CONFIG.boss.maxHealth,
         maxHealth: GAME_CONFIG.boss.maxHealth,
@@ -179,23 +213,23 @@ function initGame() {
         name: "Снеговик-Воин",
         image: "https://img.icons8.com/color/96/000000/snowman.png"
     };
-    
+
     Game.turn = 'player';
     Game.gameOver = false;
     Game.actionLog = ['Новогодняя битва начинается!', 'Снеговик-Воин бросает вам вызов!'];
-    
+
     // Перемешиваем колоду
     shuffleDeck();
-    
+
     // Босс выбирает первое действие
     chooseBossAction();
-    
+
     // Игрок берет начальную руку
     drawCards(GAME_CONFIG.cardDrawPerTurn);
-    
+
     // Обновляем интерфейс
     updateUI();
-    
+
     // Показываем правила при первом запуске
     // if (!localStorage.getItem('newYearGameRulesShown')) {
     //     showRules();
@@ -226,12 +260,12 @@ function drawCards(count) {
                 break;
             }
         }
-        
+
         // Берем карту из колоды
         const cardId = Game.player.deck.pop();
         Game.player.hand.push(cardId);
     }
-    
+
     updateHand();
 }
 
@@ -239,28 +273,28 @@ function drawCards(count) {
 function updateHand() {
     const handContainer = document.getElementById('game-area__hand');
     handContainer.innerHTML = '';
-    
+
     Game.player.hand.forEach(cardId => {
         const card = CARDS[cardId];
         const cardElement = document.createElement('div');
         cardElement.className = `card ${card.type}`;
-        if (card.type==='attack') {
-            cardElement.style.background = `url("img/card-fight.png")`
-            cardElement.style.backgroundRepeat='no-repeat'
-            cardElement.style.backgroundSize='cover'
+        if (card.type === 'attack') {
+            cardElement.style.background = `url("img/card-fight-common.png")`
+            cardElement.style.backgroundRepeat = 'no-repeat'
+            cardElement.style.backgroundSize = 'cover'
         }
-        else if (card.type==='defense'){
-            cardElement.style.background = `url("img/card-shild.png")`
-            cardElement.style.backgroundRepeat='no-repeat'
-            cardElement.style.backgroundSize='cover'
+        else if (card.type === 'defense') {
+            cardElement.style.background = `url("img/card-shield-common.png")`
+            cardElement.style.backgroundRepeat = 'no-repeat'
+            cardElement.style.backgroundSize = 'cover'
         }
         else {
-            cardElement.style.background = `url("img/card-health.png")`
-            cardElement.style.backgroundRepeat='no-repeat'
-            cardElement.style.backgroundSize='cover'
+            cardElement.style.background = `url("img/card-health-common.png")`
+            cardElement.style.backgroundRepeat = 'no-repeat'
+            cardElement.style.backgroundSize = 'cover'
         }
-        
-        
+
+
         // Проверяем, можно ли разыграть карту
         const canPlay = Game.player.energy >= card.cost && Game.turn === 'player' && !Game.gameOver;
         if (!canPlay) {
@@ -268,19 +302,19 @@ function updateHand() {
         } else {
             cardElement.classList.add('playable');
         }
-        
+
         cardElement.innerHTML = `
             <div class="card-cost">${card.cost}</div>
             <div class="card-name">${card.name}</div>
             <div class="card-icon">${card.icon}</div>
             <div class="card-description">${card.description}</div>
-            <div class="card-type">${card.type === 'attack' ? 'АТАКА'  : card.type === 'defense' ? 'ЗАЩИТА' : 'ОСОБАЯ'}</div>
+            <div class="card-type">${card.type === 'attack' ? 'АТАКА' : card.type === 'defense' ? 'ЗАЩИТА' : 'ОСОБАЯ'}</div>
         `;
-        
+
         if (canPlay) {
             cardElement.addEventListener('click', () => playCard(cardId));
         }
-        
+
         handContainer.appendChild(cardElement);
     });
 }
@@ -288,32 +322,32 @@ function updateHand() {
 // Разыграть карту
 function playCard(cardId) {
     if (Game.turn !== 'player' || Game.gameOver) return;
-    
+
     const card = CARDS[cardId];
-    
+
     // Проверяем, достаточно ли энергии
     if (Game.player.energy < card.cost) {
         addToLog(`Недостаточно энергии для "${card.name}"!`);
         return;
     }
-    
+
     // Тратим энергию
     Game.player.energy -= card.cost;
-    
+
     // Убираем карту из руки
     const cardIndex = Game.player.hand.indexOf(cardId);
     if (cardIndex !== -1) {
         Game.player.hand.splice(cardIndex, 1);
         Game.player.discard.push(cardId);
     }
-    
+
     // Применяем эффект карты
     applyCardEffect(card);
-    
+
     // Обновляем UI
     updateUI();
     updateHand();
-    
+
     // Проверяем, не умер ли босс
     checkGameOver();
 }
@@ -321,7 +355,7 @@ function playCard(cardId) {
 // Применить эффект карты
 function applyCardEffect(card) {
     addToLog(`Вы разыгрываете: ${card.name}`);
-    
+
     switch (card.id) {
         case 'snowball':
         case 'icicle':
@@ -329,14 +363,14 @@ function applyCardEffect(card) {
             dealDamageToBoss(card.value, card.name);
             //createAnimation('damage', card.value, 'boss');
             break;
-            
+
         case 'frostShield':
             // Защита игрока
             Game.player.shield += card.value;
             addToLog(`Вы получаете ${card.value} защиты`);
             //createAnimation('shield', card.value, 'player');
             break;
-            
+
         case 'surpriseGift':
             // Защита + энергия в следующем ходу
             Game.player.shield += card.value.shield;
@@ -344,13 +378,13 @@ function applyCardEffect(card) {
             addToLog(`Вы получаете ${card.value.shield} защиты и дополнительную энергию в следующем ходу`);
             //createAnimation('shield', card.value.shield, 'player');
             break;
-            
+
         case 'glowingGarland':
             // Урон всем (в текущей версии только боссу)
             dealDamageToBoss(card.value, card.name);
             //createAnimation('damage', card.value, 'boss');
             break;
-            
+
         case 'mulledWine':
             // Лечение игрока
             const healAmount = Math.min(card.value, Game.player.maxHealth - Game.player.health);
@@ -369,10 +403,10 @@ function dealDamageToBoss(damage, source) {
         Game.boss.shield -= blocked;
         damage -= blocked;
         addToLog(`Защита босса поглотила ${blocked} урона`);
-        
+
         if (damage <= 0) return;
     }
-    
+
     // Наносим оставшийся урон
     Game.boss.health = Math.max(0, Game.boss.health - damage);
     addToLog(`Вы наносите ${damage} урона боссу с помощью "${source}"`);
@@ -388,26 +422,26 @@ function chooseBossAction() {
 // Ход босса
 function bossTurn() {
     if (Game.gameOver) return;
-    
+
     addToLog(`=== ХОД БОССА ===`);
     addToLog(`${Game.boss.name} использует: ${Game.boss.nextAction.name}`);
-    
+
     const action = Game.boss.nextAction;
-    
+
     switch (action.type) {
         case 'attack':
             // Атака игрока
             dealDamageToPlayer(action.value, action.name);
             //createAnimation('damage', action.value, 'player');
             break;
-            
+
         case 'defense':
             // Защита босса
             Game.boss.shield += action.value;
             addToLog(`${Game.boss.name} получает ${action.value} защиты`);
             //createAnimation('shield', action.value, 'boss');
             break;
-            
+
         case 'special':
             // Особое действие (урон + защита)
             dealDamageToPlayer(action.value.damage, action.name);
@@ -417,29 +451,29 @@ function bossTurn() {
             //createAnimation('shield', action.value.shield, 'boss');
             break;
     }
-    
+
     // Босс выбирает следующее действие
     chooseBossAction();
-    
+
     // Сбрасываем защиту игрока (если не указано иное)
     if (Game.player.shield > 0) {
         addToLog(`Ваша защита сброшена`);
         Game.player.shield = 0;
     }
-    
+
     // Переход к ходу игрока
     Game.turn = 'player';
-    
+
     // Восстанавливаем энергию игрока
     Game.player.energy = GAME_CONFIG.player.maxEnergy;
-    
+
     // Игрок берет карты
     drawCards(GAME_CONFIG.cardDrawPerTurn);
-    
+
     // Обновляем UI
     updateUI();
     updateHand();
-    
+
     // Проверяем, не умер ли игрок
     checkGameOver();
 }
@@ -452,10 +486,10 @@ function dealDamageToPlayer(damage, source) {
         Game.player.shield -= blocked;
         damage -= blocked;
         addToLog(`Ваша защита поглотила ${blocked} урона`);
-        
+
         if (damage <= 0) return;
     }
-    
+
     // Наносим оставшийся урон
     Game.player.health = Math.max(0, Game.player.health - damage);
     addToLog(`${Game.boss.name} наносит вам ${damage} урона с помощью "${source}"`);
@@ -464,11 +498,11 @@ function dealDamageToPlayer(damage, source) {
 // Создание анимации
 // function createAnimation(type, value, target) {
 //     const animationsContainer = document.getElementById('animations-container');
-    
+
 //     const effect = document.createElement('div');
 //     effect.className = `${type}-effect`;
 //     effect.textContent = type === 'damage' ? `-${value}` : type === 'heal' ? `+${value}` : `+${value}`;
-    
+
 //     // Позиционируем анимацию
 //     if (target === 'boss') {
 //         effect.style.left = '70%';
@@ -477,9 +511,9 @@ function dealDamageToPlayer(damage, source) {
 //         effect.style.left = '30%';
 //         effect.style.top = '60%';
 //     }
-    
+
 //     animationsContainer.appendChild(effect);
-    
+
 //     // Удаляем анимацию через 1.5 секунды
 //     setTimeout(() => {
 //         if (effect.parentNode === animationsContainer) {
@@ -495,7 +529,7 @@ function checkGameOver() {
         showResult(true);
         return;
     }
-    
+
     if (Game.player.health <= 0) {
         Game.gameOver = true;
         showResult(false);
@@ -509,7 +543,7 @@ function showResult(isWin) {
     const title = document.getElementById('result__title');
     const message = document.getElementById('result__message');
     // const icon = document.getElementById('result-icon');
-    
+
     if (isWin) {
         title.textContent = 'ПОБЕДА!';
         message.textContent = 'Вы победили Снеговика-Воина! С Новым Годом!';
@@ -521,24 +555,24 @@ function showResult(isWin) {
         // icon.innerHTML = '<i class="fas fa-snowman"></i>';
         addToLog('Вы проиграли. Снеговик-Воин победил!');
     }
-    
+
     modal.style.display = 'flex';
 }
 
 // Добавить запись в лог
 function addToLog(message) {
     Game.actionLog.push(message);
-    
+
     const logContainer = document.getElementById('game-area__chat');
     const logEntry = document.createElement('div');
     logEntry.className = 'chat__log';
     logEntry.textContent = message;
-    
+
     logContainer.appendChild(logEntry);
-    
+
     // Прокручиваем лог вниз
     logContainer.scrollTop = logContainer.scrollHeight;
-    
+
     // Ограничиваем количество записей в логе
     if (Game.actionLog.length > 20) {
         Game.actionLog.shift();
@@ -554,7 +588,7 @@ function updateUI() {
     const playerHealthPercent = (Game.player.health / Game.player.maxHealth) * 100;
     document.getElementById('player-health-bar').style.width = `${playerHealthPercent}%`;
     document.getElementById('player-health-text').textContent = `${Game.player.health} / ${Game.player.maxHealth}`;
-    
+
     // Защита игрока
     const playerShieldPercent = (Game.player.shield / Game.player.maxShield) * 100;
     document.getElementById('player-armor-bar').style.width = `${playerShieldPercent}%`;
@@ -564,17 +598,17 @@ function updateUI() {
     // const playerEnergyPercent = (Game.player.energy / Game.player.maxEnergy) * 100;
     // document.getElementById('player-energy-bar').style.width = `${playerEnergyPercent}%`;
     document.getElementById('player-energy').textContent = `${Game.player.energy} / ${Game.player.maxEnergy}`;
-    
+
     // Здоровье босса
     const bossHealthPercent = (Game.boss.health / Game.boss.maxHealth) * 100;
     document.getElementById('boss-health-bar').style.width = `${bossHealthPercent}%`;
     document.getElementById('boss-health-text').textContent = `${Game.boss.health} / ${Game.boss.maxHealth}`;
-    
+
     // Защита босса
     const bossShieldPercent = Game.boss.shield * 10;
     document.getElementById('boss-armor-bar').style.width = `${bossShieldPercent}%`;
     document.getElementById('boss-armor-text').textContent = Game.boss.shield;
-    
+
     // Намерение босса
     const intentContainer = document.getElementById('boss__intent');
     if (Game.boss.nextAction) {
@@ -583,11 +617,11 @@ function updateUI() {
             <span class="intent-text">${Game.boss.nextAction.name}: ${Game.boss.nextAction.description}</span>
         `;
     }
-    
+
     // Имя и изображение босса
     document.getElementById('health-bar-label').textContent = GAME_CONFIG.boss.name;
     document.getElementById('boss__img').src = GAME_CONFIG.boss.image;
-    
+
     // Обновляем кнопку завершения хода
     const endTurnBtn = document.getElementById('btn-end-turn');
     if (Game.turn === 'player' && !Game.gameOver) {
@@ -621,43 +655,43 @@ function drawTestCard() {
 document.addEventListener('DOMContentLoaded', () => {
     // Инициализация игры
     initGame();
-    
+
     // Кнопка завершения хода
     document.getElementById('btn-end-turn').addEventListener('click', () => {
         if (Game.turn === 'player' && !Game.gameOver) {
             Game.turn = 'boss';
             updateUI();
             updateHand();
-            
+
             // Задержка перед ходом босса для драматизма
             setTimeout(() => {
                 bossTurn();
             }, 1000);
         }
     });
-    
+
     // Кнопка взять карту (тестовая)
     document.getElementById('btn-draw').addEventListener('click', drawTestCard);
-    
+
     // Кнопка перезапуска игры
     // document.getElementById('restart-btn').addEventListener('click', initGame);
-    
+
     // Кнопка помощи (правила)
     // document.getElementById('help-btn').addEventListener('click', showRules);
-    
+
     // Закрытие модального окна правил
     // document.getElementById('close-rules-btn').addEventListener('click', hideRules);
-    
+
     // Перезапуск игры из модального окна результата
     document.getElementById('btn-next-game').addEventListener('click', () => {
         document.getElementById('modal-overlay').style.display = 'none';
-        GAME_LEVEL +=1
+        GAME_LEVEL += 1
         newStatsboss()
         initGame();
-        
+
         console.log(GAME_LEVEL)
     });
-    
+
     // Закрытие модальных окон при клике вне их
     document.querySelectorAll('.modal-overlay').forEach(modal => {
         modal.addEventListener('click', (e) => {
@@ -684,3 +718,4 @@ closeBtn.addEventListener('click', () => {
     sideMenu.style.display = 'none';
     menuBtn.style.display = "block";
 })
+

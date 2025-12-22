@@ -110,7 +110,7 @@ h6 {
     display: none;
     position: fixed;
     left: 0;
-    z-index: 5;
+    z-index: 8;
     width: 18rem;
     height: 100vh;
     padding: 2rem;
@@ -231,7 +231,20 @@ h6 {
     display: flex;
 }
 .boss-img__item{
-    width: 25rem;
+    width: 60rem;
+    animation: bosslive 20s ease-in-out infinite;
+}
+
+@keyframes bosslive{
+  0%, 100%{
+    transform: rotate(0deg) scale(1);
+  }
+  40%{
+    transform: rotate(1deg) scale(1.02);
+  }
+  80%{
+    transform: rotate(-1deg) scale(1);
+  }
 }
 
 .boss__intent{
@@ -415,7 +428,7 @@ h6 {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000;
+    z-index: 50;
     padding: 20px;
     display: none;
 }
@@ -442,8 +455,8 @@ h6 {
 }
 
 .card {
-    width: 160px;
-    height: 220px;
+    width: 155px;
+    height: 230px;
     border-radius: 12px;
     padding: 30px 30px;
     display: flex;
@@ -474,4 +487,206 @@ h6 {
     transform: none;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
+
+/* Загрузки во время чего либо */
+.loading{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+     animation: loading 5s forwards;
+}
+
+.loading img{
+  animation: loading-img 1.3s infinite;
+  width: 50%;
+  position: absolute;
+  transform: translate(-25%, -25%);
+  left: 25%;
+}
+
+.loading>img:nth-child(2){
+  animation: loading-img-leftB 5s forwards;
+}
+
+.loading>img:nth-child(3){
+  animation: loading-img-a 5s forwards;
+}
+
+.loading>img:nth-child(4){
+  animation: loading-img-rightB 5s forwards;
+}
+
+.loading>img:nth-child(5){
+  animation: loading-img-team 5s forwards;
+}
+
+@keyframes loading-img{
+  0%{
+    transform:scale(0.3);
+  }
+  100%{
+    transform:scale(0.3);
+  }
+}
+
+@keyframes loading-img-leftB{
+  0%{
+    transform:scale(0.3) translate(0%, -300%);
+  }
+  10%{
+    transform:scale(0.3) translate(0%, 5%);
+  }
+  15%{
+    transform:scale(0.3) translate(0%, 0%);
+  }
+
+  60%{
+    transform:scale(0.3) translate(0%, 0%)
+  }
+  65%{
+    transform:scale(0.3) translate(0%, 0%) rotate(-50deg)
+  }
+  75%{
+    transform:scale(0.3) translate(0%, 0%) rotate(-40deg)
+  }
+
+  100%{
+    transform:scale(0.3) translate(0%, 500%) rotate(-40deg);
+  }
+}
+
+@keyframes loading-img-a{
+  0%{
+    transform:scale(0.3) translate(0%, 300%);
+  }
+  10%{
+    transform:scale(0.3) translate(0%, -5%);
+  }
+  15%{
+    transform:scale(0.3) translate(0%, 0%);
+  }
+  20%{
+    transform:scale(0.3) translate(0%, 0%) rotate(-5deg);
+  }
+  30%{
+    transform:scale(0.32) translate(0%, 0%) rotate(10deg);
+  }
+  35%{
+    transform:scale(0.3) translate(0%, 0%) rotate(0deg);
+  }
+
+
+
+  100%{
+    transform:scale(0.3) translate(-500%, 0%);
+  }
+}
+
+@keyframes loading-img-rightB{
+  0%{
+    transform:scale(0.3) translate(0%, -300%);
+  }
+  10%{
+    transform:scale(0.3) translate(0%, 5%);
+  }
+  15%{
+    transform:scale(0.3) translate(0%, 0%);
+  }
+  20%{
+    transform:scale(0.3) translate(0%, 0%) rotate(-5deg);
+  }
+  30%{
+    transform:scale(0.35) translate(0%, 0%) rotate(10deg);
+  }
+  35%{
+    transform:scale(0.3) translate(0%, 0%) rotate(0deg);
+  }
+  100%{
+    transform:scale(0.3) translate(-500%, 0%) rotate(0deg);
+  }
+}
+
+@keyframes loading-img-team{
+  0%{
+    transform:scale(0.3) translate(0%, 300%);
+  }
+  15%{
+    transform:scale(0.3) translate(0%, -5%);
+  }
+  20%{
+    transform:scale(0.3) translate(0%, 0%);
+  }
+  25%{
+    transform:scale(0.4) translate(0%, -5%);
+  }
+  50%{
+    transform:scale(0.3) translate(0%, 0%);
+  }
+  100%{
+    transform:scale(0.3) translate(0%, 0%);
+  }
+}
+
+.loading p{
+    width: 50%;
+  position: absolute;
+  bottom: 25%;
+  /* transform: translate(-50%, -50%); */
+  left: 50%;
+  color: var(--color-white);
+  font-family: "Duality";
+  font-size: 3rem;
+}
+
+.loading h3{
+  position: absolute;
+  bottom: 1px;
+  right: 10px;
+  color: var(--color-white);
+  font-family: "Duality";
+  font-size: 3rem;
+}
+
+@keyframes loading{
+  0%{
+    display: block;
+    transform: scale(0);
+  }
+  10%{
+    transform: scale(1);
+  }
+  90%{
+    transform: scale(1);
+  }
+  100%{
+    transform: scale(0) translate(-90%, 90%);
+    display: none;
+  }
+}
+
+@keyframes loading1{
+  0%{
+    display: block;
+    transform: scale(0);
+  }
+  10%{
+    transform: scale(1);
+  }
+  90%{
+    transform: scale(1);
+  }
+  100%{
+    transform: scale(0) translate(-90%, 90%);
+    display: none;
+  }
+}
+
+
 
