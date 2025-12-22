@@ -37,9 +37,6 @@ switch (GAME_LEVEL) {
             { name: 'Милая атака', type: 'attack', value: 10, description: 'Наносит 10 урона' },
             { name: 'Милия Броня', type: 'defense', value: 10, description: 'Дает 10 защиты' },
             { name: 'Новогодняя Ярость', type: 'special', value: { damage: 5, shield: 5 }, description: 'Наносит 5 урона и дает 5 защиты' }
-            { name: 'Ледяная Атака', type: 'attack', value: 10, description: 'Наносит 10 урона' },
-            { name: 'Морозная Броня', type: 'defense', value: 10, description: 'Дает 10 защиты' },
-            { name: 'Новогодняя Ярость', type: 'special', value: { damage: 5, shield: 5 }, description: 'Наносит 5 урона и дает 5 защиты' }
         ]
             }
             break;
