@@ -253,4 +253,75 @@
 })();
 
 
-//паралакс
+// Альтернативный простой счетчик
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Trying to init counter...');
+    
+    // Проверяем элементы
+    const days = document.getElementById('counter-days');
+    const hours = document.getElementById('counter-hours');
+    const minutes = document.getElementById('counter-minutes');
+    const seconds = document.getElementById('counter-seconds');
+    
+    if (!days || !hours || !minutes || !seconds) {
+        console.error('Counter elements not found!');
+        return;
+    }
+    
+    console.log('Counter elements found!');
+    
+    // Дата Нового года 2025
+        
+    const newYear = new Date('2026-01-01T00:00:00').getTime();
+    
+    function updateTime() {
+        const now = new Date().getTime();
+        const diff = newYear - now;
+        
+        if (diff <= 0) {
+            // Новый год наступил
+            days.textContent = '00';
+            hours.textContent = '00';
+            minutes.textContent = '00';
+            seconds.textContent = '00';
+            
+            const title = document.querySelector('.counter-title');
+            if (title) {
+                title.textContent = '🎉 С НОВЫМ 2025 ГОДОМ! 🎉';
+            }
+            return;
+        }
+        
+        // Вычисляем дни, часы, минуты, секунды
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+        
+        // Обновляем отображение
+        days.textContent = d < 10 ? '0' + d : d;
+        hours.textContent = h < 10 ? '0' + h : h;
+        minutes.textContent = m < 10 ? '0' + m : m;
+        seconds.textContent = s < 10 ? '0' + s : s;
+        
+        // Добавляем анимацию
+        [days, hours, minutes, seconds].forEach(el => {
+            el.classList.add('digit-update');
+            setTimeout(() => el.classList.remove('digit-update'), 500);
+        });
+    }
+    
+    // Запускаем сразу и каждую секунду
+    updateTime();
+    setInterval(updateTime, 1000);
+    
+    console.log('Counter started!');
+});
+
+// Еще одна попытка через таймаут
+setTimeout(function() {
+    if (document.getElementById('counter-days').textContent === '00') {
+        console.log('Forcing counter update...');
+        document.dispatchEvent(new Event('DOMContentLoaded'));
+    }
+}, 2000);
