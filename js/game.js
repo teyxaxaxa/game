@@ -2,7 +2,7 @@
 let GAME_LEVEL = 1
 
 // Константы и настройки игры
-
+let bgimg = document.getElementById('body')
 let GAME_CONFIG = {
     player: {
         maxHealth: 60,
@@ -15,6 +15,7 @@ let GAME_CONFIG = {
                 maxHealth: 80,
                 shield: 0,
                 name: "Гёрл",
+                image:"",
     actions: [
             { name: 'Ледяная Атака', type: 'attack', value: 10, description: 'Наносит 10 урона' },
             { name: 'Морозная Броня', type: 'defense', value: 10, description: 'Дает 10 защиты' },
@@ -33,24 +34,32 @@ switch (GAME_LEVEL) {
                 maxHealth: 80,
                 shield: 0,
                 name: "Гёрл",
+                image:"img/characterMil-hero-card.png",
     actions: [
             { name: 'Милая атака', type: 'attack', value: 10, description: 'Наносит 10 урона' },
             { name: 'Милия Броня', type: 'defense', value: 10, description: 'Дает 10 защиты' },
             { name: 'Новогодняя Ярость', type: 'special', value: { damage: 5, shield: 5 }, description: 'Наносит 5 урона и дает 5 защиты' }
         ]
             }
+            bgimg.style.background=`url(img/location.jpg)`
+            bgimg.style.backgroundRepeat='no-repeat'
+            bgimg.style.backgroundSize='cover'
             break;
             case 2:
             GAME_CONFIG.boss = {
                 maxHealth: 180,
                 shield: 20,
-                name: "Гёрл",
+                name: "Гёрл2",
+                image:"img/ryasu1.png",
     actions: [
             { name: 'Ледяная Атака', type: 'attack', value: 10, description: 'Наносит 10 урона' },
             { name: 'Морозная Броня', type: 'defense', value: 10, description: 'Дает 10 защиты' },
             { name: 'Новогодняя Ярость', type: 'special', value: { damage: 5, shield: 5 }, description: 'Наносит 5 урона и дает 5 защиты' }
         ]
             }
+            bgimg.style.background=`url(img/back-forest1.jpg)`
+            bgimg.style.backgroundRepeat='no-repeat'
+            bgimg.style.backgroundSize='cover'
             break;
     }}
 
@@ -92,7 +101,8 @@ const CARDS = {
         value: 500,
         description: 'Наносит 500 урона',
         icon: '❄️',
-        color: '#e74c3c'
+        color: '#e74c3c',
+        image:'img/card-fight.png'
     },
     frostShield: {
         id: 'frostShield',
@@ -150,7 +160,7 @@ const CARDS = {
 function initGame() {
     // Сброс состояния игры
     Game.player = {
-        health: GAME_CONFIG.player.maxHealth,
+        health: Game.player.health,
         maxHealth: GAME_CONFIG.player.maxHealth,
         maxShield:GAME_CONFIG.player.maxShield,
         shield: 0,
@@ -234,6 +244,22 @@ function updateHand() {
         const card = CARDS[cardId];
         const cardElement = document.createElement('div');
         cardElement.className = `card ${card.type}`;
+        if (card.type==='attack') {
+            cardElement.style.background = `url("img/card-fight.png")`
+            cardElement.style.backgroundRepeat='no-repeat'
+            cardElement.style.backgroundSize='cover'
+        }
+        else if (card.type==='defense'){
+            cardElement.style.background = `url("img/card-shild.png")`
+            cardElement.style.backgroundRepeat='no-repeat'
+            cardElement.style.backgroundSize='cover'
+        }
+        else {
+            cardElement.style.background = `url("img/card-health.png")`
+            cardElement.style.backgroundRepeat='no-repeat'
+            cardElement.style.backgroundSize='cover'
+        }
+        
         
         // Проверяем, можно ли разыграть карту
         const canPlay = Game.player.energy >= card.cost && Game.turn === 'player' && !Game.gameOver;
@@ -248,7 +274,7 @@ function updateHand() {
             <div class="card-name">${card.name}</div>
             <div class="card-icon">${card.icon}</div>
             <div class="card-description">${card.description}</div>
-            <div class="card-type">${card.type === 'attack' ? 'АТАКА' : card.type === 'defense' ? 'ЗАЩИТА' : 'ОСОБАЯ'}</div>
+            <div class="card-type">${card.type === 'attack' ? 'АТАКА'  : card.type === 'defense' ? 'ЗАЩИТА' : 'ОСОБАЯ'}</div>
         `;
         
         if (canPlay) {
@@ -559,8 +585,8 @@ function updateUI() {
     }
     
     // Имя и изображение босса
-    // document.getElementById('boss-name').textContent = Game.boss.name;
-    // document.getElementById('boss-img').src = Game.boss.image;
+    document.getElementById('health-bar-label').textContent = GAME_CONFIG.boss.name;
+    document.getElementById('boss__img').src = GAME_CONFIG.boss.image;
     
     // Обновляем кнопку завершения хода
     const endTurnBtn = document.getElementById('btn-end-turn');

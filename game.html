@@ -11,7 +11,7 @@
     ></script>
   </head>
 
-  <body>
+  <body id="body">
     <!-- левая колонка (меню) -->
     <aside class="left-menu">
       <div class="close" id="close-btn">
@@ -32,7 +32,7 @@
         <!-- босс -->
         <div class="game-area__boss">
           <div class="boss health-bar-container">
-            <div class="boss health-bar-label">ЗДОРОВЬЕ</div>
+            <div class="boss health-bar-label" id="health-bar-label">ЗДОРОВЬЕ</div>
             <div class="boss health-bar">
               <div class="boss health-bar-fill" id="boss-health-bar"></div>
               <span class="boss health-text" id="boss-health-text"
@@ -47,8 +47,8 @@
               <span class="boss armor-text" id="boss-armor-text">0 / 20</span>
             </div>
           </div>
-          <div class="boss__img">
-            <img src="img/boss1.png" alt="boss" class="boss-img__item" />
+          <div class="boss__img" >
+            <img src="img/boss1.png" alt="boss" class="boss-img__item" id="boss__img"/>
             <div class="boss__intent" id="boss__intent">
               <i class="fas fa-question-circle"></i>
               <span class="intent-text">Готовит атаку...</span>
