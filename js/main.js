@@ -251,3 +251,6 @@
     document.addEventListener("mousemove", mouse);
     window.addEventListener("resize", set_width);
 })();
+
+
+//паралакс

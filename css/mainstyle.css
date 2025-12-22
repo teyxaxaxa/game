@@ -101,21 +101,111 @@ h1 {
     z-index: -1;
 }
 
-.main-el-l{
+.main-el-l,
+.main-el-r {
     position: absolute;
     top: 70px;
-    left: -450px;
     z-index: -2;
+    animation: 
+        tree-sway 7s ease-in-out infinite,
+        tree-twinkle 4s ease-in-out infinite;
 }
 
-.main-el-r{
-    position: absolute;
-    top: 70px;
-    left: 1300px;
-    z-index: -2;}
+.main-el-l {
+    left: -450px;
+    transform-origin: top center;
+    animation-delay: 0s, 0.5s;
+}
 
-    .main-snowmen{
-        position: absolute;
-        top: 600px;
-        left: -100px;
+.main-el-r {
+    left: 1300px;
+    transform-origin: top center;
+    animation-delay: -3.5s, 2s; /* Разные задержки для разнообразия */
+}
+
+@keyframes tree-sway {
+    0%, 100% {
+        transform: rotate(0deg);
     }
+    25% {
+        transform: rotate(-1deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+    75% {
+        transform: rotate(1deg);
+    }
+}
+
+@keyframes tree-twinkle {
+    0%, 100% {
+        opacity: 1;
+        filter: brightness(1);
+    }
+    50% {
+        opacity: 0.9;
+        filter: brightness(1.1);
+    }
+}
+
+    .main-snowmen {
+    position: absolute;
+    top: 600px;
+    left: -100px;
+    animation: snowman-gentle 5s ease-in-out infinite;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+@keyframes snowman-gentle {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-15px) rotate(-1deg);
+    }
+    50% {
+        transform: translateY(-5px) rotate(0deg);
+    }
+    75% {
+        transform: translateY(-10px) rotate(1deg);
+    }
+}
+
+.main-snowmen:hover {
+    animation-play-state: paused;
+    transform: scale(1.2) rotate(10deg) !important;
+    filter: 
+        drop-shadow(0 0 15px rgba(33, 150, 243, 0.7))
+        brightness(1.1);
+    z-index: 100;
+}
+
+.main-dedmoroz {
+    width: 500px;
+    position: absolute;
+    top: -10px;
+    left: -600px; /* Начинаем за пределами экрана слева */
+    animation: 
+        walk-horizontal 20s linear infinite,
+        walk-vertical 2s ease-in-out infinite;
+}
+
+@keyframes walk-horizontal {
+    0% {
+        left: -600px;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+@keyframes walk-vertical {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
