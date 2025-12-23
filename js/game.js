@@ -719,3 +719,31 @@ closeBtn.addEventListener('click', () => {
     menuBtn.style.display = "block";
 })
 
+// Появление анимации при появление и нажатий
+const loading = document.getElementById('loading');
+const loadingFirst = document.getElementById('first');
+const loadingSecond = document.getElementById('second');
+const loadingbtn = document.getElementById('loadingbtn');
+
+loading.style.display = "block";
+loadingFirst.style.display = "block";
+loadingSecond.style.display = "block";
+loading.style.animation = "loadingExit 5s forwards";
+loadingFirst.style.animation = "loadingExit 4s forwards";
+loadingSecond.style.animation = "loadingExit 3s forwards";
+
+loadingbtn.addEventListener('click', () => {
+    loading.style.display = "block";
+    loadingFirst.style.display = "block";
+    loadingSecond.style.display = "block";
+    loading.style.animation = "loading 8s forwards";
+    loadingFirst.style.animation = "loading 5s forwards";
+    loadingSecond.style.animation = "loading 4s forwards";
+
+setTimeout(() => {
+  window.location.replace('game.html');
+}, 5000);
+
+
+})
+
