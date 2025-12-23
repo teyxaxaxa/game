@@ -10,7 +10,7 @@ let GAME_CONFIG = {
         maxShield: 20,
         startEnergy: 3,
         maxEnergy: 3,
-        startDeck: ['snowball', 'snowball', 'snowball', 'frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine']
+        startDeck: ['snowball', 'snowball', 'snowball', 'frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift']
     },
     boss: {
         maxHealth: 80,
@@ -133,8 +133,8 @@ const CARDS = {
         name: 'Снежок',
         type: 'attack',
         cost: 1,
-        value: 500,
-        description: 'Наносит 500 урона',
+        value: 5,
+        description: 'Наносит 5 урона',
         icon: '❄️',
         color: '#e74c3c',
     },
@@ -174,7 +174,7 @@ const CARDS = {
         type: 'special',
         cost: 0,
         value: 3,
-        description: 'Наносит 3 урона всем врагам',
+        description: 'Наносит 3 урона',
         icon: '✨',
         color: '#9b59b6'
     },
@@ -187,7 +187,27 @@ const CARDS = {
         description: 'Восстанавливает 4 здоровья',
         icon: '🍷',
         color: '#9b59b6'
-    }
+    },
+    test1: {
+        id: 'test1',
+        name: 'test1',
+        type: 'special',
+        cost: 3,
+        value: 3,
+        description: 'Наносит 20 урона',
+        icon: '😀',
+        color: '#9b59b6'
+    },
+    test2: {
+        id: 'test2',
+        name: 'test2',
+        type: 'special',
+        cost: 0,
+        value: 3,
+        description: 'Восстанавливает 4 здоровья и дает 3 защиты',
+        icon: '🦝',
+        color: '#9b59b6'
+    },
 };
 
 // Инициализация игры
@@ -249,6 +269,8 @@ function shuffleDeck() {
 function drawCards(count) {
     for (let i = 0; i < count; i++) {
         if (Game.player.deck.length === 0) {
+            // Если в рука имеет более 5 карт, то запретим брать больше
+
             // Если колода пуста, перемешиваем сброс
             if (Game.player.discard.length > 0) {
                 Game.player.deck = [...Game.player.discard];
@@ -746,4 +768,6 @@ setTimeout(() => {
 
 
 })
+
+
 

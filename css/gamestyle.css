@@ -367,7 +367,7 @@ h6 {
 .game-area__hand {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 0px;
     flex-wrap: wrap;
     min-height: 200px;
     width: 60rem;
@@ -377,8 +377,63 @@ h6 {
     border-radius: 15px;
     margin-top: 20px;
     margin-bottom: 20px;
-
 }
+
+.card {
+    width: 155px;
+    height: 230px;
+    border-radius: 12px;
+    padding: 30px 30px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+    z-index: 5;
+}
+
+
+.card:first-child{
+    transform: rotate(-20deg) translateY(50px) translateX(40px);
+}
+.card:nth-child(2){
+    transform: rotate(-10deg) translateY(5px) translateX(20px);
+}
+.card:nth-child(3){
+    transform: rotate(0deg) translateY(-10px) ;
+}
+.card:nth-last-child(2){
+    transform: rotate(10deg) translateY(5px) translateX(-20px);
+    z-index: 2;
+}
+.card:last-child{
+    transform: rotate(20deg) translateY(50px) translateX(-40px);
+    z-index: 1;
+}
+.card:hover {
+    transform: translateY(-10px) scale(1.1);
+    z-index: 10;
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+}
+
+.card.playable:hover {
+    box-shadow: 0 12px 20px rgba(46, 204, 113, 0.6);
+}
+
+.card.unplayable {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.card.unplayable:hover {
+    transform: none;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+
 
 /* контроль */
 .game-area__controls {
@@ -454,39 +509,8 @@ h6 {
 .result__btn-next-game {
 }
 
-.card {
-    width: 155px;
-    height: 230px;
-    border-radius: 12px;
-    padding: 30px 30px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
-    position: relative;
-    overflow: hidden;
-    user-select: none;
-}
 
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
-}
 
-.card.playable:hover {
-    box-shadow: 0 12px 20px rgba(46, 204, 113, 0.6);
-}
-
-.card.unplayable {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-.card.unplayable:hover {
-    transform: none;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
 
 /* Загрузки во время чего либо */
 .loading{
