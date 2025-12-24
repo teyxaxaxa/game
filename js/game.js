@@ -282,20 +282,25 @@ function drawCards(count) {
                 break;
             }
         }
-
+        const maxleght=5
         // Берем карту из колоды
         const cardId = Game.player.deck.pop();
-        Game.player.hand.push(cardId);
+        if (Game.player.hand.length<maxleght) {
+            Game.player.hand.push(cardId);}
+        else{
+            console.log('Массив достиг максимального размера!');
+        }
+
     }
 
     updateHand();
 }
-
+const maxleght = 5
 // Обновление руки игрока
 function updateHand() {
     const handContainer = document.getElementById('game-area__hand');
     handContainer.innerHTML = '';
-
+        
     Game.player.hand.forEach(cardId => {
         const card = CARDS[cardId];
         const cardElement = document.createElement('div');
