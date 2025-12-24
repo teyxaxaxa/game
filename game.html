@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Battle for Room 311</title>
     <link rel="stylesheet" href="css/gamestyle.css" />
     <script
       src="https://kit.fontawesome.com/06d986b207.js"
@@ -25,6 +25,7 @@
       </button>
     </aside>
     <main class="main">
+        
       <button id="menu-btn">
         <i class="fa-solid fa-gear"></i>
       </button>
@@ -74,6 +75,7 @@
               src="img/characterRyasu-hero-card.png"
               alt="игрок"
               class="player-card__img character-hero-card"
+              id="player-card__img"
             />
             <img
               src="img/back-hero-card.png"
@@ -82,8 +84,7 @@
             />
 
             <div class="stats__class">
-              Плут
-              <div class="player-card__name">Рясу</div>
+              <div class="player-card__name" id="player-card__name">Рясу</div>
             </div>
             <div class="player-section__stats">
               <div class="stats__shield-health">
@@ -148,6 +149,9 @@
         </div>
       </div>
     </main>
+    <!-- окно выбора персонажа -->
+    <div class="cheange_hero" id="cheange_hero"></div>
+
     <!-- окно победы/поражение -->
     <div class="modal-overlay" id="modal-overlay">
       <div class="modal-overlay__result">
@@ -159,6 +163,18 @@
       </div>
     </div>
 
+    <!-- окно загрузки -->
+     <div class="loading-first" id="first">g</div>
+    <div class="loading-second" id="second">gv</div>
+    <div class="loading" id="loading">
+        <img src="img/logo/logo-back.png" alt="logo">
+        <img src="img/logo/logo-firstB.png" alt="logo">
+        <img src="img/logo/logo-A.png" alt="logo">
+        <img src="img/logo/logo-secondB.png" alt="logo">
+        <img src="img/logo/logo-TEAM.png" alt="logo">
+        <p>загрузка...</p>
+        <h3>разработан командой БРИК-А-БРАК</h3>
+     </div>
     <script src="js/game.js"></script>
   </body>
 </html>

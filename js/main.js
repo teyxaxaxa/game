@@ -325,3 +325,31 @@ setTimeout(function() {
         document.dispatchEvent(new Event('DOMContentLoaded'));
     }
 }, 2000);
+
+
+
+
+
+
+// Появление анимации при нажатии
+
+const loading = document.getElementById('loading');
+const loadingFirst = document.getElementById('first');
+const loadingSecond = document.getElementById('second');
+const loadingbtn = document.getElementById('loadingbtn');
+
+
+loadingbtn.addEventListener('click', () => {
+    loading.style.display = "block";
+    loadingFirst.style.display = "block";
+    loadingSecond.style.display = "block";
+    loading.style.animation = "loading 8s forwards";
+    loadingFirst.style.animation = "loading 5s forwards";
+    loadingSecond.style.animation = "loading 4s forwards";
+
+setTimeout(() => {
+  window.location.replace('game.html');
+}, 2500);
+
+
+})
