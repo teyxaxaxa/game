@@ -753,4 +753,21 @@ h6 {
 
 
 
+.cheange_hero{
+    width: 100vw;
+    height: 100vh;
+    color: white;
+    display: flex;
+    position: absolute;
+    z-index: 99999;
+    background: #000;
+    opacity: 0.8;
+}
 
+
+.hero {
+    width: 5rem;
+    height: 10rem;
+    background: blue;
+    margin: 1rem;
+}

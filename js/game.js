@@ -2,7 +2,70 @@
 let GAME_LEVEL = 1
 // поиск фотографии
 let bgimg = document.getElementById('body')
+// объект персонажей
+const heros = {
+    hero1:{
+        maxHealth: 60,
+        maxShield: 20,
+        startEnergy: 3,
+        maxEnergy: 3,
+        image:"img/boss-level1.png",
+        startDeck: ['snowball', 'snowball', 'snowball', 'frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift']
+    },
+    hero2:{
+        maxHealth: 80,
+        maxShield: 320,
+        startEnergy: 6,
+        maxEnergy: 6,
+        image:"img/boss-level2.png",
+        startDeck: ['snowball', 'snowball', 'snowball', 'frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift']
+    },
+    hero3:{
+        maxHealth: 100,
+        maxShield: 220,
+        startEnergy: 10,
+        maxEnergy: 10,
+        image:"img/boss-level3.png",
+        startDeck: ['snowball', 'snowball', 'snowball', 'frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift']
+    },
+}
+//выбор персонажа
 
+function cheange_hero() {
+    const hero_cont=document.getElementById('cheange_hero')
+    hero_cont.innerHTML=''
+    Object.keys(heros).forEach(heroId =>{
+        const player = heros[heroId]
+        const heroElement = document.createElement('div')
+        heroElement.className='hero'
+        heroElement.innerHTML = `
+        <p class="hero-health">${player.maxHealth}<?p>
+        <p class="hero-Shield">${player.maxShield}<?p>
+        <p class="hero-Energy">${player.maxEnergy}<?p>
+        `
+        heroElement.addEventListener('click',()=>{hero_can_play(heroId); initGame()})
+        
+        hero_cont.appendChild(heroElement)
+    })
+    
+}
+
+function hero_can_play(heroId){
+    const hero = heros[heroId]
+    GAME_CONFIG.player = {
+        maxHealth: hero.maxHealth,
+        maxShield: hero.maxShield,
+        startEnergy: hero.startEnergy,
+        maxEnergy: hero.maxEnergy,
+        image: hero.image,
+        startDeck: ['snowball', 'snowball', 'snowball', 'frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift']
+    }
+    if (Game.player.health<GAME_CONFIG.player.maxHealth){
+        Game.player.health=GAME_CONFIG.player.maxHealth
+    }
+    // document.getElementById('player-card__img').src=`url("img/font-hero-card.png")`
+    document.getElementById('cheange_hero').style.display='none'
+}
 // Константы и настройки игры
 let GAME_CONFIG = {
     player: {
@@ -10,6 +73,7 @@ let GAME_CONFIG = {
         maxShield: 20,
         startEnergy: 3,
         maxEnergy: 3,
+        image:"",
         startDeck: ['snowball', 'snowball', 'snowball', 'frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift']
     },
     boss: {
@@ -25,6 +89,7 @@ let GAME_CONFIG = {
     },
     cardDrawPerTurn: 5
 };
+
 
 
 // Рассчитывание характеристик босса по уровня прохождение игры
@@ -99,13 +164,14 @@ function newStatsboss() {
 }
 
 newStatsboss();
-
+cheange_hero()
 // Объект игры
 const Game = {
     player: {
         health: GAME_CONFIG.player.maxHealth,
         maxHealth: GAME_CONFIG.player.maxHealth,
         maxShield: GAME_CONFIG.player.maxShield,
+        image:GAME_CONFIG.player.image,
         shield: 0,
         energy: GAME_CONFIG.player.startEnergy,
         maxEnergy: GAME_CONFIG.player.maxEnergy,
@@ -213,10 +279,12 @@ const CARDS = {
 // Инициализация игры
 function initGame() {
     // Сброс состояния игры
+    
     Game.player = {
         health: Game.player.health,
         maxHealth: GAME_CONFIG.player.maxHealth,
         maxShield: GAME_CONFIG.player.maxShield,
+        image: GAME_CONFIG.player.image,
         shield: 0,
         energy: GAME_CONFIG.player.startEnergy,
         maxEnergy: GAME_CONFIG.player.maxEnergy,
@@ -286,7 +354,8 @@ function drawCards(count) {
         // Берем карту из колоды
         const cardId = Game.player.deck.pop();
         if (Game.player.hand.length<maxleght) {
-            Game.player.hand.push(cardId);}
+            Game.player.hand.push(cardId)
+        }
         else{
             console.log('Массив достиг максимального размера!');
         }
@@ -295,7 +364,6 @@ function drawCards(count) {
 
     updateHand();
 }
-const maxleght = 5
 // Обновление руки игрока
 function updateHand() {
     const handContainer = document.getElementById('game-area__hand');
@@ -648,6 +716,7 @@ function updateUI() {
     // Имя и изображение босса
     document.getElementById('health-bar-label').textContent = GAME_CONFIG.boss.name;
     document.getElementById('boss__img').src = GAME_CONFIG.boss.image;
+    document.getElementById('player-card__img').src = GAME_CONFIG.player.image;
 
     // Обновляем кнопку завершения хода
     const endTurnBtn = document.getElementById('btn-end-turn');
@@ -747,32 +816,32 @@ closeBtn.addEventListener('click', () => {
 })
 
 // Появление анимации при появление и нажатий
-const loading = document.getElementById('loading');
-const loadingFirst = document.getElementById('first');
-const loadingSecond = document.getElementById('second');
-const loadingbtn = document.getElementById('loadingbtn');
+// const loading = document.getElementById('loading');
+// const loadingFirst = document.getElementById('first');
+// const loadingSecond = document.getElementById('second');
+// const loadingbtn = document.getElementById('loadingbtn');
 
-loading.style.display = "block";
-loadingFirst.style.display = "block";
-loadingSecond.style.display = "block";
-loading.style.animation = "loadingExit 5s forwards";
-loadingFirst.style.animation = "loadingExit 4s forwards";
-loadingSecond.style.animation = "loadingExit 3s forwards";
+// loading.style.display = "block";
+// loadingFirst.style.display = "block";
+// loadingSecond.style.display = "block";
+// loading.style.animation = "loadingExit 5s forwards";
+// loadingFirst.style.animation = "loadingExit 4s forwards";
+// loadingSecond.style.animation = "loadingExit 3s forwards";
 
-loadingbtn.addEventListener('click', () => {
-    loading.style.display = "block";
-    loadingFirst.style.display = "block";
-    loadingSecond.style.display = "block";
-    loading.style.animation = "loading 8s forwards";
-    loadingFirst.style.animation = "loading 5s forwards";
-    loadingSecond.style.animation = "loading 4s forwards";
+// loadingbtn.addEventListener('click', () => {
+//     loading.style.display = "block";
+//     loadingFirst.style.display = "block";
+//     loadingSecond.style.display = "block";
+//     loading.style.animation = "loading 8s forwards";
+//     loadingFirst.style.animation = "loading 5s forwards";
+//     loadingSecond.style.animation = "loading 4s forwards";
 
-setTimeout(() => {
-  window.location.replace('game.html');
-}, 5000);
+// setTimeout(() => {
+//   window.location.replace('game.html');
+// }, 5000);
 
 
-})
+// })
 
 
 
