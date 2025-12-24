@@ -1,0 +1,20 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.parallax-bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.parallax-bg img {
+  width: 110%;
+  height: 110%;
+  object-fit: cover;
+  transform: translate(-5%, -5%);
+  transition: transform 0.1s linear;
+}
