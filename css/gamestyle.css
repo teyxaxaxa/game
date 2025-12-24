@@ -751,17 +751,18 @@ h6 {
   font-size: 3rem;
 }
 
-
+/* Окно с героями */
 
 .cheange_hero{
-    width: 100vw;
-    height: 100vh;
-    color: white;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    z-index: 80;
     display: flex;
-    position: absolute;
-    z-index: 99999;
-    background: #000;
-    opacity: 0.8;
+    opacity: 0.7;
+    background-color: #1c1e1f;
 }
 
 

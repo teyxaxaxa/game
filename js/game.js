@@ -1,31 +1,45 @@
 // На каком уровне игрок
 let GAME_LEVEL = 1
-// поиск фотографии
+
+// поиск фона для каждого уровня
 let bgimg = document.getElementById('body')
+
 // объект персонажей
 const heros = {
     hero1:{
+        name: "Плут Рясу",
         maxHealth: 60,
         maxShield: 20,
         startEnergy: 3,
         maxEnergy: 3,
-        image:"img/boss-level1.png",
+        image:"img/characterRyasu-hero-card.png",
         startDeck: ['snowball', 'snowball', 'snowball', 'frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift']
     },
     hero2:{
+        name: "Волшебница Ульра",
         maxHealth: 80,
         maxShield: 320,
         startEnergy: 6,
         maxEnergy: 6,
-        image:"img/boss-level2.png",
+        image:"img/characterUlra-hero-card.png",
         startDeck: ['snowball', 'snowball', 'snowball', 'frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift']
     },
     hero3:{
+        name: "Леший Стекло",
         maxHealth: 100,
         maxShield: 220,
         startEnergy: 10,
         maxEnergy: 10,
-        image:"img/boss-level3.png",
+        image:"img/characterSteclo-hero-card.png",
+        startDeck: ['snowball']
+    },
+    hero4:{
+        name: "Проказница Мила",
+        maxHealth: 10,
+        maxShield: 2,
+        startEnergy: 0,
+        maxEnergy: 2,
+        image:"img/characterMil-hero-card.png",
         startDeck: ['snowball', 'snowball', 'snowball', 'frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift']
     },
 }
@@ -53,17 +67,20 @@ function cheange_hero() {
 function hero_can_play(heroId){
     const hero = heros[heroId]
     GAME_CONFIG.player = {
+        name: hero.name,
         maxHealth: hero.maxHealth,
         maxShield: hero.maxShield,
         startEnergy: hero.startEnergy,
         maxEnergy: hero.maxEnergy,
         image: hero.image,
-        startDeck: ['snowball', 'snowball', 'snowball', 'frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift']
+        startDeck: hero.startDeck
     }
     if (Game.player.health<GAME_CONFIG.player.maxHealth){
         Game.player.health=GAME_CONFIG.player.maxHealth
     }
-    // document.getElementById('player-card__img').src=`url("img/font-hero-card.png")`
+    else if (Game.player.health>GAME_CONFIG.player.maxHealth){
+        Game.player.health=GAME_CONFIG.player.maxHealth
+    }
     document.getElementById('cheange_hero').style.display='none'
 }
 // Константы и настройки игры
@@ -74,6 +91,7 @@ let GAME_CONFIG = {
         startEnergy: 3,
         maxEnergy: 3,
         image:"",
+        name: "",
         startDeck: ['snowball', 'snowball', 'snowball', 'frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift']
     },
     boss: {
@@ -199,7 +217,7 @@ const CARDS = {
         name: 'Снежок',
         type: 'attack',
         cost: 1,
-        value: 5,
+        value: 500,
         description: 'Наносит 5 урона',
         icon: '❄️',
         color: '#e74c3c',
@@ -716,6 +734,9 @@ function updateUI() {
     // Имя и изображение босса
     document.getElementById('health-bar-label').textContent = GAME_CONFIG.boss.name;
     document.getElementById('boss__img').src = GAME_CONFIG.boss.image;
+
+    // Имя и изображение игрока
+    document.getElementById('player-card__name').textContent = GAME_CONFIG.player.name;
     document.getElementById('player-card__img').src = GAME_CONFIG.player.image;
 
     // Обновляем кнопку завершения хода
@@ -816,17 +837,17 @@ closeBtn.addEventListener('click', () => {
 })
 
 // Появление анимации при появление и нажатий
-// const loading = document.getElementById('loading');
-// const loadingFirst = document.getElementById('first');
-// const loadingSecond = document.getElementById('second');
-// const loadingbtn = document.getElementById('loadingbtn');
+const loading = document.getElementById('loading');
+const loadingFirst = document.getElementById('first');
+const loadingSecond = document.getElementById('second');
+const loadingbtn = document.getElementById('loadingbtn');
 
-// loading.style.display = "block";
-// loadingFirst.style.display = "block";
-// loadingSecond.style.display = "block";
-// loading.style.animation = "loadingExit 5s forwards";
-// loadingFirst.style.animation = "loadingExit 4s forwards";
-// loadingSecond.style.animation = "loadingExit 3s forwards";
+loading.style.display = "block";
+loadingFirst.style.display = "block";
+loadingSecond.style.display = "block";
+loading.style.animation = "loadingExit 5s forwards";
+loadingFirst.style.animation = "loadingExit 4s forwards";
+loadingSecond.style.animation = "loadingExit 3s forwards";
 
 // loadingbtn.addEventListener('click', () => {
 //     loading.style.display = "block";
