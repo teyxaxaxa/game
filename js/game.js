@@ -34,8 +34,7 @@ const heros = {
         startEnergy: 8,
         maxEnergy: 8,
         image: "img/characterSteclo-hero-card.png",
-        startDeck: ['wildShape','sneakAttack','sneakAttack','rangeAttack','rangeAttack','sandToss','sandToss','dirtyTrick'],
-        formDeck:['bite','bite','bite','bite','bite',],
+        startDeck: ['wildShape','bite','bite','bite','rangeAttack','rangeAttack','sandToss','sandToss','dirtyTrick'],
         description: "Имеет особую форму зверя, в которой он получает 40 брони, а так же особый эффект при ударе 'кравотечение'",
     },
     hero4: {
@@ -392,7 +391,7 @@ const CARDS = {
         id: 'bite',
         name: 'bite',
         type: 'bite',
-        cost: 8,
+        cost: 2,
         value: 5,
         description:'Куснуть',
         icon:'img/iconCards/bite.png',
@@ -466,7 +465,7 @@ function drawCards(count) {
             // Если в рука имеет более 5 карт, то запретим брать больше
 
             // Если колода пуста, перемешиваем сброс
-            if (Game.player.discard.length > 0) {
+            if (Game.player.discard.length > 0 && Game.player.deck<=3) {
                 Game.player.deck = [...Game.player.discard];
                 Game.player.discard = [];
                 shuffleDeck();
@@ -484,6 +483,7 @@ function drawCards(count) {
         }
         else {
             console.log('Массив достиг максимального размера!');
+            console.log(Game.player.discard.length)
         }
 
     }
@@ -564,10 +564,6 @@ function playCard(cardId) {
         Game.boss.bleeding=true;
         Game.player.shield=40
         Game.player.form=true;
-        Game.player.hand=[]
-        Game.player.discard=[]
-        Game.player.deck=heros.hero3.formDeck
-        
     }
     // Применяем эффект карты
     applyCardEffect(card);
@@ -781,9 +777,7 @@ function bossTurn() {
     Game.turn = 'player';
     if (Game.player.shield<=0 && Game.player.form===true){
         Game.player.form=false
-        Game.player.hand=[]
-        Game.player.discard=[]
-        Game.player.deck=GAME_CONFIG.player.startDeck
+        Game.boss.bleeding=false
     }
     // Восстанавливаем энергию игрока
     Game.player.energy = GAME_CONFIG.player.maxEnergy;
