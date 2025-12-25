@@ -897,3 +897,7 @@ loadingSecond.style.animation = "loadingExit 3s forwards";
 
 
 
+closeBtndd.addEventListener('click', () => {
+    sideMenu.style.display = 'none';
+    menuBtn.style.display = "block";
+})
