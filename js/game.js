@@ -102,7 +102,6 @@ function hero_can_play(heroId) {
         maxEnergy: hero.maxEnergy,
         image: hero.image,
         startDeck: hero.startDeck
-
     }
     if (Game.player.health < GAME_CONFIG.player.maxHealth) {
         Game.player.health = GAME_CONFIG.player.maxHealth
@@ -111,9 +110,11 @@ function hero_can_play(heroId) {
         Game.player.health = GAME_CONFIG.player.maxHealth
     }
     document.getElementById('chooseHeroWindow').style.display = 'none'
+
 }
+
 // Константы и настройки игры
-let GAME_CONFIG = {
+const GAME_CONFIG = {
     player: {
         maxHealth: 60,
         maxShield: 20,
@@ -122,7 +123,7 @@ let GAME_CONFIG = {
         image: "",
         name: "",
         countDodge: 0,
-        startDeck: []
+        startDeck: ['bite']
     },
     boss: {
         maxHealth: 80,
@@ -226,7 +227,7 @@ const Game = {
         maxEnergy: GAME_CONFIG.player.maxEnergy,
         countDodge: 0,
         form:false,
-        deck: [],
+        deck: [...GAME_CONFIG.player.startDeck],
         hand: [],
         discard: []
     },
@@ -455,19 +456,19 @@ function shuffleDeck() {
     for (let i = Game.player.deck.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [Game.player.deck[i], Game.player.deck[j]] = [Game.player.deck[j], Game.player.deck[i]];
+        
     }
 }
 
+
 // Взять карты
 function drawCards(count) {
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i <= (count); i++) {
         if (Game.player.deck.length === 0) {
-            // Если в рука имеет более 5 карт, то запретим брать больше
-
             // Если колода пуста, перемешиваем сброс
-            if (Game.player.discard.length > 0 && Game.player.deck<=3) {
-                Game.player.deck = [...Game.player.discard];
-                Game.player.discard = [];
+            if (Game.player.discard.length > 0 ) {
+                Game.player.deck.push(...Game.player.discard);
+                console.log(Game.player.deck)
                 shuffleDeck();
                 addToLog('Колода перемешана заново!');
             } else {
@@ -483,7 +484,6 @@ function drawCards(count) {
         }
         else {
             console.log('Массив достиг максимального размера!');
-            console.log(Game.player.discard.length)
         }
 
     }
@@ -1034,12 +1034,12 @@ function updateUI() {
 // }
 
 // Нарисовать тестовую карту (для отладки)
-function drawTestCard() {
-    if (Game.turn === 'player' && !Game.gameOver) {
-        drawCards(1);
-        addToLog('Вы берете дополнительную карту');
-    }
-}
+// function drawTestCard() {
+//     if (Game.turn === 'player' && !Game.gameOver) {
+//         drawCards(1);
+//         addToLog('Вы берете дополнительную карту');
+//     }
+// }
 
 // Обработчики событий
 document.addEventListener('DOMContentLoaded', () => {
