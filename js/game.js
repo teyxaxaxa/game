@@ -9,12 +9,13 @@ const heros = {
     hero1: {
         name: "Рясу",
         maxHealth: 40,
-        maxShield: 10,
+        maxShield: 0,
         startEnergy: 10,
         maxEnergy: 10,
         image: "img/characterRyasu-hero-card.png",
         startDeck: ['sneakAttack','sneakAttack','rangeAttack','rangeAttack','sandToss','sandToss','dirtyTrick'],
         description: "Очень проворный эльф плут Рясу! Из-за отсутствие брони и большое здоровье, Рясу имеет множество атакующий карт. Получайте жетоны ловкости, чтобы увеличить шанс уклонение!",
+        countDodge: 2,
     },
     hero2: {
         name: "Ульра",
@@ -23,7 +24,7 @@ const heros = {
         startEnergy: 12,
         maxEnergy: 12,
         image: "img/characterUlra-hero-card.png",
-        startDeck: ['frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift'],
+        startDeck: ['sneakAttack','sneakAttack','rangeAttack','rangeAttack','sandToss','sandToss','dirtyTrick'],
         description: "dddd",
     },
     hero3: {
@@ -43,7 +44,7 @@ const heros = {
         startEnergy: 11,
         maxEnergy: 11,
         image: "img/characterMil-hero-card.png",
-        startDeck: ['frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift'],
+        startDeck: [],
         description: "dddd",
     },
 }
@@ -120,7 +121,8 @@ let GAME_CONFIG = {
         maxEnergy: 3,
         image: "",
         name: "",
-        startDeck: ['frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift']
+        countDodge: 0,
+        startDeck: []
     },
     boss: {
         maxHealth: 80,
@@ -242,16 +244,7 @@ const Game = {
 
 // Определение карт
 const CARDS = {
-    sneakAttack: {
-        id: 'sneakAttack',
-        name: 'Атака исподтишка',
-        type: 'attack',
-        cost: 10,
-        value: 5,
-        description: 'Наносит 5 урона игнорируя защиту босса',
-        icon: 'img/iconCards/sneakAttack.png',
-        color: '#e74c3c',
-    },
+    // Карты Рясу
     dirtyTrick: {
         id: 'dirtyTrick',
         name: 'Грязный трюк',
@@ -261,6 +254,16 @@ const CARDS = {
         description: 'Наносит 3 урона. Получите 1 жетон ловкости',
         icon: 'img/iconCards/dirtyTrick.png',
         color: '#e74c3c',
+    },
+    sneakAttack: {
+        id: 'sneakAttack',
+        name: 'Атака исподтишка',
+        type: 'special',
+        cost: 10,
+        value: 500,
+        description: 'Наносит 5 урона игнорируя защиту босса',
+        icon: 'img/iconCards/sneakAttack.png',
+        color: '#c2e73cff',
     },
     sandToss: {
         id: 'sandToss',
@@ -282,75 +285,36 @@ const CARDS = {
         icon: 'img/iconCards/rangeAttack.png',
         color: '#e74c3c',
     },
-    frostShield: {
-        id: 'frostShield',
-        name: 'Морозный Щит',
-        type: 'defense',
-        cost: 1,
-        value: 7,
-        description: 'Дает 7 защиты',
-        icon: 'img/iconCards/sneakAttack.png',
-        color: '#3498db'
-    },
-    icicle: {
-        id: 'icicle',
-        name: 'Ледяная Сосулька',
+    // Карты Милы
+    iceKnife: {
+        id: 'iceKnife',
+        name: 'Грязный трюк',
         type: 'attack',
-        cost: 2,
-        value: 8,
-        description: 'Наносит 8 урона',
-        icon: 'img/iconCards/sneakAttack.png',
-        color: '#e74c3c'
-    },
-    surpriseGift: {
-        id: 'surpriseGift',
-        name: 'Подарок-Сюрприз',
-        type: 'defense',
-        cost: 1,
-        value: { shield: 5, energy: 1 },
-        description: 'Дает 5 защиты и +1 энергии в след. ходу',
-        icon: 'img/iconCards/sneakAttack.png',
-        color: '#3498db'
-    },
-    glowingGarland: {
-        id: 'glowingGarland',
-        name: 'Светящаяся Гирлянда',
-        type: 'special',
-        cost: 0,
+        cost: 4,
         value: 3,
-        description: 'Наносит 3 урона',
-        icon: 'img/iconCards/sneakAttack.png',
-        color: '#9b59b6'
+        description: 'Наносит 3 урона. Получите 1 жетон ловкости',
+        icon: 'img/iconCards/iceKnife.png',
+        color: '#e74c3c',
     },
-    mulledWine: {
-        id: 'mulledWine',
-        name: 'Бокал Глинтвейна',
-        type: 'special',
-        cost: 2,
-        value: 4,
-        description: 'Восстанавливает 4 здоровья',
-        icon: 'img/iconCards/sneakAttack.png',
-        color: '#9b59b6'
-    },
-    test1: {
-        id: 'test1',
-        name: 'test1',
-        type: 'special',
-        cost: 3,
+    dirtyTrick: {
+        id: 'dirtyTrick',
+        name: 'Грязный трюк',
+        type: 'attack',
+        cost: 4,
         value: 3,
-        description: 'Наносит 20 урона',
-        icon: 'img/iconCards/sneakAttack.png',
-        color: '#9b59b6'
+        description: 'Наносит 3 урона. Получите 1 жетон ловкости',
+        icon: 'img/iconCards/dirtyTrick.png',
+        color: '#e74c3c',
     },
-    test2: {
-        id: 'test2',
-        name: 'test2',
-        type: 'special',
-        cost: 0,
+    dirtyTrick: {
+        id: 'dirtyTrick',
+        name: 'Грязный трюк',
+        type: 'attack',
+        cost: 4,
         value: 3,
-        description: 'Восстанавливает 4 здоровья и дает 3 защиты',
-        icon: 'img/iconCards/sneakAttack.png',
-        color: '#9b59b6'
+        description: 'Наносит 3 урона. Получите 1 жетон ловкости',
+        icon: 'img/iconCards/dirtyTrick.png',
+        color: '#e74c3c',
     },
     //карты лешего
     wildShape:{
@@ -472,6 +436,10 @@ function updateHand() {
 
     Game.player.hand.forEach(cardId => {
         const card = CARDS[cardId];
+<<<<<<< HEAD
+=======
+        console.log(card);
+>>>>>>> 0f2d7a75221edff24e05bf7fc457115d38eb9351
         const cardElement = document.createElement('div');
         cardElement.className = `card`;
         if (card.type === 'attack') {
@@ -558,10 +526,27 @@ function applyCardEffect(card) {
     addToLog(`Вы разыгрываете: ${card.name}`);
 
     switch (card.id) {
+<<<<<<< HEAD
         case 'bite':
             dealDamageToBoss(card.value, card.name);
             break;
         case 'icicle':
+=======
+        // Эффекты карт Рясу
+        case 'sneakAttack':
+            // Истинный урон
+            dealTrueDamageToBoss(card.value, card.name);
+            break;
+        case 'dirtyTrick':
+        case 'sandToss':
+            // Истинный урон
+            dealDamageToBoss(card.value, card.name);
+            Game.player.countDodge+=1;
+            break;
+            
+            // Эффекты карт Милы
+        case 'rangeAttack':
+>>>>>>> 0f2d7a75221edff24e05bf7fc457115d38eb9351
             // Атака босса
             dealDamageToBoss(card.value, card.name);
             //createAnimation('damage', card.value, 'boss');
@@ -611,6 +596,13 @@ function dealDamageToBoss(damage, source) {
         if (damage <= 0) return;
     }
 
+    // Наносим оставшийся урон
+    Game.boss.health = Math.max(0, Game.boss.health - damage);
+    addToLog(`Вы наносите ${damage} урона боссу с помощью "${source}"`);
+}
+
+// Нанести истинный урон боссу
+function dealTrueDamageToBoss(damage, source) {
     // Наносим оставшийся урон
     Game.boss.health = Math.max(0, Game.boss.health - damage);
     addToLog(`Вы наносите ${damage} урона боссу с помощью "${source}"`);
