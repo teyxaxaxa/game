@@ -1,7 +1,26 @@
+html {
+  cursor: url('../img/Candycursor.png') 16 16, auto;
+  /* 16 16 - координаты "горячей точки" (x y) */
+}
+
+/* Для разных состояний */
+a:hover {
+  cursor: url('../img/Candypointer.png') 16 16, pointer;
+}
+
+button:hover {
+  cursor: url('../img/Candypointer.png') 16 16, pointer;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  font-family: 'Rubik', sans-serif;
+  overflow: hidden;
 }
 
 .parallax-bg {
@@ -15,6 +34,197 @@
   width: 110%;
   height: 110%;
   object-fit: cover;
-  transform: translate(-5%, -5%);
   transition: transform 0.1s linear;
 }
+
+/* ОБЩИЕ стили для всех персонажей */
+.character,
+.charactermila,
+.characterrustam,
+.characterjulia,
+.characterartemolen {
+  position: fixed;
+  bottom: 20px;
+  transform: translateX(-50%);
+  opacity: 0;
+  filter: drop-shadow(0 0 0 transparent);
+  z-index: 10;
+}
+
+/* Позиционирование и размеры для конкретных персонажей */
+.character { 
+  left: 55%;
+  width: 550px;
+  bottom: 20px;
+  z-index: 12;
+}
+
+.charactermila { 
+  width: 1100px;
+  left: 20%;
+  bottom: -10px;
+  z-index: 11;
+}
+
+.characterrustam { 
+  width: 1000px;
+  left: 90%;
+  bottom: -10px;
+  z-index: 12;
+}
+
+.characterjulia { 
+  width: 1000px;
+  left: 33%;
+  bottom: -70px;
+  z-index: 13;
+}
+
+.characterartemolen { 
+  width: 1100px;
+  left: 70%;
+  bottom: -20px;
+  z-index: 14;
+}
+
+/* ОДНА общая анимация появления для всех */
+@keyframes smoothAppear {
+  0% {
+    transform: translateX(-50%) translateY(80px) scale(0.9);
+    opacity: 0;
+    filter: drop-shadow(0 0 0 rgba(var(--glow-color), 0)) blur(3px);
+  }
+  20% {
+    transform: translateX(-50%) translateY(50px) scale(0.95);
+    opacity: 0.5;
+    filter: drop-shadow(0 0 10px rgba(var(--glow-color), 0.5)) blur(1px);
+  }
+  40% {
+    transform: translateX(-50%) translateY(30px) scale(1.02);
+    opacity: 0.8;
+    filter: drop-shadow(0 0 15px rgba(var(--glow-color), 0.7)) blur(0);
+  }
+  60% {
+    transform: translateX(-50%) translateY(10px) scale(1.01);
+    opacity: 1;
+    filter: drop-shadow(0 0 12px rgba(var(--glow-color), 0.6));
+  }
+  80% {
+    transform: translateX(-50%) translateY(3px) scale(0.995);
+    filter: drop-shadow(0 0 8px rgba(var(--glow-color), 0.4));
+  }
+  100% {
+    transform: translateX(-50%) translateY(0) scale(1);
+    opacity: 1;
+    filter: drop-shadow(0 0 5px rgba(var(--glow-color), 0.2));
+  }
+}
+
+/* Анимация появления для всех персонажей */
+.character.show,
+.charactermila.show,
+.characterrustam.show,
+.characterjulia.show,
+.characterartemolen.show,
+.play-btn.show {
+  animation: smoothAppear 1.5s ease-out forwards;
+}
+
+/* Цвета свечения для каждого персонажа */
+.character {
+  --glow-color: 255, 200, 100;
+}
+
+.charactermila {
+  --glow-color: 255, 0, 0;
+}
+
+.characterrustam {
+  --glow-color: 150, 255, 150;
+}
+
+.characterjulia {
+  --glow-color: 255, 0, 255;
+}
+
+.characterartemolen {
+  --glow-color: 0, 0, 255;
+}
+
+/* ОДНА общая анимация дыхания для всех */
+.character.idle,
+.charactermila.idle,
+.characterrustam.idle,
+.characterjulia.idle,
+.characterartemolen.idle,
+.play-btn.idle {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0% {
+    transform: translateX(-50%) translateY(0) scale(1);
+    filter: drop-shadow(0 0 5px rgba(var(--glow-color), 0.2));
+  }
+  50% {
+    transform: translateX(-50%) translateY(-6px) scale(1.01);
+    filter: drop-shadow(0 0 8px rgba(var(--glow-color), 0.3));
+  }
+  100% {
+    transform: translateX(-50%) translateY(0) scale(1);
+    filter: drop-shadow(0 0 5px rgba(var(--glow-color), 0.2));
+  }
+}
+
+/* СТИЛИ КНОПКИ */
+.play-btn {
+  position: fixed;
+  left: 50%;
+  bottom: 100px;
+  transform: translateX(-50%) translateY(80px) scale(0.9);
+  opacity: 0;
+  
+  padding: 20px 50px;
+  background: linear-gradient(145deg, #ff6600, #ff9204);
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 900;
+  font-size: 2.5rem;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.671);
+  
+  box-shadow: 
+    0 5px 50px rgb(0, 0, 0),
+    0 0 15px rgba(255, 0, 0, 0.5);
+  
+  transition: all 0.5s ease;
+  z-index: 20;
+  --glow-color: 255, 51, 102;
+}
+
+.play-btn:hover {
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: 
+    0 8px 50px rgba(0, 0, 0, 0.767),
+    0 0 20px rgb(255, 0, 0);
+    background: linear-gradient(145deg, #ff8c3f, #ff9204);
+}
+
+.play-btn:active {
+  transform: translateX(-50%) translateY(1px);
+  box-shadow: 
+    0 3px 15px rgba(0, 0, 0, 0.3),
+    0 0 10px rgba(255, 51, 102, 0.4);
+}
+
+
+
+
+
+
+
+
