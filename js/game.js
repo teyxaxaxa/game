@@ -102,7 +102,6 @@ function hero_can_play(heroId) {
         maxEnergy: hero.maxEnergy,
         image: hero.image,
         startDeck: hero.startDeck
-
     }
     if (Game.player.health < GAME_CONFIG.player.maxHealth) {
         Game.player.health = GAME_CONFIG.player.maxHealth
@@ -111,9 +110,11 @@ function hero_can_play(heroId) {
         Game.player.health = GAME_CONFIG.player.maxHealth
     }
     document.getElementById('chooseHeroWindow').style.display = 'none'
+
 }
+
 // Константы и настройки игры
-let GAME_CONFIG = {
+const GAME_CONFIG = {
     player: {
         maxHealth: 60,
         maxShield: 20,
@@ -122,7 +123,7 @@ let GAME_CONFIG = {
         image: "",
         name: "",
         countDodge: 0,
-        startDeck: []
+        startDeck: ['bite']
     },
     boss: {
         maxHealth: 80,
@@ -147,33 +148,36 @@ function newStatsboss() {
     switch (GAME_LEVEL) {
         case 1:
             GAME_CONFIG.boss = {
-                maxHealth: 80,
+                maxHealth: 40,
                 shield: 0,
                 name: "Злой Тихон",
                 image: "img/boss-level1.png",
                 actions: [
-                    { name: 'Злобная атака', type: 'attack', value: 10, description: 'Наносит 10 урона' },
-                    { name: 'Злобная Броня', type: 'defense', value: 10, description: 'Дает 10 защиты' },
-                    { name: 'Новогодняя Ярость', type: 'special', value: { damage: 5, shield: 5 }, description: 'Наносит 5 урона и дает 5 защиты' }
+                    { name: 'Злобная атака', type: 'attack', value: 5, description: 'Наносит 5 урона' },
+                    { name: 'Злобная Броня', type: 'defense', value: 5, description: 'Дает 5 защиты' },
+                    { name: 'Злобная ярость', type: 'special', value: { damage: 5, shield: 5 }, description: 'Наносит 5 урона и дает 5 защиты' }
                 ]
             }
-            bgimg.style.background = `url(img/background-level1.png)`
+            bgimg.style.background = `url(img/background-level4.png)`
             bgimg.style.backgroundRepeat = 'no-repeat'
             bgimg.style.backgroundSize = 'cover'
             break;
         case 2:
             GAME_CONFIG.boss = {
-                maxHealth: 180,
+                maxHealth: 80,
                 shield: 20,
-                name: "boss2",
+                name: "Воровка PHP",
                 image: "img/boss-level2.png",
                 actions: [
-                    { name: 'Ледяная Атака', type: 'attack', value: 10, description: 'Наносит 10 урона' },
-                    { name: 'Морозная Броня', type: 'defense', value: 10, description: 'Дает 10 защиты' },
-                    { name: 'Новогодняя Ярость', type: 'special', value: { damage: 5, shield: 5 }, description: 'Наносит 5 урона и дает 5 защиты' }
+                    { name: 'Программный сбор', type: 'attack', value: 8, description: 'Наносит 8 урона' },
+                    { name: 'Программный сбор', type: 'attack', value: 8, description: 'Наносит 8 урона' },
+                    { name: 'Программный сбор', type: 'attack', value: 8, description: 'Наносит 8 урона' },
+                    { name: 'Антивирусник', type: 'defense', value: 10, description: 'Дает 12 защиты' },
+                    { name: 'Без куртки нельзя!', type: 'attack', value: 15, description: 'Наносит 15 урона' },
+                    { name: 'Программная Ярость', type: 'special', value: { damage: 5, shield: 5 }, description: 'Наносит 8 урона и дает 5 защиты' }
                 ]
             }
-            bgimg.style.background = `url(img/background-level2.png)`
+            bgimg.style.background = `url(img/background-level3.png)`
             bgimg.style.backgroundRepeat = 'no-repeat'
             bgimg.style.backgroundSize = 'cover'
             break;
@@ -181,31 +185,36 @@ function newStatsboss() {
             GAME_CONFIG.boss = {
                 maxHealth: 120,
                 shield: 10,
-                name: "boss3",
+                name: "zZz_Босс противогаза_zZz",
                 image: "img/boss-level3.png",
                 actions: [
-                    { name: 'Ледяная Атака', type: 'attack', value: 10, description: 'Наносит 10 урона' },
-                    { name: 'Морозная Броня', type: 'defense', value: 10, description: 'Дает 10 защиты' },
-                    { name: 'Новогодняя Ярость', type: 'special', value: { damage: 5, shield: 5 }, description: 'Наносит 5 урона и дает 5 защиты' }
+                    { name: 'Удар лапой', type: 'attack', value: 10, description: 'Наносит 10 урона' },
+                    { name: 'Удар лапой', type: 'attack', value: 10, description: 'Наносит 10 урона' },
+                    { name: 'Удар лапой', type: 'attack', value: 10, description: 'Наносит 10 урона' },
+                    { name: 'Отжимание!', type: 'attack', value: 15, description: 'Наносит 15 урона. -Ты опоздал!' },
+                    { name: 'Костюм ОЗК', type: 'defense', value: 15, description: 'Дает 10 защиты' },
+                    { name: 'Сдача нормативов', type: 'special', value: { damage: 5, shield: 5 }, description: 'Наносит 15 урона и дает 5 защиты. -Я ничего не сдавал..' }
                 ]
             }
-            bgimg.style.background = `url(img/background-level3.png)`
+            bgimg.style.background = `url(img/background-level2.png)`
             bgimg.style.backgroundRepeat = 'no-repeat'
             bgimg.style.backgroundSize = 'cover'
             break;
         case 4:
             GAME_CONFIG.boss = {
-                maxHealth: 180,
+                maxHealth: 150,
                 shield: 20,
-                name: "boss4",
+                name: "Отбирательница 311",
                 image: "img/boss-level4.png",
                 actions: [
-                    { name: 'Ледяная Атака', type: 'attack', value: 10, description: 'Наносит 10 урона' },
-                    { name: 'Морозная Броня', type: 'defense', value: 10, description: 'Дает 10 защиты' },
-                    { name: 'Новогодняя Ярость', type: 'special', value: { damage: 5, shield: 5 }, description: 'Наносит 5 урона и дает 5 защиты' }
+                    { name: 'Регистрация на конкурс', type: 'attack', value: 10, description: 'Наносит 15 урона. -Это тебе на степендию' },
+                    { name: 'Её нет в 104 кабинете', type: 'defense', value: 15, description: 'Дает 15 защиты. -Ну и где же она??' },
+                    { name: 'Злобная ярость', type: 'special', value: { damage: 5, shield: 5 }, description: 'Наносит 5 урона и дает 5 защиты' },
+                    { name: 'Программная Ярость', type: 'special', value: { damage: 5, shield: 5 }, description: 'Наносит 8 урона и дает 5 защиты' },
+                    { name: 'Сдача нормативов', type: 'special', value: { damage: 5, shield: 5 }, description: 'Наносит 15 урона и дает 5 защиты. -Я ничего не сдавал..' }
                 ]
             }
-            bgimg.style.background = `url(img/background-level4.png)`
+            bgimg.style.background = `url(img/background-level1.png)`
             bgimg.style.backgroundRepeat = 'no-repeat'
             bgimg.style.backgroundSize = 'cover'
             break;
@@ -226,7 +235,7 @@ const Game = {
         maxEnergy: GAME_CONFIG.player.maxEnergy,
         countDodge: 0,
         form:false,
-        deck: [],
+        deck: [...GAME_CONFIG.player.startDeck],
         hand: [],
         discard: []
     },
@@ -266,6 +275,7 @@ const CARDS = {
         type: 'attack',
         cost: 5,
         value: 3,
+        dodge: 3,
         description: 'Наносит 3 урона. Получите 3 жетон ловкости',
         icon: 'img/iconCards/dirtyTrick.png',
         color: '#e74c3c',
@@ -286,6 +296,7 @@ const CARDS = {
         type: 'attack',
         cost: 2,
         value: 2,
+        dodge: 2,
         description: 'Наносит 2 урона. Получите 2 жетона ловкости',
         icon: 'img/iconCards/sandToss.png',
         color: '#e74c3c',
@@ -353,26 +364,6 @@ const CARDS = {
         value: 3,
         description: 'Наносит 3 урона. Получите 1 жетон ловкости',
         icon: 'img/iconCards/iceKnife.png',
-        color: '#e74c3c',
-    },
-    dirtyTrick: {
-        id: 'dirtyTrick',
-        name: 'Грязный трюк',
-        type: 'attack',
-        cost: 4,
-        value: 3,
-        description: 'Наносит 3 урона. Получите 1 жетон ловкости',
-        icon: 'img/iconCards/dirtyTrick.png',
-        color: '#e74c3c',
-    },
-    dirtyTrick: {
-        id: 'dirtyTrick',
-        name: 'Грязный трюк',
-        type: 'attack',
-        cost: 4,
-        value: 3,
-        description: 'Наносит 3 урона. Получите 1 жетон ловкости',
-        icon: 'img/iconCards/dirtyTrick.png',
         color: '#e74c3c',
     },
     //карты лешего
@@ -455,19 +446,19 @@ function shuffleDeck() {
     for (let i = Game.player.deck.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [Game.player.deck[i], Game.player.deck[j]] = [Game.player.deck[j], Game.player.deck[i]];
+        
     }
 }
 
+
 // Взять карты
 function drawCards(count) {
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i <= (count); i++) {
         if (Game.player.deck.length === 0) {
-            // Если в рука имеет более 5 карт, то запретим брать больше
-
             // Если колода пуста, перемешиваем сброс
-            if (Game.player.discard.length > 0 && Game.player.deck<=3) {
-                Game.player.deck = [...Game.player.discard];
-                Game.player.discard = [];
+            if (Game.player.discard.length > 0 ) {
+                Game.player.deck.push(...Game.player.discard);
+                console.log(Game.player.deck)
                 shuffleDeck();
                 addToLog('Колода перемешана заново!');
             } else {
@@ -483,7 +474,6 @@ function drawCards(count) {
         }
         else {
             console.log('Массив достиг максимального размера!');
-            console.log(Game.player.discard.length)
         }
 
     }
@@ -592,9 +582,10 @@ function applyCardEffect(card) {
             break;
         case 'dirtyTrick':
         case 'sandToss':
-            // Истинный урон
+            // Урон с жетонами уклонений
             dealDamageToBoss(card.value, card.name);
-            Game.player.countDodge += 1;
+            Game.player.countDodge += card.dodge;
+            addToLog(`Вы сейчас имеете ${Game.player.countDodge} жетон(ов) уклонений`);
             break;
 
         // Эффекты карт Юльры
@@ -798,8 +789,10 @@ function bossTurn() {
 function dealDamageToPlayer(damage, source) {
     // Учитываем защиту игрока
     if (Game.player.countDodge > 0) {
-        let dodgeBoss = Math.random*100;
+        let dodgeBoss = Math.random()*100;
         let dodgePlayer = Game.player.countDodge * 10;
+        console.log(dodgeBoss);
+        console.log(dodgePlayer);
         if (dodgeBoss < dodgePlayer) {
             Game.player.countDodge -=1;
             addToLog(`Вы смогли уклониться от босса! Сейчас вы имеете ${Game.player.countDodge} жетон(ов) уклонений`);
@@ -1034,12 +1027,12 @@ function updateUI() {
 // }
 
 // Нарисовать тестовую карту (для отладки)
-function drawTestCard() {
-    if (Game.turn === 'player' && !Game.gameOver) {
-        drawCards(1);
-        addToLog('Вы берете дополнительную карту');
-    }
-}
+// function drawTestCard() {
+//     if (Game.turn === 'player' && !Game.gameOver) {
+//         drawCards(1);
+//         addToLog('Вы берете дополнительную карту');
+//     }
+// }
 
 // Обработчики событий
 document.addEventListener('DOMContentLoaded', () => {
@@ -1082,7 +1075,7 @@ const menuBtn = document.querySelector('#menu-btn');
 const closeBtn = document.querySelector('#close-btn');
 
 menuBtn.addEventListener('click', () => {
-    sideMenu.style.display = 'block';
+    sideMenu.style.display = 'flex';
     menuBtn.style.display = "none";
 })
 
