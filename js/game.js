@@ -12,6 +12,7 @@ const heros = {
         maxShield: 10,
         startEnergy: 10,
         maxEnergy: 10,
+        bleeding: false,
         image: "img/characterRyasu-hero-card.png",
         startDeck: ['sneakAttack','sneakAttack','rangeAttack','rangeAttack','sandToss','sandToss','dirtyTrick'],
         description: "Очень проворный эльф плут Рясу! Из-за отсутствие брони и большое здоровье, Рясу имеет множество атакующий карт. Получайте жетоны ловкости, чтобы увеличить шанс уклонение!",
@@ -22,6 +23,7 @@ const heros = {
         maxShield: 20,
         startEnergy: 12,
         maxEnergy: 12,
+        bleeding: false,
         image: "img/characterUlra-hero-card.png",
         startDeck: ['frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift'],
         description: "dddd",
@@ -32,6 +34,7 @@ const heros = {
         maxShield: 40,
         startEnergy: 8,
         maxEnergy: 8,
+        bleeding: false,
         image: "img/characterSteclo-hero-card.png",
         startDeck: ['wildShape'],
         description: "Имеет особую форму зверя, в которой он получает 40 брони, а так же особый эффект при ударе 'кравотечение'",
@@ -42,6 +45,7 @@ const heros = {
         maxShield: 30,
         startEnergy: 11,
         maxEnergy: 11,
+        bleeding: false,
         image: "img/characterMil-hero-card.png",
         startDeck: ['frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift'],
         description: "dddd",
@@ -230,6 +234,7 @@ const Game = {
         shield: GAME_CONFIG.boss.shield,
         nextAction: null,
         name: GAME_CONFIG.boss.name,
+        bleeding: false,
         image: "https://img.icons8.com/color/96/000000/snowman.png"
     },
     turn: 'player',
@@ -353,9 +358,10 @@ const CARDS = {
     wildShape:{
         id: 'wildShape',
         name: 'wildShape',
-        type: 'special',
+        type: 'wildShape',
         cost: GAME_CONFIG.player.maxEnergy,
-        value: 1,
+        value: 0,
+        bleeding: 3,
         description:'Превращение в зверя',
         icon:'img/iconCard/wildShape.png',
         color:'#9e0303ff'
@@ -393,6 +399,7 @@ function initGame() {
         maxHealth: GAME_CONFIG.boss.maxHealth,
         shield: GAME_CONFIG.boss.shield,
         nextAction: null,
+        bleeding: false,
         name: GAME_CONFIG.boss.name,
         image: "https://img.icons8.com/color/96/000000/snowman.png"
     };
@@ -466,8 +473,6 @@ function updateHand() {
 
     Game.player.hand.forEach(cardId => {
         const card = CARDS[cardId];
-        console.log(card)
-        console.log(card.type)
         const cardElement = document.createElement('div');
         cardElement.className = `card`;
         if (card.type === 'attack') {
@@ -516,7 +521,9 @@ function playCard(cardId) {
     if (Game.turn !== 'player' || Game.gameOver) return;
 
     const card = CARDS[cardId];
-
+    if (card.type==='wildShape'){
+        Game.boss.bleeding=true;
+    }
     // Проверяем, достаточно ли энергии
     if (Game.player.energy < card.cost) {
         addToLog(`Недостаточно энергии для "${card.name}"!`);
@@ -549,6 +556,8 @@ function applyCardEffect(card) {
     addToLog(`Вы разыгрываете: ${card.name}`);
 
     switch (card.id) {
+        case 'wildShape':
+            dealDamageToBoss(card.value, card.name);
         case 'icicle':
             // Атака босса
             dealDamageToBoss(card.value, card.name);
@@ -588,6 +597,9 @@ function applyCardEffect(card) {
 
 // Нанести урон боссу
 function dealDamageToBoss(damage, source) {
+    if (Game.boss.bleeding===true){
+        Game.boss.health = Game.boss.health - CARDS.wildShape.bleeding;
+    }
     // Учитываем защиту босса
     if (Game.boss.shield > 0) {
         const blocked = Math.min(damage, Game.boss.shield);
