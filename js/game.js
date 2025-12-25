@@ -23,7 +23,7 @@ const heros = {
         startEnergy: 12,
         maxEnergy: 12,
         image: "img/characterUlra-hero-card.png",
-        startDeck: ['snowball', 'snowball', 'snowball', 'frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift'],
+        startDeck: ['frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift'],
         description: "dddd",
     },
     hero3: {
@@ -33,7 +33,7 @@ const heros = {
         startEnergy: 8,
         maxEnergy: 8,
         image: "img/characterSteclo-hero-card.png",
-        startDeck: ['snowball'],
+        startDeck: ['wildShape'],
         description: "Имеет особую форму зверя, в которой он получает 40 брони, а так же особый эффект при ударе 'кравотечение'",
     },
     hero4: {
@@ -43,7 +43,7 @@ const heros = {
         startEnergy: 11,
         maxEnergy: 11,
         image: "img/characterMil-hero-card.png",
-        startDeck: ['snowball', 'snowball', 'snowball', 'frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift'],
+        startDeck: ['frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift'],
         description: "dddd",
     },
 }
@@ -119,7 +119,7 @@ let GAME_CONFIG = {
         maxEnergy: 3,
         image: "",
         name: "",
-        startDeck: ['snowball', 'snowball', 'snowball', 'frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift']
+        startDeck: ['frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift']
     },
     boss: {
         maxHealth: 80,
@@ -349,12 +349,32 @@ const CARDS = {
         icon: 'img/iconCards/sneakAttack.png',
         color: '#9b59b6'
     },
+    //карты лешего
+    wildShape:{
+        id: 'wildShape',
+        name: 'wildShape',
+        type: 'special',
+        cost: GAME_CONFIG.player.maxEnergy,
+        value: 1,
+        description:'Превращение в зверя',
+        icon:'img/iconCard/wildShape.png',
+        color:'#9e0303ff'
+    },
+    bite: {
+        id: 'bite',
+        name: 'bite',
+        type: 'special',
+        cost: GAME_CONFIG.player.maxEnergy,
+        value: 5,
+        description:'Превращение в зверя',
+        icon:'img/iconCard/bite.png',
+        color:'#9e0303ff'
+    }
 };
 
 // Инициализация игры
 function initGame() {
     // Сброс состояния игры
-
     Game.player = {
         health: Game.player.health,
         maxHealth: GAME_CONFIG.player.maxHealth,
@@ -446,8 +466,10 @@ function updateHand() {
 
     Game.player.hand.forEach(cardId => {
         const card = CARDS[cardId];
+        console.log(card)
+        console.log(card.type)
         const cardElement = document.createElement('div');
-        cardElement.className = `card ${card.type}`;
+        cardElement.className = `card`;
         if (card.type === 'attack') {
             cardElement.style.background = `url("img/card-fight-common.png")`
             cardElement.style.backgroundRepeat = 'no-repeat'
@@ -527,7 +549,6 @@ function applyCardEffect(card) {
     addToLog(`Вы разыгрываете: ${card.name}`);
 
     switch (card.id) {
-        case 'snowball':
         case 'icicle':
             // Атака босса
             dealDamageToBoss(card.value, card.name);
