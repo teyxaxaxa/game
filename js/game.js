@@ -102,6 +102,7 @@ function hero_can_play(heroId) {
         maxEnergy: hero.maxEnergy,
         image: hero.image,
         startDeck: hero.startDeck
+
     }
     if (Game.player.health < GAME_CONFIG.player.maxHealth) {
         Game.player.health = GAME_CONFIG.player.maxHealth
@@ -222,6 +223,7 @@ const Game = {
         shield: 0,
         energy: GAME_CONFIG.player.startEnergy,
         maxEnergy: GAME_CONFIG.player.maxEnergy,
+        form:false,
         deck: [],
         hand: [],
         discard: []
@@ -232,6 +234,7 @@ const Game = {
         shield: GAME_CONFIG.boss.shield,
         nextAction: null,
         name: GAME_CONFIG.boss.name,
+        bleeding: false,
         image: "https://img.icons8.com/color/96/000000/snowman.png"
     },
     turn: 'player',
@@ -317,9 +320,10 @@ const CARDS = {
     wildShape:{
         id: 'wildShape',
         name: 'wildShape',
-        type: 'special',
-        cost: GAME_CONFIG.player.maxEnergy,
-        value: 1,
+        type: 'wildShape',
+        cost: 8,
+        value: 0,
+        bleeding: 3,
         description:'Превращение в зверя',
         icon:'img/iconCard/wildShape.png',
         color:'#9e0303ff'
@@ -327,8 +331,8 @@ const CARDS = {
     bite: {
         id: 'bite',
         name: 'bite',
-        type: 'special',
-        cost: GAME_CONFIG.player.maxEnergy,
+        type: 'bite',
+        cost: 8,
         value: 5,
         description:'Превращение в зверя',
         icon:'img/iconCard/bite.png',
@@ -344,6 +348,7 @@ function initGame() {
         maxHealth: GAME_CONFIG.player.maxHealth,
         maxShield: GAME_CONFIG.player.maxShield,
         image: GAME_CONFIG.player.image,
+        form:false,
         shield: 0,
         energy: GAME_CONFIG.player.startEnergy,
         maxEnergy: GAME_CONFIG.player.maxEnergy,
@@ -357,6 +362,7 @@ function initGame() {
         maxHealth: GAME_CONFIG.boss.maxHealth,
         shield: GAME_CONFIG.boss.shield,
         nextAction: null,
+        bleeding: false,
         name: GAME_CONFIG.boss.name,
         image: "https://img.icons8.com/color/96/000000/snowman.png"
     };
@@ -479,7 +485,12 @@ function playCard(cardId) {
     if (Game.turn !== 'player' || Game.gameOver) return;
 
     const card = CARDS[cardId];
-
+    if (card.type==='wildShape'){
+        Game.boss.bleeding=true;
+        Game.player.shield=40
+        Game.player.form=true;
+        Game.player.deck=['bite','bite','bite','bite','bite',]
+    }
     // Проверяем, достаточно ли энергии
     if (Game.player.energy < card.cost) {
         addToLog(`Недостаточно энергии для "${card.name}"!`);
@@ -512,6 +523,10 @@ function applyCardEffect(card) {
     addToLog(`Вы разыгрываете: ${card.name}`);
 
     switch (card.id) {
+        case 'bite':
+            dealDamageToBoss(card.value, card.name);
+            break;
+        case 'icicle':
         // Эффекты карт Рясу
         case 'sneakAttack':
             // Истинный урон
@@ -564,6 +579,7 @@ function applyCardEffect(card) {
 
 // Нанести урон боссу
 function dealDamageToBoss(damage, source) {
+    
     // Учитываем защиту босса
     if (Game.boss.shield > 0) {
         const blocked = Math.min(damage, Game.boss.shield);
@@ -596,7 +612,9 @@ function chooseBossAction() {
 // Ход босса
 function bossTurn() {
     if (Game.gameOver) return;
-
+    if (Game.boss.bleeding===true){
+        Game.boss.health = Game.boss.health - CARDS.wildShape.bleeding;
+    }
     addToLog(`=== ХОД БОССА ===`);
     addToLog(`${Game.boss.name} использует: ${Game.boss.nextAction.name}`);
 
@@ -630,7 +648,9 @@ function bossTurn() {
     chooseBossAction();
 
     // Сбрасываем защиту игрока (если не указано иное)
-    if (Game.player.shield > 0) {
+    if (Game.player.form===true){
+    }
+    else if (Game.player.shield > 0) {
         addToLog(`Ваша защита сброшена`);
         Game.player.shield = 0;
     }
@@ -835,7 +855,12 @@ function updateUI() {
 
     // Имя и изображение игрока
     document.getElementById('player-card__name').textContent = GAME_CONFIG.player.name;
-    document.getElementById('player-card__img').src = GAME_CONFIG.player.image;
+    if (Game.player.form===true){
+        document.getElementById('player-card__img').src = `url('img/characterStecloBeast-hero-card.png')`;
+    }
+    else{
+        document.getElementById('player-card__img').src = GAME_CONFIG.player.image;
+    }
 
     // Обновляем кнопку завершения хода
     const endTurnBtn = document.getElementById('btn-end-turn');
