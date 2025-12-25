@@ -34,7 +34,7 @@ const heros = {
         maxEnergy: 8,
         image: "img/characterSteclo-hero-card.png",
         startDeck: ['snowball'],
-        description: "dddd",
+        description: "Имеет особую форму зверя, в которой он получает 40 брони, а так же особый эффект при ударе 'кравотечение'",
     },
     hero4: {
         name: "Мила",
