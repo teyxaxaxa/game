@@ -15,9 +15,10 @@ const characterjulia = document.querySelector(".characterjulia");
 const characterartemolen = document.querySelector(".characterartemolen");
 const playBtn = document.querySelector(".play-btn");
 const gameTitle = document.querySelector(".game-title");
+const partnersContainer = document.querySelector(".partners-container");
 
 // Функция для анимации появления
-function animateElement(element, delay) {
+function animateElement(element, delay, addIdle = true) {
   if (!element) return;
   
   setTimeout(() => {
@@ -30,35 +31,43 @@ function animateElement(element, delay) {
 
     setTimeout(() => {
       element.classList.remove("show");
-      element.classList.add("idle");
+      // Для заголовка и партнеров не добавляем idle, для остальных - добавляем
+      if (addIdle && element !== gameTitle && element !== partnersContainer) {
+        element.classList.add("idle");
+      }
     }, 1500);
   }, delay);
 }
 
 // Последовательность появления:
-// 1. Заголовок игры первым
+// 1. Заголовок игры первым (БЕЗ анимации дыхания)
 setTimeout(() => {
-  animateElement(gameTitle, 0);
+  animateElement(gameTitle, 0, false);
 }, 300);
 
-// 2. Пряник через 0.5 секунды
+// 2. Бегущая строка партнеров
+setTimeout(() => {
+  animateElement(partnersContainer, 0, false);
+}, 300);
+
+// 3. Пряник через 0.9 секунды
 setTimeout(() => {
   animateElement(character, 0);
-}, 500);
+}, 900);
 
-// 3. Милиса и Рустам одновременно через 1 секунду
+// 4. Милиса и Рустам одновременно через 1.2 секунды
 setTimeout(() => {
   animateElement(charactermila, 0);
   animateElement(characterryasu, 0);
-}, 1000);
+}, 1200);
 
-// 4. Юля и Артём одновременно через 1.5 секунды
+// 5. Юля и Артём одновременно через 1.5 секунды
 setTimeout(() => {
   animateElement(characterjulia, 0);
   animateElement(characterartemolen, 0);
 }, 1500);
 
-// 5. Кнопка через 2.5 секунды (через 1s после последних персонажей)
+// 6. Кнопка через 2.5 секунды
 setTimeout(() => {
   animateElement(playBtn, 0);
 }, 2500);

@@ -37,17 +37,16 @@ body {
   transition: transform 0.1s linear;
 }
 
-/* Стили для заголовка игры */
 .game-title {
   position: fixed;
-  top: 5%;
+  top: 3%;
   left: 50%;
-  transform: translateX(-50%) translateY(-30px) scale(0.9);
-  opacity: 0; /* Важно: изначально прозрачный */
+  transform: translateX(-50%) translateY(0) scale(1);
+  opacity: 0;
   
   font-family: 'Rubik', sans-serif;
   font-weight: 900;
-  font-size: 4.5rem;
+  font-size: 4.7rem;
   color: white;
   text-transform: uppercase;
   letter-spacing: 4px;
@@ -57,11 +56,10 @@ body {
     0 0 20px rgba(255, 100, 0, 0.5),
     0 0 30px rgba(255, 50, 0, 0.3);
   
-  z-index: 15;
+  z-index: 5;
   --glow-color: 255, 100, 50;
   pointer-events: none;
   
-  /* Убедимся, что скрытый класс работает */
   transition: opacity 0.3s ease;
 }
 
@@ -71,22 +69,179 @@ body {
   visibility: hidden;
 }
 
+
+
+/* Стили для бегущей строки партнеров */
+.partners-container {
+  position: fixed;
+  top: 4%; /* На одном уровне с заголовком */
+  left: 75%; /* Позиция справа */
+  width: 25%; /* Узкая полоска */
+  height: 70px;
+  overflow: hidden;
+  z-index: 18;
+  pointer-events: none;
+  opacity: 0;
+  /* УБИРАЕМ начальный transform - анимация сама установит */
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 25%, /* Уже область появления */
+    black 75%, /* Уже область исчезновения */
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 25%,
+    black 75%,
+    transparent 100%
+  );
+  --glow-color: 255, 200, 100;
+}
+
+/* Отдельная анимация для бегущей строки (она не по центру!) */
+@keyframes partnersAppear {
+  0% {
+    transform: translateY(80px) scale(0.9);
+    opacity: 0;
+    filter: drop-shadow(0 0 0 rgba(var(--glow-color), 0)) blur(3px);
+  }
+  20% {
+    transform: translateY(50px) scale(0.95);
+    opacity: 0.5;
+    filter: drop-shadow(0 0 10px rgba(var(--glow-color), 0.5)) blur(1px);
+  }
+  40% {
+    transform: translateY(30px) scale(1.02);
+    opacity: 0.8;
+    filter: drop-shadow(0 0 15px rgba(var(--glow-color), 0.7)) blur(0);
+  }
+  60% {
+    transform: translateY(10px) scale(1.01);
+    opacity: 1;
+    filter: drop-shadow(0 0 12px rgba(var(--glow-color), 0.6));
+  }
+  80% {
+    transform: translateY(3px) scale(0.995);
+    filter: drop-shadow(0 0 8px rgba(var(--glow-color), 0.4));
+  }
+  100% {
+    transform: translateY(0) scale(1); /* Финальное положение - без смещения вниз! */
+    opacity: 1;
+    filter: drop-shadow(0 0 5px rgba(var(--glow-color), 0.2));
+  }
+}
+
+/* Только для бегущей строки своя анимация */
+.partners-container.show {
+  animation: partnersAppear 1.5s ease-out forwards;
+  visibility: visible;
+}
+
+/* Контейнер для бегущей строки */
+.partners-marquee {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Трек с логотипами */
+.partners-track {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  animation: marquee 15s linear infinite; /* Быстрее для узкой полоски */
+  will-change: transform;
+}
+
+/* Отдельный логотип партнера */
+.partner-logo {
+  flex-shrink: 0;
+  margin: 0 15px; /* Меньше отступов для узкой полосы */
+  opacity: 0.8; /* Фиксированная полупрозрачность */
+  transition: opacity 0.3s ease;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
+}
+
+.partner-logo:hover {
+  opacity: 1;
+}
+
+/* Стили для изображений логотипов */
+.partner-logo img {
+  height: 45px;
+  width: auto;
+  max-width: 100px; /* Меньше логотипы */
+  object-fit: contain;
+  filter: brightness(1.1) contrast(1.05);
+}
+
+/* Анимация бегущей строки */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Пауза при наведении */
+.partners-marquee:hover .partners-track {
+  animation-play-state: paused;
+}
+
 /* Адаптивность для мобильных устройств */
 @media (max-width: 1200px) {
   .game-title {
     font-size: 4.5rem;
-    top: 12%;
+    top: 8%;
+  }
+  
+  .partners-container {
+    top: 8%;
+    left: 70%;
+    width: 30%;
+    height: 60px;
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 20%,
+      black 80%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 20%,
+      black 80%,
+      transparent 100%
+    );
+  }
+  
+  .partner-logo {
+    margin: 0 12px;
+  }
+  
+  .partner-logo img {
+    height: 40px;
+    max-width: 90px;
   }
 }
 
 @media (max-width: 768px) {
   .game-title {
     font-size: 3rem;
-    top: 10%;
+    top: 7%;
     letter-spacing: 2px;
   }
+  
+  .partners-container {
+    display: none; /* На мобильных скрываем */
+  }
 }
-
 
 /* ОБЩИЕ стили для всех персонажей */
 .character,
@@ -171,7 +326,7 @@ body {
   }
 }
 
-/* Анимация появления для всех персонажей И заголовка */
+/* Анимация появления для всех элементов кроме бегущей строки */
 .character.show,
 .charactermila.show,
 .characterryasu.show,
@@ -274,8 +429,6 @@ body {
     0 0 10px rgba(255, 51, 102, 0.4);
 }
 
-
-
 /* Загрузки во время чего либо */
 .loading{
     top: 0;
@@ -367,23 +520,6 @@ body {
   left: 25%;
 }
 
-/* .loading>img:nth-child(2){
-  animation: loading-img-leftB 5s forwards;
-}
-
-.loading>img:nth-child(3){
-  animation: loading-img-a 5s forwards;
-}
-
-.loading>img:nth-child(4){
-  animation: loading-img-rightB 5s forwards;
-}
-
-.loading>img:nth-child(5){
-  animation: loading-img-team 5s forwards;
-} */
-
-
 @keyframes loading-img{
   0%{
     transform:scale(0.3);
@@ -439,8 +575,6 @@ body {
     transform:scale(0.3) translate(0%, 0%) rotate(0deg);
   }
 
-
-
   100%{
     transform:scale(0.3) translate(-500%, 0%);
   }
@@ -495,7 +629,6 @@ body {
     width: 50%;
   position: absolute;
   bottom: 25%;
-  /* transform: translate(-50%, -50%); */
   left: 50%;
   color: var(--color-white);
   font-family: "Duality";
@@ -510,8 +643,6 @@ body {
   font-family: "Duality";
   font-size: 3rem;
 }
-
-
 
 @keyframes loading1{
   0%{
@@ -529,3 +660,5 @@ body {
     display: none;
   }
 }
+
+
