@@ -436,10 +436,7 @@ function updateHand() {
 
     Game.player.hand.forEach(cardId => {
         const card = CARDS[cardId];
-<<<<<<< HEAD
-=======
         console.log(card);
->>>>>>> 0f2d7a75221edff24e05bf7fc457115d38eb9351
         const cardElement = document.createElement('div');
         cardElement.className = `card`;
         if (card.type === 'attack') {
@@ -526,12 +523,10 @@ function applyCardEffect(card) {
     addToLog(`Вы разыгрываете: ${card.name}`);
 
     switch (card.id) {
-<<<<<<< HEAD
         case 'bite':
             dealDamageToBoss(card.value, card.name);
             break;
         case 'icicle':
-=======
         // Эффекты карт Рясу
         case 'sneakAttack':
             // Истинный урон
@@ -546,7 +541,6 @@ function applyCardEffect(card) {
             
             // Эффекты карт Милы
         case 'rangeAttack':
->>>>>>> 0f2d7a75221edff24e05bf7fc457115d38eb9351
             // Атака босса
             dealDamageToBoss(card.value, card.name);
             //createAnimation('damage', card.value, 'boss');
