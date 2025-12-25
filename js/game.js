@@ -276,7 +276,7 @@ const CARDS = {
         name: 'Атака исподтишка',
         type: 'special',
         cost: 10,
-        value: 10,
+        value: 1000,
         description: 'Наносит 10 урона игнорируя защиту босса',
         icon: 'img/iconCards/sneakAttack.png',
         color: '#c2e73cff',
@@ -928,6 +928,23 @@ function showResult(isWin) {
 
     modal.style.display = 'flex';
 }
+
+const btnFinish = document.getElementById('btn-finish');
+const btnRestart = document.getElementById('btn-restart');
+
+btnFinish.addEventListener('click', () => {
+
+setTimeout(() => {
+  window.location.replace('index.html');
+}, 1500);
+})
+
+btnRestart.addEventListener('click', () => {
+
+setTimeout(() => {
+  window.location.replace('game.html');
+}, 1500);
+})
 
 // Добавить запись в лог
 function addToLog(message) {
