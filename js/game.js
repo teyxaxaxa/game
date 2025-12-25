@@ -316,7 +316,7 @@ function initGame() {
         maxHealth: GAME_CONFIG.boss.maxHealth,
         shield: GAME_CONFIG.boss.shield,
         nextAction: null,
-        name: "Снеговик-Воин",
+        name: GAME_CONFIG.boss.name,
         image: "https://img.icons8.com/color/96/000000/snowman.png"
     };
 
@@ -638,8 +638,20 @@ function dealDamageToPlayer(damage, source) {
 // Проверка конца игры
 function checkGameOver() {
     if (Game.boss.health <= 0) {
-        Game.gameOver = true;
-        showResult(true);
+        if (GAME_LEVEL=== 4){
+            Game.gameOver = true;
+            showResult(true);
+            
+        }
+        if (Game.boss.health <= 0 && GAME_LEVEL<4){
+        const win_boss = document.getElementById('win_on_boss')
+        win_boss.style.display='flex'
+        document.getElementById('win_on_boss-btn').addEventListener('click',() => win_boss.style.display='none')
+        document.getElementById('win_on_boss-text').textContent=`вы победили ${Game.boss.name}! хотите продолжить путь?`
+    }
+        GAME_LEVEL += 1
+        newStatsboss()
+        initGame();
         return;
     }
 
@@ -659,13 +671,32 @@ function showResult(isWin) {
 
     if (isWin) {
         title.textContent = 'ПОБЕДА!';
-        message.textContent = 'Вы победили Снеговика-Воина! С Новым Годом!';
-        // icon.innerHTML = '<i class="fas fa-trophy"></i>';
+        modal.style.backgroundImage =`url("img/win.jpg")`
+        modal.style.backgroundRepeat = 'no-repeat'
+        modal.style.backgroundSize = 'cover'
+        message.textContent = `Вы победили ${Game.boss.name}! С Новым Годом!`;
+        const button_container = document.createElement('div')
+        button_container.className = 'button_container'
+        button_container.innerHTML= `
+        <a class="btn" id = "btn-lose" href="index.html">ЗАВЕРШИТЬ ИГРУ</a>
+        <a class="btn" id = "btn-lose" href="game.html">ПОВТОРИТЬ ИГРУ</a>
+        `
+        modal.appendChild(button_container)
         addToLog('Вы победили Снеговика-Воина! Поздравляем!');
     } else {
+        modal.style.backgroundImage =`url("img/win.jpg")`
+        modal.style.backgroundRepeat = 'no-repeat'
+        modal.style.backgroundSize = 'cover'
         title.textContent = 'ПОРАЖЕНИЕ!';
-        message.textContent = 'Снеговик-Воин оказался сильнее. Попробуйте еще раз!';
-        // icon.innerHTML = '<i class="fas fa-snowman"></i>';
+        const button_container = document.createElement('div')
+        button_container.className = 'button_container'
+        button_container.innerHTML= `
+        <a class="btn" id = "btn-lose" href="index.html">ЗАВЕРШИТЬ ИГРУ</a>
+        <a class="btn" id = "btn-lose" href="game.html">ПОВТОРИТЬ ИГРУ</a>
+        `
+        modal.appendChild(button_container)
+        message.textContent = `${Game.boss.name} оказался сильнее. Попробуйте еще раз!`;
+        message.className="lose"
         addToLog('Вы проиграли. Снеговик-Воин победил!');
     }
 
@@ -791,8 +822,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btn-draw').addEventListener('click', drawTestCard);
 
     // Кнопка перезапуска игры
-    // document.getElementById('restart-btn').addEventListener('click', initGame);
-
+    document.getElementById('restart-btn').addEventListener('click',() => location.reload());
+    
     // Кнопка помощи (правила)
     // document.getElementById('help-btn').addEventListener('click', showRules);
 
@@ -800,23 +831,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // document.getElementById('close-rules-btn').addEventListener('click', hideRules);
 
     // Перезапуск игры из модального окна результата
-    document.getElementById('btn-next-game').addEventListener('click', () => {
-        document.getElementById('modal-overlay').style.display = 'none';
-        GAME_LEVEL += 1
-        newStatsboss()
-        initGame();
+    // document.getElementById('btn-next-game').addEventListener('click', () => {
+    //     document.getElementById('modal-overlay').style.display = 'none';
+    //     GAME_LEVEL += 1
+    //     newStatsboss()
+    //     initGame();
 
-        console.log(GAME_LEVEL)
-    });
+    //     console.log(GAME_LEVEL)
+    // });
 
     // Закрытие модальных окон при клике вне их
-    document.querySelectorAll('.modal-overlay').forEach(modal => {
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
-    });
+    // document.querySelectorAll('.modal-overlay').forEach(modal => {
+    //     modal.addEventListener('click', (e) => {
+    //         if (e.target === modal) {
+    //             modal.style.display = 'none';
+    //         }
+    //     });
+    // });
 });
 
 // открытие меню 

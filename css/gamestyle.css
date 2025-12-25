@@ -772,3 +772,30 @@ h6 {
     background: blue;
     margin: 1rem;
 }
+
+
+.lose{
+
+}
+
+.win_on_boss{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    display: none;
+    justify-content: center;
+    z-index: 80;
+    opacity: 0.7;
+    background-color: #1c1e1f;
+}
+.win_on_boss-text{
+    color: white;
+}
+.win_on_boss-btn{
+    width: 10rem;
+    height: 2rem;
+    color: black;
+    z-index: 81;
+}
