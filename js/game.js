@@ -13,7 +13,7 @@ const heros = {
         startEnergy: 10,
         maxEnergy: 10,
         image: "img/characterRyasu-hero-card.png",
-        startDeck: ['sneakAttack','sneakAttack','rangeAttack','rangeAttack','sandToss','sandToss','dirtyTrick'],
+        startDeck: ['sneakAttack', 'sneakAttack', 'rangeAttack', 'rangeAttack', 'sandToss', 'sandToss', 'dirtyTrick'],
         description: "Очень проворный эльф плут Рясу! Из-за отсутствие брони и большое здоровье, Рясу имеет множество атакующий карт. Получайте жетоны ловкости, чтобы увеличить шанс уклонение!",
         countDodge: 2,
     },
@@ -24,8 +24,8 @@ const heros = {
         startEnergy: 12,
         maxEnergy: 12,
         image: "img/characterUlra-hero-card.png",
-        startDeck: ['sneakAttack','sneakAttack','rangeAttack','rangeAttack','sandToss','sandToss','dirtyTrick'],
-        description: "dddd",
+        startDeck: ['kickTeeth', 'kickTeeth', 'kickTeeth', 'kickTeeth', 'fireBolt', 'fireBolt', 'fireBall', 'fireShield', 'heal', 'heal'],
+        description: "Ведьма, что вяжет судьбы огнём! Не сильна в прямом бою, но её чары выжигают врагов изнутри. С помощью огненных заклинаний копите жетоны огня и сжигайте противников!",
     },
     hero3: {
         name: "Стекло",
@@ -39,14 +39,14 @@ const heros = {
         description: "Имеет особую форму зверя, в которой он получает 40 брони, а так же особый эффект при ударе 'кравотечение'",
     },
     hero4: {
-        name: "Мила",
+        name: "Морана",
         maxHealth: 10,
         maxShield: 30,
         startEnergy: 11,
         maxEnergy: 11,
         image: "img/characterMil-hero-card.png",
         startDeck: [],
-        description: "dddd",
+        description: "Морана - холодная волшебница севера! Обладает огромной защитой, но уязвимым ядром. Копите Жетоны Стужи, чтобы заморозить врагов и нанести сокрушительный урон!",
     },
 }
 //выбор персонажа
@@ -130,6 +130,7 @@ let GAME_CONFIG = {
         shield: 0,
         name: "Гёрл",
         image: "",
+        countFire: 0,
         actions: [
             { name: 'Ледяная Атака', type: 'attack', value: 10, description: 'Наносит 10 урона' },
             { name: 'Морозная Броня', type: 'defense', value: 10, description: 'Дает 10 защиты' },
@@ -198,7 +199,7 @@ function newStatsboss() {
                 maxHealth: 180,
                 shield: 20,
                 name: "boss4",
-                image: "img/characterMil-hero-card.png",
+                image: "img/boss-level4.png",
                 actions: [
                     { name: 'Ледяная Атака', type: 'attack', value: 10, description: 'Наносит 10 урона' },
                     { name: 'Морозная Броня', type: 'defense', value: 10, description: 'Дает 10 защиты' },
@@ -224,6 +225,7 @@ const Game = {
         shield: 0,
         energy: GAME_CONFIG.player.startEnergy,
         maxEnergy: GAME_CONFIG.player.maxEnergy,
+        countDodge: 0,
         form:false,
         deck: [],
         hand: [],
@@ -235,6 +237,7 @@ const Game = {
         shield: GAME_CONFIG.boss.shield,
         nextAction: null,
         name: GAME_CONFIG.boss.name,
+        countFire: 0,
         bleeding: false,
         image: "https://img.icons8.com/color/96/000000/snowman.png"
     },
@@ -245,14 +248,26 @@ const Game = {
 
 // Определение карт
 const CARDS = {
+    // общие карты:
+    heal: {
+        id: 'heal',
+        name: 'Возложение рук',
+        type: 'attack',
+        cost: 4,
+        value: 10,
+        description: 'Даёт 10 здоровье',
+        icon: 'img/iconCards/heal.png',
+        color: '#2cf112ff',
+    },
+
     // Карты Рясу
     dirtyTrick: {
         id: 'dirtyTrick',
         name: 'Грязный трюк',
         type: 'attack',
-        cost: 4,
+        cost: 5,
         value: 3,
-        description: 'Наносит 3 урона. Получите 1 жетон ловкости',
+        description: 'Наносит 3 урона. Получите 3 жетон ловкости',
         icon: 'img/iconCards/dirtyTrick.png',
         color: '#e74c3c',
     },
@@ -261,8 +276,8 @@ const CARDS = {
         name: 'Атака исподтишка',
         type: 'special',
         cost: 10,
-        value: 500,
-        description: 'Наносит 5 урона игнорируя защиту босса',
+        value: 10,
+        description: 'Наносит 10 урона игнорируя защиту босса',
         icon: 'img/iconCards/sneakAttack.png',
         color: '#c2e73cff',
     },
@@ -271,8 +286,8 @@ const CARDS = {
         name: 'Бросить песок',
         type: 'attack',
         cost: 2,
-        value: 5,
-        description: 'Наносит 2 урона. Получите 1 жетона ловкости',
+        value: 2,
+        description: 'Наносит 2 урона. Получите 2 жетона ловкости',
         icon: 'img/iconCards/sandToss.png',
         color: '#e74c3c',
     },
@@ -285,6 +300,50 @@ const CARDS = {
         description: 'Наносит 5 урона',
         icon: 'img/iconCards/rangeAttack.png',
         color: '#e74c3c',
+    },
+    // Карты Юльры
+    kickTeeth: {
+        id: 'kickTeeth',
+        name: 'Удар по зубам',
+        type: 'attack',
+        cost: 2,
+        value: 2,
+        description: 'Наносит 2 урона.',
+        icon: 'img/iconCards/kickTeeth.png',
+        color: '#ce4064ff',
+    },
+    fireBolt: {
+        id: 'fireBolt',
+        name: 'Огненный снаряд',
+        type: 'attack',
+        cost: 4,
+        value: 2,
+        fire: 1,
+        description: 'Наносит 2 урона. Босс получает 1 жетон огня',
+        icon: 'img/iconCards/fireBolt.png',
+        color: '#ce4064ff',
+    },
+    fireBall: {
+        id: 'fireBall',
+        name: 'Огненный шар',
+        type: 'attack',
+        cost: 10,
+        value: 10,
+        fire: 5,
+        description: 'Наносит 10 урона. Босс получает 5 жетон огня',
+        icon: 'img/iconCards/fireBall.png',
+        color: '#ce4064ff',
+    },
+    fireShield: {
+        id: 'fireShield',
+        name: 'Огненный щит',
+        type: 'defense',
+        cost: 6,
+        value: 10,
+        fire: 1,
+        description: 'Даёт 10 брони. Босс получает 1 жетон огня',
+        icon: 'img/iconCards/fireShield.png',
+        color: '#ce4064ff',
     },
     // Карты Милы
     iceKnife: {
@@ -318,7 +377,7 @@ const CARDS = {
         color: '#e74c3c',
     },
     //карты лешего
-    wildShape:{
+    wildShape: {
         id: 'wildShape',
         name: 'wildShape',
         type: 'wildShape',
@@ -353,6 +412,7 @@ function initGame() {
         shield: 0,
         energy: GAME_CONFIG.player.startEnergy,
         maxEnergy: GAME_CONFIG.player.maxEnergy,
+        countDodge: 0,
         deck: [...GAME_CONFIG.player.startDeck],
         hand: [],
         discard: []
@@ -365,9 +425,9 @@ function initGame() {
         nextAction: null,
         bleeding: false,
         name: GAME_CONFIG.boss.name,
+        countFire: 0,
         image: "https://img.icons8.com/color/96/000000/snowman.png"
     };
-
     Game.turn = 'player';
     Game.gameOver = false;
     Game.actionLog = ['Новогодняя битва начинается!', 'Снеговик-Воин бросает вам вызов!'];
@@ -538,10 +598,29 @@ function applyCardEffect(card) {
         case 'sandToss':
             // Истинный урон
             dealDamageToBoss(card.value, card.name);
-            Game.player.countDodge+=1;
+            Game.player.countDodge += 1;
             break;
-            
-            // Эффекты карт Милы
+
+        // Эффекты карт Юльры
+        case 'fireBolt':
+        case 'fireBall':
+            // Атака с огненными уронами
+            dealDamageToBoss(card.value, card.name);
+            Game.boss.countFire += card.fire;
+            addToLog(`Босс получает ${card.fire} жетонов огня`);
+            console.log(Game.boss.countFire);
+            break;
+        case 'fireShield':
+            // Броня с огненными уронами
+            Game.player.shield += card.value;
+            addToLog(`Вы получаете ${card.value} защиты. Босс получает ${card.fire} жетонов огня`);
+            Game.boss.countFire += card.fire;
+            break;
+
+
+
+
+        case 'kickTeeth':
         case 'rangeAttack':
             // Атака босса
             dealDamageToBoss(card.value, card.name);
@@ -569,12 +648,11 @@ function applyCardEffect(card) {
             //createAnimation('damage', card.value, 'boss');
             break;
 
-        case 'mulledWine':
+        case 'heal':
             // Лечение игрока
             const healAmount = Math.min(card.value, Game.player.maxHealth - Game.player.health);
             Game.player.health += healAmount;
             addToLog(`Вы восстанавливаете ${healAmount} здоровья`);
-            //createAnimation('heal', healAmount, 'player');
             break;
     }
 }
@@ -602,6 +680,24 @@ function dealTrueDamageToBoss(damage, source) {
     // Наносим оставшийся урон
     Game.boss.health = Math.max(0, Game.boss.health - damage);
     addToLog(`Вы наносите ${damage} урона боссу с помощью "${source}"`);
+}
+
+// Нанести урон боссу из за жетоны огня
+function dealFireDamageToBoss(fireDamage, fireCount) {
+    // Учитываем защиту босса
+    if (Game.boss.shield > 0) {
+        const blocked = Math.min(fireDamage, Game.boss.shield);
+        Game.boss.shield -= blocked;
+        fireDamage -= blocked;
+        addToLog(`Защита босса поглотила ${blocked} урона`);
+
+        if (fireDamage <= 0) return;
+    }
+
+    // Наносим оставшийся урон
+    Game.boss.health = Math.max(0, Game.boss.health - fireDamage);
+    addToLog(`Босс получает ${fireDamage} урона огня, сейчас "${fireCount}" жетон(ов) огня`);
+    Game.boss.countFire -= 1;
 }
 
 // Босс выбирает действие
@@ -657,6 +753,29 @@ function bossTurn() {
         Game.player.shield = 0;
     }
 
+    // Подчёт жетонов огня
+    // dealFireDamageToBoss(Game.boss.countFire, Game.boss.countFire)
+    if (Game.boss.countFire > 0) {
+        let fireDamage = Game.boss.countFire;
+        console.log("первое условие выполнилось!");
+        if (Game.boss.shield > 0) {
+            console.log(" второе условие выполнилось!");
+            
+            const blocked = Math.min(fireDamage, Game.boss.shield);
+            Game.boss.shield -= blocked;
+            fireDamage -= blocked;
+            console.log(fireDamage);
+            console.log(Game.boss.countFire);
+            addToLog(`Защита босса поглотила ${blocked} урона`);
+
+            if (fireDamage <= 0);
+        }
+        console.log(" третье условие выполнилось!");
+        // Наносим оставшийся урон
+        Game.boss.health = Math.max(0, Game.boss.health - fireDamage);
+        addToLog(`Босс получает ${fireDamage} урона огня, сейчас "${Game.boss.countFire}" жетон(ов) огня`);
+        Game.boss.countFire -= 1;
+    }
     // Переход к ходу игрока
     Game.turn = 'player';
     if (Game.player.shield<=0 && Game.player.form===true){
@@ -683,6 +802,22 @@ function bossTurn() {
 // Нанести урон игроку
 function dealDamageToPlayer(damage, source) {
     // Учитываем защиту игрока
+    if (Game.player.countDodge > 0) {
+        let dodgeBoss = Math.random*100;
+        let dodgePlayer = Game.player.countDodge * 10;
+        if (dodgeBoss < dodgePlayer) {
+            Game.player.countDodge -=1;
+            addToLog(`Вы смогли уклониться от босса! Сейчас вы имеете ${Game.player.countDodge} жетон(ов) уклонений`);
+            return
+        }
+        else {
+            {
+            Game.player.countDodge = 0;
+            addToLog(`Вы не смогли уклониться от босса! Вы теряете все жетоны уклонение!`);
+        }
+        }
+
+    }
     if (Game.player.shield > 0) {
         const blocked = Math.min(damage, Game.player.shield);
         Game.player.shield -= blocked;
