@@ -34,7 +34,7 @@ const heros = {
         startEnergy: 8,
         maxEnergy: 8,
         image: "img/characterSteclo-hero-card.png",
-        startDeck: [],
+        startDeck: ['wildShape'],
         description: "Имеет особую форму зверя, в которой он получает 40 брони, а так же особый эффект при ударе 'кравотечение'",
     },
     hero4: {
@@ -44,7 +44,7 @@ const heros = {
         startEnergy: 11,
         maxEnergy: 11,
         image: "img/characterMil-hero-card.png",
-        startDeck: ['sneakAttack','sneakAttack','rangeAttack','rangeAttack','sandToss','sandToss','dirtyTrick'],
+        startDeck: [],
         description: "dddd",
     },
 }
@@ -313,12 +313,32 @@ const CARDS = {
         icon: 'img/iconCards/dirtyTrick.png',
         color: '#e74c3c',
     },
+    //карты лешего
+    wildShape:{
+        id: 'wildShape',
+        name: 'wildShape',
+        type: 'special',
+        cost: GAME_CONFIG.player.maxEnergy,
+        value: 1,
+        description:'Превращение в зверя',
+        icon:'img/iconCard/wildShape.png',
+        color:'#9e0303ff'
+    },
+    bite: {
+        id: 'bite',
+        name: 'bite',
+        type: 'special',
+        cost: GAME_CONFIG.player.maxEnergy,
+        value: 5,
+        description:'Превращение в зверя',
+        icon:'img/iconCard/bite.png',
+        color:'#9e0303ff'
+    }
 };
 
 // Инициализация игры
 function initGame() {
     // Сброс состояния игры
-
     Game.player = {
         health: Game.player.health,
         maxHealth: GAME_CONFIG.player.maxHealth,
@@ -412,7 +432,7 @@ function updateHand() {
         const card = CARDS[cardId];
         console.log(card);
         const cardElement = document.createElement('div');
-        cardElement.className = `card ${card.type}`;
+        cardElement.className = `card`;
         if (card.type === 'attack') {
             cardElement.style.background = `url("img/card-fight-common.png")`
             cardElement.style.backgroundRepeat = 'no-repeat'
