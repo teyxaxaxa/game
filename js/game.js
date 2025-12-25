@@ -34,7 +34,8 @@ const heros = {
         startEnergy: 8,
         maxEnergy: 8,
         image: "img/characterSteclo-hero-card.png",
-        startDeck: ['wildShape'],
+        startDeck: ['wildShape','sneakAttack','sneakAttack','rangeAttack','rangeAttack','sandToss','sandToss','dirtyTrick'],
+        formDeck:['bite','bite','bite','bite','bite',],
         description: "Имеет особую форму зверя, в которой он получает 40 брони, а так же особый эффект при ударе 'кравотечение'",
     },
     hero4: {
@@ -325,7 +326,7 @@ const CARDS = {
         value: 0,
         bleeding: 3,
         description:'Превращение в зверя',
-        icon:'img/iconCard/wildShape.png',
+        icon:'img/iconCards/wildShape.png',
         color:'#9e0303ff'
     },
     bite: {
@@ -334,8 +335,8 @@ const CARDS = {
         type: 'bite',
         cost: 8,
         value: 5,
-        description:'Превращение в зверя',
-        icon:'img/iconCard/bite.png',
+        description:'Куснуть',
+        icon:'img/iconCards/bite.png',
         color:'#9e0303ff'
     }
 };
@@ -436,7 +437,6 @@ function updateHand() {
 
     Game.player.hand.forEach(cardId => {
         const card = CARDS[cardId];
-        console.log(card);
         const cardElement = document.createElement('div');
         cardElement.className = `card`;
         if (card.type === 'attack') {
@@ -485,12 +485,7 @@ function playCard(cardId) {
     if (Game.turn !== 'player' || Game.gameOver) return;
 
     const card = CARDS[cardId];
-    if (card.type==='wildShape'){
-        Game.boss.bleeding=true;
-        Game.player.shield=40
-        Game.player.form=true;
-        Game.player.deck=['bite','bite','bite','bite','bite',]
-    }
+    
     // Проверяем, достаточно ли энергии
     if (Game.player.energy < card.cost) {
         addToLog(`Недостаточно энергии для "${card.name}"!`);
@@ -499,14 +494,21 @@ function playCard(cardId) {
 
     // Тратим энергию
     Game.player.energy -= card.cost;
-
     // Убираем карту из руки
     const cardIndex = Game.player.hand.indexOf(cardId);
     if (cardIndex !== -1) {
         Game.player.hand.splice(cardIndex, 1);
         Game.player.discard.push(cardId);
     }
-
+    if (card.type==='wildShape'){
+        Game.boss.bleeding=true;
+        Game.player.shield=40
+        Game.player.form=true;
+        Game.player.hand=[]
+        Game.player.discard=[]
+        Game.player.deck=heros.hero3.formDeck
+        
+    }
     // Применяем эффект карты
     applyCardEffect(card);
 
@@ -657,12 +659,18 @@ function bossTurn() {
 
     // Переход к ходу игрока
     Game.turn = 'player';
-
+    if (Game.player.shield<=0 && Game.player.form===true){
+        Game.player.form=false
+        Game.player.hand=[]
+        Game.player.discard=[]
+        Game.player.deck=GAME_CONFIG.player.startDeck
+    }
     // Восстанавливаем энергию игрока
     Game.player.energy = GAME_CONFIG.player.maxEnergy;
-
+    
     // Игрок берет карты
     drawCards(GAME_CONFIG.cardDrawPerTurn);
+    
 
     // Обновляем UI
     updateUI();
@@ -783,7 +791,6 @@ function showResult(isWin) {
         `
         modal.appendChild(button_container)
         message.textContent = `${Game.boss.name} оказался сильнее. Попробуйте еще раз!`;
-        message.className = "lose"
         addToLog('Вы проиграли. Снеговик-Воин победил!');
     }
 
@@ -856,7 +863,7 @@ function updateUI() {
     // Имя и изображение игрока
     document.getElementById('player-card__name').textContent = GAME_CONFIG.player.name;
     if (Game.player.form===true){
-        document.getElementById('player-card__img').src = `url('img/characterStecloBeast-hero-card.png')`;
+        document.getElementById('player-card__img').src = "img/characterStecloBeast-hero-card.png";
     }
     else{
         document.getElementById('player-card__img').src = GAME_CONFIG.player.image;
