@@ -112,6 +112,8 @@ h6 {
   width: 18rem;
   height: 100vh;
   padding: 2rem;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 #close-btn {

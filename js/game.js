@@ -274,6 +274,7 @@ const CARDS = {
         type: 'attack',
         cost: 5,
         value: 3,
+        dodge: 3,
         description: 'Наносит 3 урона. Получите 3 жетон ловкости',
         icon: 'img/iconCards/dirtyTrick.png',
         color: '#e74c3c',
@@ -294,6 +295,7 @@ const CARDS = {
         type: 'attack',
         cost: 2,
         value: 2,
+        dodge: 2,
         description: 'Наносит 2 урона. Получите 2 жетона ловкости',
         icon: 'img/iconCards/sandToss.png',
         color: '#e74c3c',
@@ -361,26 +363,6 @@ const CARDS = {
         value: 3,
         description: 'Наносит 3 урона. Получите 1 жетон ловкости',
         icon: 'img/iconCards/iceKnife.png',
-        color: '#e74c3c',
-    },
-    dirtyTrick: {
-        id: 'dirtyTrick',
-        name: 'Грязный трюк',
-        type: 'attack',
-        cost: 4,
-        value: 3,
-        description: 'Наносит 3 урона. Получите 1 жетон ловкости',
-        icon: 'img/iconCards/dirtyTrick.png',
-        color: '#e74c3c',
-    },
-    dirtyTrick: {
-        id: 'dirtyTrick',
-        name: 'Грязный трюк',
-        type: 'attack',
-        cost: 4,
-        value: 3,
-        description: 'Наносит 3 урона. Получите 1 жетон ловкости',
-        icon: 'img/iconCards/dirtyTrick.png',
         color: '#e74c3c',
     },
     //карты лешего
@@ -600,9 +582,10 @@ function applyCardEffect(card) {
             break;
         case 'dirtyTrick':
         case 'sandToss':
-            // Истинный урон
+            // Урон с жетонами уклонений
             dealDamageToBoss(card.value, card.name);
-            Game.player.countDodge += 1;
+            Game.player.countDodge += card.dodge;
+            addToLog(`Вы сейчас имеете ${Game.player.countDodge} жетон(ов) уклонений`);
             break;
 
         // Эффекты карт Юльры
@@ -806,8 +789,10 @@ function bossTurn() {
 function dealDamageToPlayer(damage, source) {
     // Учитываем защиту игрока
     if (Game.player.countDodge > 0) {
-        let dodgeBoss = Math.random*100;
+        let dodgeBoss = Math.random()*100;
         let dodgePlayer = Game.player.countDodge * 10;
+        console.log(dodgeBoss);
+        console.log(dodgePlayer);
         if (dodgeBoss < dodgePlayer) {
             Game.player.countDodge -=1;
             addToLog(`Вы смогли уклониться от босса! Сейчас вы имеете ${Game.player.countDodge} жетон(ов) уклонений`);
@@ -1090,7 +1075,7 @@ const menuBtn = document.querySelector('#menu-btn');
 const closeBtn = document.querySelector('#close-btn');
 
 menuBtn.addEventListener('click', () => {
-    sideMenu.style.display = 'block';
+    sideMenu.style.display = 'flex';
     menuBtn.style.display = "none";
 })
 
