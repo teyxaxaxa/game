@@ -4,39 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Battle for Room 311</title>
-    <link rel="stylesheet" href="css/mainstyle.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <div class="container">
-        <h1>С НОВЫМ ГОДОМ!</h1>
-        <div class="buttons">
-            <button class="btn" id="loadingbtn">
-                Играть
-            </button>
-            <button class="btn noactive"><a href="test.html">Отчислиться</a></button>
-        </div>
-        <img src="img/main-snow.png" alt="" class="main-snow">
-        <img src="img/main-el.png" alt="" class="main-el-l">
-        <img src="img/main-el.png" alt="" class="main-el-r">
-        <img src="img/main-snowmen.png" alt="" class="main-snowmen">
-        <img src="img/main-dedmoroz.png" alt="" class="main-dedmoroz">
-        <!-- Счетчик времени до НГ -->
-    <div class="time-counter">
-        <div class="counter-box">
-            <div class="counter-title">🎄 До 2025 года:</div>
-            <div class="time-display">
-                <span id="counter-days">00</span><span class="time-label">д</span>
-                <span class="separator">:</span>
-                <span id="counter-hours">00</span><span class="time-label">ч</span>
-                <span class="separator">:</span>
-                <span id="counter-minutes">00</span><span class="time-label">м</span>
-                <span class="separator">:</span>
-                <span id="counter-seconds">00</span><span class="time-label">с</span>
-            </div>
-        </div>
+    
+    <div class="parallax-bg">
+        <img src="img/main/bg_eetk2.jpeg" alt="background" />
     </div>
-    </div>
-    <div class="loading-first" id="first">g</div>
+    
+    <img src="img/main/mainBoss.png" alt="character" class="character hidden">
+    <img src="img/main/mainMila.png" alt="mila" class="charactermila hidden">
+    <img src="img/main/mainRyasu.png" alt="ryasu" class="characterryasu hidden">
+    <img src="img/main/mainJulia.png" alt="julia" class="characterjulia hidden">
+    <img src="img/main/mainSteclo.png" alt="steclo" class="characterartemolen hidden">
+    
+    <button class="play-btn hidden" id="loadingbtn">ИГРАТЬ</button>
+
+<div class="loading-first" id="first">g</div>
     <div class="loading-second" id="second">gv</div>
     <div class="loading" id="loading">
         <img src="img/logo/logo-back.png" alt="logo">
@@ -47,6 +36,7 @@
         <p>загрузка...</p>
         <h3>разработан командой БРИК-А-БРАК</h3>
      </div>
+
     <script src="js/main.js"></script>
 </body>
 </html>
