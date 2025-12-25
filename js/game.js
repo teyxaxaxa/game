@@ -34,13 +34,8 @@ const heros = {
         startEnergy: 8,
         maxEnergy: 8,
         image: "img/characterSteclo-hero-card.png",
-<<<<<<< HEAD
-        startDeck: ['sneakAttack','sneakAttack','rangeAttack','rangeAttack','sandToss','sandToss','dirtyTrick'],
-        description: "dddd",
-=======
-        startDeck: ['snowball'],
+        startDeck: [],
         description: "Имеет особую форму зверя, в которой он получает 40 брони, а так же особый эффект при ударе 'кравотечение'",
->>>>>>> 6a754a4a51a7ba4d7aa2251da6ad866b30a250db
     },
     hero4: {
         name: "Мила",
@@ -126,7 +121,7 @@ let GAME_CONFIG = {
         image: "",
         name: "",
         countDodge: 0,
-        startDeck: ['snowball', 'snowball', 'snowball', 'frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift']
+        startDeck: []
     },
     boss: {
         maxHealth: 80,
@@ -262,7 +257,7 @@ const CARDS = {
         name: 'Атака исподтишка',
         type: 'special',
         cost: 10,
-        value: 5,
+        value: 500,
         description: 'Наносит 5 урона игнорируя защиту босса',
         icon: 'img/iconCards/sneakAttack.png',
         color: '#c2e73cff',
