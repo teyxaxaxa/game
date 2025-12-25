@@ -527,25 +527,167 @@ h6 {
   padding: 20px;
   display: none;
   transition: all 1s;
+  animation: fadeIn 0.5s ease;
 }
 .modal-overlay__result {
-  background: linear-gradient(to bottom right, #1a3a5f, #0c1b2b);
+  background: rgba(155, 155, 209, 0.301); 
+  backdrop-filter: blur(5px); 
   border-radius: 20px;
-  padding: 30px;
-  max-width: 800px;
-  width: 100%;
-  border: 5px solid #ffd700;
-  box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
-  max-height: 90vh;
-  overflow-y: auto;
+  padding: 50px 60px;
+  max-width: 650px;
+  width: 90%;
+  position: relative;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  animation: slideUp 0.6s ease;
+  text-align: center;
+  
+  background-clip: padding-box;
 }
 .result__title {
+    background: linear-gradient(
+    90deg,
+    #ff0000, #ff9900, #ffff00, #00ff00, 
+    #0099ff, #6633ff, #ff00ff
+  );
+     
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
   font-family: "Mountains of Christmas", cursive;
-  font-size: 2.5rem;
-  color: #ffd700;
+  font-size: 3.5rem;
   text-align: center;
-  margin-bottom: 25px;
-  text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+  margin-bottom: 30px;
+  animation: rainbow-flow 4s linear infinite;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  letter-spacing: 2px;
+}
+.result__message {
+  color: #ffffff;
+  font-size: 1.5rem;
+  margin-bottom: 40px;
+  font-family: 'Arial', sans-serif;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  line-height: 1.6;
+  font-weight: 400;
+  background: rgba(173, 173, 173, 0.075);
+  padding: 20px;
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+}
+.result__buttons {
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+.result__btn {
+  padding: 18px 40px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 200px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  position: relative;
+  overflow: hidden;
+  color: white;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  font-family: 'Arial', sans-serif;
+  outline: none;
+}
+.result__btn,
+.result__btn:focus,
+.result__btn:hover,
+.result__btn:active {
+  border: none;
+  outline: none;
+  appearance: none;
+}
+
+.result__btn-finish {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+}
+.result__btn-finish:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(102, 126, 234, 0.5);
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+.result__btn-finish:active {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.result__btn-restart {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+}
+.result__btn-restart:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(245, 87, 108, 0.5);
+  background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+.result__btn-restart:active {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(245, 87, 108, 0.4);
+}
+.result__btn::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  transform: rotate(30deg);
+  transition: transform 0.5s;
+}
+.result__btn:hover::after {
+  transform: rotate(30deg) translate(20%, 20%);
+}
+@keyframes rainbow-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .result__btn-next-game {
 }

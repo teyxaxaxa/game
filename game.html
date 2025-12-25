@@ -200,13 +200,20 @@
      </div>
     <!-- окно победы/поражение -->
     <div class="modal-overlay" id="modal-overlay">
-      <div class="modal-overlay__result">
+        <div class="modal-overlay__content">
+            <div class="modal-overlay__result">
         <h2 class="result__title" id="result__title">Победа!</h2>
-        <p id="result__message"></p>
-        <!-- <button class="btn result__btn-next-game" id="btn-next-game">
-          Идти дальше!
-        </button> -->
+        <p class="result__message"  id="result__message"></p>
+        <div class="result__buttons">
+        <button class="result__btn result__btn-finish" id="btn-finish">
+          Завершить игру
+        </button>
+        <button class="result__btn result__btn-restart" id="btn-restart">
+          Повторить игру
+        </button>
       </div>
+      </div>
+        </div>
     </div>
 
     <!-- окно загрузки -->
