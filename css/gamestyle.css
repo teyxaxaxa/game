@@ -1,472 +1,512 @@
 @font-face {
-    font-family: "Duality";
-    src: url(../fonts/Duality\(RUS\ BY\ LYAJKA\).otf);
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Duality";
+  src: url(../fonts/Duality\(RUS\BY\LYAJKA\).otf);
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 @font-face {
-    font-family: "Bakinskay";
-    src: url(../fonts/bakinskay.otf);
-    font-weight: 400;
-    font-style: normal;
+  font-family: "Bakinskay";
+  src: url(../fonts/bakinskay.otf);
+  font-weight: 400;
+  font-style: normal;
 }
 @font-face {
-    font-family: "Bakinskay";
-    src: url(../fonts/bakinskaydistortion.otf);
-    font-weight: 500;
-    font-style: normal;
+  font-family: "Bakinskay";
+  src: url(../fonts/bakinskaydistortion.otf);
+  font-weight: 500;
+  font-style: normal;
 }
 @font-face {
-    font-family: "Bakinskay";
-    src: url(../fonts/bakinskay-gradient.otf);
-    font-weight: 600;
-    font-style: normal;
+  font-family: "Bakinskay";
+  src: url(../fonts/bakinskay-gradient.otf);
+  font-weight: 600;
+  font-style: normal;
 }
 @font-face {
-    font-family: "Bakinskay";
-    src: url(../fonts/bakinskay-1-italic.otf);
-    font-weight: 300;
-    font-style: italic;
+  font-family: "Bakinskay";
+  src: url(../fonts/bakinskay-1-italic.otf);
+  font-weight: 300;
+  font-style: italic;
 }
 
-:root{
-    --color-red: #DA2C38;
-    --color-green: #226F54;
-    --color-firm-white: #F4F0BB;
-    --color-firm-dark: #131313;
-    --color-dark: #000;
-    --color-white: #fff;
-    --color-brow: #43291F;
-    --border-radius-1: 0.5rem;
-    --box-shadow: 0 2rem 3rem var(--color-dark);
-    --background: var(--color-white);
+:root {
+  --color-red: #da2c38;
+  --color-green: #226f54;
+  --color-firm-white: #f4f0bb;
+  --color-firm-dark: #131313;
+  --color-dark: #000;
+  --color-white: #fff;
+  --color-brow: #43291f;
+  --border-radius-1: 0.5rem;
+  --box-shadow: 0 2rem 3rem var(--color-dark);
+  --background: var(--color-white);
 }
 
 *,
 *::after,
 *::before {
-    margin: 0;
-    padding: 0;
-    outline: none;
-    border: none;
-    text-decoration: none;
-    list-style: none;
-    box-sizing: border-box;
-    
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
 }
 
 body {
-    width: 100vw;
-    height: 100vh;
-    font-family: Poppins, sans-serif;
-    font-size: 1rem;
-    background: url(../img/back-forest1.jpg);
-     background-repeat: no-repeat;
-    background-size:cover;
-    color: var(--color-dark);
-    overflow: hidden;
-    /* display: grid;
+  width: 100vw;
+  height: 100vh;
+  font-family: Poppins, sans-serif;
+  font-size: 1rem;
+  background: url(../img/back-forest1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: var(--color-dark);
+  overflow: hidden;
+  /* display: grid;
     grid-template-columns: 12rem auto; */
 }
 
-
 a {
-    color: var(--color-dark);
+  color: var(--color-dark);
 }
 
 img {
-    display: block;
-    width: 100%;
+  display: block;
+  width: 100%;
 }
 
 h1 {
-    font-size: 1.8rem;
-    font-weight: 800;
+  font-size: 1.8rem;
+  font-weight: 800;
 }
 
 h2 {
-    font-size: 1.4rem;
+  font-size: 1.4rem;
 }
 
 h3 {
-    font-size: 0.87rem;
+  font-size: 0.87rem;
 }
 
 h4 {
-    font-size: 0.8rem;
+  font-size: 0.8rem;
 }
 
 h5 {
-    font-size: 0.77rem;
+  font-size: 0.77rem;
 }
 
 h6 {
-    font-size: 0.67rem;
+  font-size: 0.67rem;
 }
 
 .left-menu {
-    background: rgba(0, 0, 0, 0.5);
-    display: none;
-    position: fixed;
-    left: 0;
-    z-index: 8;
-    width: 18rem;
-    height: 100vh;
-    padding: 2rem;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  position: fixed;
+  left: 0;
+  z-index: 8;
+  width: 18rem;
+  height: 100vh;
+  padding: 2rem;
 }
 
-#close-btn{
-    font-size: 3rem;
-    color: var(--color-white);
-    background: none;
+#close-btn {
+  font-size: 3rem;
+  color: var(--color-white);
+  background: none;
 }
-
-
 
 .main {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
-#menu-btn{
-    position: fixed;
-    left: 2rem;
-    top: 2rem;
-    font-size: 3rem;
-    color: var(--color-white);
-    background: none;
+#menu-btn {
+  position: fixed;
+  left: 2rem;
+  top: 2rem;
+  font-size: 3rem;
+  color: var(--color-white);
+  background: none;
 }
 
 .game-area {
-    display: flex;
-    width: 100%;
-    
+  display: flex;
+  width: 100%;
 }
 .game-area__boss {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 /* полоски здоровье */
-.health-bar-container, .armor-bar-container {
-    display: flex;
-    margin: auto;
-    flex-direction: column;
-    align-items: center;
+.health-bar-container,
+.armor-bar-container {
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  align-items: center;
 }
-.stats__health-bar{
-    flex-grow: 1;
-    align-items: center;
+.stats__health-bar {
+  flex-grow: 1;
+  align-items: center;
 }
-.health-bar-label{
-    
-    font-size: 1rem;
-    color: var(--color-red);
-    font-family: "Duality";
-    font-weight: 400;
-    margin-bottom: 5px;
-    font-weight: 500;
+.health-bar-label {
+  font-size: 1rem;
+  color: var(--color-red);
+  font-family: "Duality";
+  font-weight: 400;
+  margin-bottom: 5px;
+  font-weight: 500;
 }
-.health-bar, .armor-bar{
-    
-    height: 30px;
-    min-width: 15rem;
-    background-color: #34495e;
-    border-radius: var(--border-radius-1);
-    overflow: hidden;
-    position: relative;
-    box-shadow: var(--box-shadow);
-    border: 2px solid #2c3e50;
-}
-
-.game-area__boss .health-bar, .game-area__boss .armor-bar{
-    min-width: 50rem;
-    height: 40px;
-    border-radius: 0.5rem 0.5rem 0 0 !important;
-    border: none;
+.health-bar,
+.armor-bar {
+  height: 30px;
+  min-width: 15rem;
+  background-color: #34495e;
+  border-radius: var(--border-radius-1);
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--box-shadow);
+  border: 2px solid #2c3e50;
 }
 
-.game-area__boss .health-bar-fill{
-    border-radius: 0.5rem 0.5rem 0 0 !important;
+.game-area__boss .health-bar,
+.game-area__boss .armor-bar {
+  min-width: 50rem;
+  height: 40px;
+  border-radius: 0.5rem 0.5rem 0 0 !important;
+  border: none;
 }
 
-.game-area__boss .armor-bar, .game-area__boss .armor-bar-fill{
-
-    height: 20px;
-    border-radius: 0px 0px 10px 10px !important;
-    border: none;
+.game-area__boss .health-bar-fill {
+  border-radius: 0.5rem 0.5rem 0 0 !important;
 }
 
-
-
-.health-bar-fill , .armor-bar-fill {
-    height: 100%;
-    background: linear-gradient(to right, #e92020, #61f70b);
-    border-radius: var(--border-radius-1);
-    transition: width 0.5s ease;
-    width: 100%;
-}
-.game-area__boss .health-bar-fill{
-    background: linear-gradient(to right, #e74c3c, #0f13f1);
-}
-.health-text , .armor-text{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
-    text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
-    color: white;
-    font-family: "Duality";
-    font-weight: 600;
+.game-area__boss .armor-bar,
+.game-area__boss .armor-bar-fill {
+  height: 20px;
+  border-radius: 0px 0px 10px 10px !important;
+  border: none;
 }
 
-.armor-bar-fill{
-    background: linear-gradient(to right, #99aabb, #3f3f5c);
+.health-bar-fill,
+.armor-bar-fill {
+  height: 100%;
+  background: linear-gradient(to right, #e92020, #61f70b);
+  border-radius: var(--border-radius-1);
+  transition: width 0.5s ease;
+  width: 100%;
+}
+.game-area__boss .health-bar-fill {
+  background: linear-gradient(to right, #e74c3c, #0f13f1);
+}
+.health-text,
+.armor-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+  color: white;
+  font-family: "Duality";
+  font-weight: 600;
+}
+
+.armor-bar-fill {
+  background: linear-gradient(to right, #99aabb, #3f3f5c);
 }
 
 .boss__img {
-    display: flex;
+  display: flex;
 }
-.boss-img__item{
-    width: 60rem;
-    animation: bosslive 20s ease-in-out infinite;
+.boss-img__item {
+  width: 60rem;
+  animation: bosslive 20s ease-in-out infinite;
 }
 
-@keyframes bosslive{
-  0%, 100%{
+@keyframes bosslive {
+  0%,
+  100% {
     transform: rotate(0deg) scale(1);
   }
-  40%{
+  40% {
     transform: rotate(1deg) scale(1.02);
   }
-  80%{
+  80% {
     transform: rotate(-1deg) scale(1);
   }
 }
 
-.boss__intent{
-    padding: 0.8rem;
-    margin-top: 10%;
-    width: 13rem;
-    font-family: "Duality";
-    max-height: 7rem;
-    color: white;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: var(--border-radius-1);
+.boss__intent {
+  padding: 0.8rem;
+  margin-top: 10%;
+  width: 13rem;
+  font-family: "Duality";
+  max-height: 7rem;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: var(--border-radius-1);
 }
 /* чат */
 .game-area__chat {
-    max-height: 10rem;
-    max-width: 20rem;
-    position: absolute;
-    right: 0%;
-    top: 25%;
-    overflow-y: auto;
-    padding: 1rem;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 0 0 0 20px;
-
+  max-height: 10rem;
+  max-width: 20rem;
+  position: absolute;
+  right: 0%;
+  top: 25%;
+  overflow-y: auto;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 0 0 0 20px;
 }
 .chat__log {
-    padding: 5px 0;
-    color: #ecf0f1;
-    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
-    font-size: 0.9rem;
+  padding: 5px 0;
+  color: #ecf0f1;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+  font-size: 0.9rem;
 }
 
 .chat__log:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 /* player */
 .game-area__player-section {
-    /* display: flex;
+  /* display: flex;
     justify-content: space-around; */
-    align-items: end; 
-    display: grid;
-    grid-template-columns: 0.5fr 0.5fr auto 1fr;
-    gap: 2rem;
-    width: 100%;
-    height: 60%;
-    bottom: 0%;
-    position: absolute;
-    padding: 2rem 2rem;
+  align-items: end;
+  display: grid;
+  grid-template-columns: 0.5fr 0.5fr auto 1fr;
+  gap: 2rem;
+  width: 100%;
+  height: 60%;
+  bottom: 0%;
+  position: absolute;
+  padding: 2rem 2rem;
 }
 .player-section__player-card {
-    display: flex;
-    flex-direction: column;
-    /* position: absolute;
+  display: flex;
+  flex-direction: column;
+  /* position: absolute;
     left: 5%;
     bottom: 10%; */
 }
 .player-card__img {
-    width: 16rem;
+  width: 16rem;
+  transition: all 0.5s;
 }
 
 .font-hero-card {
-    position: absolute;
-    z-index: 4;
+  position: absolute;
+  z-index: 4;
+  transition: all 0.5s;
 }
 .character-hero-card {
-    position: absolute;
-    z-index: 3;
+  position: absolute;
+  z-index: 3;
+  transition: all 0.5s;
 }
-.back-hero-card{
-
+.back-hero-card {
+  transition: all 0.5s;
 }
 
 .stats__class {
-    z-index: 5;
-    height: 1px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    align-items: end;
-    padding-left: 1rem;
-    margin-bottom: 1rem;
-    font-size: 2rem;
-    font-family: "Duality";
-    color: white;
-    font-weight: 400;
+  z-index: 5;
+  height: 1px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  align-items: end;
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  font-family: "Duality";
+  color: white;
+  font-weight: 400;
 }
 .player-card__name {
-    padding-left:1rem ;
-    font-size: 5rem;
-    font-family: "Bakinskay";
-    font-weight: 400;
-    text-align: center;
+  padding-left: 1rem;
+  font-size: 4rem;
+  font-family: "Bakinskay";
+  font-weight: 400;
+  text-align: center;
+  z-index: 4;
+  transition: all 0.5s;
 }
 
 .player-section__stats {
-    /* position: absolute;
+  /* position: absolute;
     left: 0%;
     bottom: 0%; */
-    display: flex;
+  display: flex;
 }
 
 .stats__resourse {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.resourse__img img{
-    width: 10rem;
+.resourse__img img {
+  width: 10rem;
 }
 .resourse__value {
-    font-size: 4rem;
-    font-family: "Bakinskay";
-    font-weight: 400;
-    color: #3087df;
+  font-size: 4rem;
+  font-family: "Bakinskay";
+  font-weight: 400;
+  color: #3087df;
 }
 .resourse__name {
 }
 /* рука игрока */
 .game-area__hand {
-    display: flex;
-    justify-content: center;
-    gap: 0px;
-    flex-wrap: wrap;
-    min-height: 200px;
-    width: 60rem;
-    margin: auto;
-    padding: 20px;
-    background: rgba(44, 62, 80, 0.5);
-    border-radius: 15px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 0px;
+  flex-wrap: wrap;
+  min-height: 200px;
+  width: 60rem;
+  margin: auto;
+  padding: 20px;
+  background: rgba(44, 62, 80, 0.5);
+  border-radius: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .card {
-    width: 155px;
-    height: 230px;
-    border-radius: 12px;
-    padding: 30px 30px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
-    position: relative;
-    overflow: hidden;
-    user-select: none;
-    z-index: 5;
+  width: 155px;
+  height: 230px;
+  border-radius: 12px;
+  padding: 2px 18px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  z-index: 5;
 }
 
-
-.card:first-child{
-    transform: rotate(-20deg) translateY(50px) translateX(40px);
+.card:first-child {
+  transform: rotate(-20deg) translateY(50px) translateX(40px);
 }
-.card:nth-child(2){
-    transform: rotate(-10deg) translateY(5px) translateX(20px);
+.card:nth-child(2) {
+  transform: rotate(-10deg) translateY(5px) translateX(20px);
 }
-.card:nth-child(3){
-    transform: rotate(0deg) translateY(-10px) ;
+.card:nth-child(3) {
+  transform: rotate(0deg) translateY(-10px);
 }
-.card:nth-last-child(2){
-    transform: rotate(10deg) translateY(5px) translateX(-20px);
-    z-index: 2;
+.card:nth-last-child(2) {
+  transform: rotate(10deg) translateY(5px) translateX(-20px);
+  z-index: 2;
 }
-.card:last-child{
-    transform: rotate(20deg) translateY(50px) translateX(-40px);
-    z-index: 1;
+.card:last-child {
+  transform: rotate(20deg) translateY(50px) translateX(-40px);
+  z-index: 1;
 }
 .card:hover {
-    transform: translateY(-10px) scale(1.1);
-    z-index: 10;
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+  transform: translateY(-10px) scale(1.1);
+  z-index: 10;
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
 }
 
 .card.playable:hover {
-    box-shadow: 0 12px 20px rgba(46, 204, 113, 0.6);
+  box-shadow: 0 12px 20px rgba(46, 204, 113, 0.6);
 }
 
 .card.unplayable {
-    opacity: 0.6;
-    cursor: not-allowed;
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .card.unplayable:hover {
-    transform: none;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  transform: none;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.card-cost{
+    text-align: end;
+    font-family: "Bakinskay";
+    font-size: 2rem;
+    margin-bottom: -1rem;
+    
+    color: var(--color-white);
+}
+
+.card-name{
+    font-family: "Bakinskay";
+    font-size: 2rem;
+    color: var(--color-dark);
+    text-align: center;
+}
+
+.card-type{
+    font-family: sans-serif;
+    font-weight: bold;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--color-dark);
+    text-align: center;
+}
+
+.card-icon{
+    width: 6rem;
+    margin: 0 auto;
+    margin-bottom: -1rem;
+}
+
+
+
+.card-description{
+    font-family: sans-serif;
+    font-size: 0.8rem;
+    color: var(--color-dark);
+    text-align: center;
+
 }
 
 
 
 /* контроль */
 .game-area__controls {
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
 }
 .btn {
-    width: 100%;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 10px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 .btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
 }
 
 .btn:active {
-    transform: translateY(1px);
+  transform: translateY(1px);
 }
 
 .controls__btn-end-turn {
@@ -474,129 +514,125 @@ h6 {
 .controls__btn-draw {
 }
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.85);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 50;
-    padding: 20px;
-    display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 20px;
+  display: none;
+  transition: all 1s;
 }
 .modal-overlay__result {
-    background: linear-gradient(to bottom right, #1a3a5f, #0c1b2b);
-    border-radius: 20px;
-    padding: 30px;
-    max-width: 800px;
-    width: 100%;
-    border: 5px solid #ffd700;
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
-    max-height: 90vh;
-    overflow-y: auto;
+  background: linear-gradient(to bottom right, #1a3a5f, #0c1b2b);
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 800px;
+  width: 100%;
+  border: 5px solid #ffd700;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+  max-height: 90vh;
+  overflow-y: auto;
 }
 .result__title {
-    font-family: 'Mountains of Christmas', cursive;
-    font-size: 2.5rem;
-    color: #ffd700;
-    text-align: center;
-    margin-bottom: 25px;
-    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+  font-family: "Mountains of Christmas", cursive;
+  font-size: 2.5rem;
+  color: #ffd700;
+  text-align: center;
+  margin-bottom: 25px;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
 }
 .result__btn-next-game {
 }
 
-
-
-
 /* Загрузки во время чего либо */
-.loading{
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: fixed;
-    background: #1d1c1c;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-    display:  none;
+.loading {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  background: #1d1c1c;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  display: none;
 }
 
-.loading-first{
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: fixed;
-    z-index: 99;
-    background-color: #1c1e1f;
-    display: none;
-    
+.loading-first {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  z-index: 99;
+  background-color: #1c1e1f;
+  display: none;
 }
 
-.loading-second{
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: fixed;
-    z-index: 98;
-    background-color: #222222;
-    display: none;
+.loading-second {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  z-index: 98;
+  background-color: #222222;
+  display: none;
 }
 
-
-@keyframes loading{
-  0%{
-    display: block ;
+@keyframes loading {
+  0% {
+    display: block;
     transform: translate(0%, -500%);
   }
-  30%{
+  30% {
     display: block;
     transform: translate(0%, 0%);
   }
-  60%{
+  60% {
     display: block;
     transform: translate(0%, 0%);
   }
-  80%{
-    transform:translate(0%, 0%);
+  80% {
+    transform: translate(0%, 0%);
     display: block;
   }
-  100%{
-    transform:translate(0%, 500%);
+  100% {
+    transform: translate(0%, 500%);
     display: none;
   }
 }
 
-@keyframes loadingExit{
-  0%{
-    display: block ;
-    transform: translate(0%, 0%);
-  }
-  30%{
+@keyframes loadingExit {
+  0% {
     display: block;
     transform: translate(0%, 0%);
   }
-  60%{
+  30% {
     display: block;
     transform: translate(0%, 0%);
   }
-  80%{
-    transform:translate(0%, 0%);
+  60% {
+    display: block;
+    transform: translate(0%, 0%);
+  }
+  80% {
+    transform: translate(0%, 0%);
     display: block;
   }
-  100%{
-    transform:translate(0%, 500%);
+  100% {
+    transform: translate(0%, 500%);
     display: none;
   }
 }
 
-.loading img{
+.loading img {
   animation: loading-img 1.3s infinite;
   width: 50%;
   position: absolute;
@@ -604,135 +640,129 @@ h6 {
   left: 25%;
 }
 
-.loading>img:nth-child(2){
+.loading > img:nth-child(2) {
   animation: loading-img-leftB 5s forwards;
 }
 
-.loading>img:nth-child(3){
+.loading > img:nth-child(3) {
   animation: loading-img-a 5s forwards;
 }
 
-.loading>img:nth-child(4){
+.loading > img:nth-child(4) {
   animation: loading-img-rightB 5s forwards;
 }
 
-.loading>img:nth-child(5){
+.loading > img:nth-child(5) {
   animation: loading-img-team 5s forwards;
 }
 
-.active {
-  animation: loading 5s forwards;
-}
-
-@keyframes loading-img{
-  0%{
-    transform:scale(0.3);
+@keyframes loading-img {
+  0% {
+    transform: scale(0.3);
   }
-  100%{
-    transform:scale(0.3);
+  100% {
+    transform: scale(0.3);
   }
 }
 
-@keyframes loading-img-leftB{
-  0%{
-    transform:scale(0.3) translate(0%, -300%);
+@keyframes loading-img-leftB {
+  0% {
+    transform: scale(0.3) translate(0%, -300%);
   }
-  10%{
-    transform:scale(0.3) translate(0%, 5%);
+  10% {
+    transform: scale(0.3) translate(0%, 5%);
   }
-  15%{
-    transform:scale(0.3) translate(0%, 0%);
-  }
-
-  60%{
-    transform:scale(0.3) translate(0%, 0%)
-  }
-  65%{
-    transform:scale(0.3) translate(0%, 0%) rotate(-50deg)
-  }
-  75%{
-    transform:scale(0.3) translate(0%, 0%) rotate(-40deg)
+  15% {
+    transform: scale(0.3) translate(0%, 0%);
   }
 
-  100%{
-    transform:scale(0.3) translate(0%, 500%) rotate(-40deg);
+  60% {
+    transform: scale(0.3) translate(0%, 0%);
+  }
+  65% {
+    transform: scale(0.3) translate(0%, 0%) rotate(-50deg);
+  }
+  75% {
+    transform: scale(0.3) translate(0%, 0%) rotate(-40deg);
+  }
+
+  100% {
+    transform: scale(0.3) translate(0%, 500%) rotate(-40deg);
   }
 }
 
-@keyframes loading-img-a{
-  0%{
-    transform:scale(0.3) translate(0%, 300%);
+@keyframes loading-img-a {
+  0% {
+    transform: scale(0.3) translate(0%, 300%);
   }
-  10%{
-    transform:scale(0.3) translate(0%, -5%);
+  10% {
+    transform: scale(0.3) translate(0%, -5%);
   }
-  15%{
-    transform:scale(0.3) translate(0%, 0%);
+  15% {
+    transform: scale(0.3) translate(0%, 0%);
   }
-  20%{
-    transform:scale(0.3) translate(0%, 0%) rotate(-5deg);
+  20% {
+    transform: scale(0.3) translate(0%, 0%) rotate(-5deg);
   }
-  30%{
-    transform:scale(0.32) translate(0%, 0%) rotate(10deg);
+  30% {
+    transform: scale(0.32) translate(0%, 0%) rotate(10deg);
   }
-  35%{
-    transform:scale(0.3) translate(0%, 0%) rotate(0deg);
+  35% {
+    transform: scale(0.3) translate(0%, 0%) rotate(0deg);
   }
 
-
-
-  100%{
-    transform:scale(0.3) translate(-500%, 0%);
+  100% {
+    transform: scale(0.3) translate(-500%, 0%);
   }
 }
 
-@keyframes loading-img-rightB{
-  0%{
-    transform:scale(0.3) translate(0%, -300%);
+@keyframes loading-img-rightB {
+  0% {
+    transform: scale(0.3) translate(0%, -300%);
   }
-  10%{
-    transform:scale(0.3) translate(0%, 5%);
+  10% {
+    transform: scale(0.3) translate(0%, 5%);
   }
-  15%{
-    transform:scale(0.3) translate(0%, 0%);
+  15% {
+    transform: scale(0.3) translate(0%, 0%);
   }
-  20%{
-    transform:scale(0.3) translate(0%, 0%) rotate(-5deg);
+  20% {
+    transform: scale(0.3) translate(0%, 0%) rotate(-5deg);
   }
-  30%{
-    transform:scale(0.35) translate(0%, 0%) rotate(10deg);
+  30% {
+    transform: scale(0.35) translate(0%, 0%) rotate(10deg);
   }
-  35%{
-    transform:scale(0.3) translate(0%, 0%) rotate(0deg);
+  35% {
+    transform: scale(0.3) translate(0%, 0%) rotate(0deg);
   }
-  100%{
-    transform:scale(0.3) translate(-500%, 0%) rotate(0deg);
-  }
-}
-
-@keyframes loading-img-team{
-  0%{
-    transform:scale(0.3) translate(0%, 300%);
-  }
-  15%{
-    transform:scale(0.3) translate(0%, -5%);
-  }
-  20%{
-    transform:scale(0.3) translate(0%, 0%);
-  }
-  25%{
-    transform:scale(0.4) translate(0%, -5%);
-  }
-  50%{
-    transform:scale(0.3) translate(0%, 0%);
-  }
-  100%{
-    transform:scale(0.3) translate(0%, 0%);
+  100% {
+    transform: scale(0.3) translate(-500%, 0%) rotate(0deg);
   }
 }
 
-.loading p{
-    width: 50%;
+@keyframes loading-img-team {
+  0% {
+    transform: scale(0.3) translate(0%, 300%);
+  }
+  15% {
+    transform: scale(0.3) translate(0%, -5%);
+  }
+  20% {
+    transform: scale(0.3) translate(0%, 0%);
+  }
+  25% {
+    transform: scale(0.4) translate(0%, -5%);
+  }
+  50% {
+    transform: scale(0.3) translate(0%, 0%);
+  }
+  100% {
+    transform: scale(0.3) translate(0%, 0%);
+  }
+}
+
+.loading p {
+  width: 50%;
   position: absolute;
   bottom: 25%;
   /* transform: translate(-50%, -50%); */
@@ -742,7 +772,7 @@ h6 {
   font-size: 3rem;
 }
 
-.loading h3{
+.loading h3 {
   position: absolute;
   bottom: 1px;
   right: 10px;
@@ -753,49 +783,114 @@ h6 {
 
 /* Окно с героями */
 
-.cheange_hero{
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: fixed;
-    z-index: 80;
-    display: flex;
-    opacity: 0.7;
-    background-color: #1c1e1f;
+.choose-hero {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  z-index: 80;
+  opacity: 1;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10rem;
+  background: url(/img/background-cheangeHero.png);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-
-.hero {
-    width: 5rem;
-    height: 10rem;
-    background: blue;
-    margin: 1rem;
+.choose-hero__cards-heros {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  transition: all 2s;
 }
 
-
-.lose{
-
+.choose-hero h2 {
+  font-size: 4rem;
+  font-family: "Duality";
+  color: var(--color-firm-dark);
+  background: var(--color-firm-white);
+  padding: 0.5rem;
+  border-radius: var(--border-radius-1);
 }
 
-.win_on_boss{
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: fixed;
-    display: none;
-    justify-content: center;
-    z-index: 80;
-    opacity: 0.7;
-    background-color: #1c1e1f;
+.cards-heros__hero {
+  transition: all 0.5s;
 }
-.win_on_boss-text{
-    color: white;
+
+.hero__stats {
+  position: fixed;
+  bottom: 30px;
+  left: 20%;
+  right: 20%;
+
+  height: 20rem;
+  border-radius: var(--border-radius-1);
+  border: var(--color-green) 2px solid;
+  padding: 1rem;
+
+  display: none;
+  transition: all 0.5s;
+  background: var(--color-firm-white);
 }
-.win_on_boss-btn{
-    width: 10rem;
-    height: 2rem;
-    color: black;
-    z-index: 81;
+
+.cards-heros__hero:hover {
+}
+
+.cards-heros__hero .player-card__name {
+  position: absolute;
+}
+
+.cards-heros__hero:hover .back-hero-card,
+.cards-heros__hero:hover .font-hero-card {
+  transition: all 0.5s;
+  transform: perspective(900px) translateY(-5%) rotateX(30deg) translateZ(0)
+    scale(1.1);
+  box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+}
+
+.cards-heros__hero:hover .character-hero-card {
+  z-index: 4;
+  transform: translate3d(0%, -20%, 100px) scale(1.3);
+}
+
+.cards-heros__hero:hover .player-card__name {
+  transform: translate3d(0%, -50px, 100px) scale(1.5);
+}
+
+.cards-heros__hero:hover .hero__stats {
+  display: block;
+  transform: perspective(900px) translateY(55%) rotateX(15deg) translateZ(5rem)
+    scale(1.1);
+  z-index: 6;
+}
+
+/* окно победы или поражений */
+
+.lose {
+}
+
+.win_on_boss {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  display: none;
+  justify-content: center;
+  z-index: 80;
+  opacity: 0.7;
+  background-color: #1c1e1f;
+}
+.win_on_boss-text {
+  color: white;
+}
+.win_on_boss-btn {
+  width: 10rem;
+  height: 2rem;
+  color: black;
+  z-index: 81;
 }

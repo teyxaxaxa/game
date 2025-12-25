@@ -6,65 +6,92 @@ let bgimg = document.getElementById('body')
 
 // объект персонажей
 const heros = {
-    hero1:{
-        name: "Плут Рясу",
-        maxHealth: 60,
-        maxShield: 20,
-        startEnergy: 3,
-        maxEnergy: 3,
-        image:"img/characterRyasu-hero-card.png",
-        startDeck: ['snowball', 'snowball', 'snowball', 'frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift']
-    },
-    hero2:{
-        name: "Волшебница Ульра",
-        maxHealth: 80,
-        maxShield: 320,
-        startEnergy: 6,
-        maxEnergy: 6,
-        image:"img/characterUlra-hero-card.png",
-        startDeck: ['snowball', 'snowball', 'snowball', 'frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift']
-    },
-    hero3:{
-        name: "Леший Стекло",
-        maxHealth: 100,
-        maxShield: 220,
+    hero1: {
+        name: "Рясу",
+        maxHealth: 40,
+        maxShield: 10,
         startEnergy: 10,
         maxEnergy: 10,
-        image:"img/characterSteclo-hero-card.png",
-        startDeck: ['snowball']
+        image: "img/characterRyasu-hero-card.png",
+        startDeck: ['snowball', 'snowball', 'snowball', 'frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift'],
+        description: "Очень проворный эльф плут Рясу! Из-за отсутствие брони и большое здоровье, Рясу имеет множество атакующий карт и имеет шанс увернуться от атак!",
     },
-    hero4:{
-        name: "Проказница Мила",
-        maxHealth: 10,
-        maxShield: 2,
-        startEnergy: 0,
-        maxEnergy: 2,
-        image:"img/characterMil-hero-card.png",
-        startDeck: ['snowball', 'snowball', 'snowball', 'frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift']
+    hero2: {
+        name: "Ульра",
+        maxHealth: 30,
+        maxShield: 20,
+        startEnergy: 12,
+        maxEnergy: 12,
+        image: "img/characterUlra-hero-card.png",
+        startDeck: ['snowball', 'snowball', 'snowball', 'frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift'],
+        description: "dddd",
+    },
+    hero3: {
+        name: "Стекло",
+        maxHealth: 60,
+        maxShield: 40,
+        startEnergy: 8,
+        maxEnergy: 8,
+        image: "img/characterSteclo-hero-card.png",
+        startDeck: ['snowball'],
+        description: "dddd",
+    },
+    hero4: {
+        name: "Мила",
+        maxHealth: 50,
+        maxShield: 30,
+        startEnergy: 11,
+        maxEnergy: 11,
+        image: "img/characterMil-hero-card.png",
+        startDeck: ['snowball', 'snowball', 'snowball', 'frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift'],
+        description: "dddd",
     },
 }
 //выбор персонажа
 
-function cheange_hero() {
-    const hero_cont=document.getElementById('cheange_hero')
-    hero_cont.innerHTML=''
-    Object.keys(heros).forEach(heroId =>{
+function chooseHero() {
+    const hero_window = document.getElementById('chooseHeroWindow')
+    const hero_cont = document.getElementById('chooseHero')
+    hero_cont.innerHTML = ''
+    Object.keys(heros).forEach(heroId => {
         const player = heros[heroId]
         const heroElement = document.createElement('div')
-        heroElement.className='hero'
+        heroElement.className = 'cards-heros__hero'
         heroElement.innerHTML = `
-        <p class="hero-health">${player.maxHealth}<?p>
-        <p class="hero-Shield">${player.maxShield}<?p>
-        <p class="hero-Energy">${player.maxEnergy}<?p>
+        <img
+              src="img/font-hero-card.png"
+              alt="рамка"
+              class="player-card__img font-hero-card"
+            />
+            <img
+              src="${player.image}"
+              alt="игрок"
+              class="player-card__img character-hero-card"
+              id="player-card__img"
+            />
+            <img
+              src="img/back-hero-card.png"
+              alt="фон"
+              class="player-card__img back-hero-card"
+            />
+            <div class="stats__class">
+              <div class="player-card__name" id="player-card__name">${player.name}</div>
+            </div>
+            <div class="hero__stats">
+        <p class="hero-health">Здоровье: ${player.maxHealth}<?p>
+        <p class="hero-Shield">Максмимальная защита: ${player.maxShield}<?p>
+        <p class="hero-Energy">Максимальная энергия: ${player.maxEnergy}<?p>
+        <p class="hero-Energy">Описание: ${player.description}<?p>
+        </div>
         `
-        heroElement.addEventListener('click',()=>{hero_can_play(heroId); initGame()})
-        
+        heroElement.addEventListener('click', () => { hero_can_play(heroId); initGame() })
+
         hero_cont.appendChild(heroElement)
     })
-    
+
 }
 
-function hero_can_play(heroId){
+function hero_can_play(heroId) {
     const hero = heros[heroId]
     GAME_CONFIG.player = {
         name: hero.name,
@@ -75,13 +102,13 @@ function hero_can_play(heroId){
         image: hero.image,
         startDeck: hero.startDeck
     }
-    if (Game.player.health<GAME_CONFIG.player.maxHealth){
-        Game.player.health=GAME_CONFIG.player.maxHealth
+    if (Game.player.health < GAME_CONFIG.player.maxHealth) {
+        Game.player.health = GAME_CONFIG.player.maxHealth
     }
-    else if (Game.player.health>GAME_CONFIG.player.maxHealth){
-        Game.player.health=GAME_CONFIG.player.maxHealth
+    else if (Game.player.health > GAME_CONFIG.player.maxHealth) {
+        Game.player.health = GAME_CONFIG.player.maxHealth
     }
-    document.getElementById('cheange_hero').style.display='none'
+    document.getElementById('chooseHeroWindow').style.display = 'none'
 }
 // Константы и настройки игры
 let GAME_CONFIG = {
@@ -90,7 +117,7 @@ let GAME_CONFIG = {
         maxShield: 20,
         startEnergy: 3,
         maxEnergy: 3,
-        image:"",
+        image: "",
         name: "",
         startDeck: ['snowball', 'snowball', 'snowball', 'frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift']
     },
@@ -182,14 +209,14 @@ function newStatsboss() {
 }
 
 newStatsboss();
-cheange_hero()
+chooseHero()
 // Объект игры
 const Game = {
     player: {
         health: GAME_CONFIG.player.maxHealth,
         maxHealth: GAME_CONFIG.player.maxHealth,
         maxShield: GAME_CONFIG.player.maxShield,
-        image:GAME_CONFIG.player.image,
+        image: GAME_CONFIG.player.image,
         shield: 0,
         energy: GAME_CONFIG.player.startEnergy,
         maxEnergy: GAME_CONFIG.player.maxEnergy,
@@ -212,14 +239,24 @@ const Game = {
 
 // Определение карт
 const CARDS = {
+    sneakAttack: {
+        id: 'sneakAttack',
+        name: 'Атака исподтишка',
+        type: 'attack',
+        cost: 10,
+        value: 5,
+        description: 'Наносит 5 урона игнорируя защиту босса',
+        icon: 'img/iconCards/sneakAttack.png',
+        color: '#e74c3c',
+    },
     snowball: {
         id: 'snowball',
         name: 'Снежок',
         type: 'attack',
-        cost: 1,
+        cost: 10,
         value: 500,
         description: 'Наносит 5 урона',
-        icon: '❄️',
+        icon: 'img/iconCards/sneakAttack.png',
         color: '#e74c3c',
     },
     frostShield: {
@@ -229,7 +266,7 @@ const CARDS = {
         cost: 1,
         value: 7,
         description: 'Дает 7 защиты',
-        icon: '🛡️',
+        icon: 'img/iconCards/sneakAttack.png',
         color: '#3498db'
     },
     icicle: {
@@ -239,7 +276,7 @@ const CARDS = {
         cost: 2,
         value: 8,
         description: 'Наносит 8 урона',
-        icon: '🧊',
+        icon: 'img/iconCards/sneakAttack.png',
         color: '#e74c3c'
     },
     surpriseGift: {
@@ -249,7 +286,7 @@ const CARDS = {
         cost: 1,
         value: { shield: 5, energy: 1 },
         description: 'Дает 5 защиты и +1 энергии в след. ходу',
-        icon: '🎁',
+        icon: 'img/iconCards/sneakAttack.png',
         color: '#3498db'
     },
     glowingGarland: {
@@ -259,7 +296,7 @@ const CARDS = {
         cost: 0,
         value: 3,
         description: 'Наносит 3 урона',
-        icon: '✨',
+        icon: 'img/iconCards/sneakAttack.png',
         color: '#9b59b6'
     },
     mulledWine: {
@@ -269,7 +306,7 @@ const CARDS = {
         cost: 2,
         value: 4,
         description: 'Восстанавливает 4 здоровья',
-        icon: '🍷',
+        icon: 'img/iconCards/sneakAttack.png',
         color: '#9b59b6'
     },
     test1: {
@@ -279,7 +316,7 @@ const CARDS = {
         cost: 3,
         value: 3,
         description: 'Наносит 20 урона',
-        icon: '😀',
+        icon: 'img/iconCards/sneakAttack.png',
         color: '#9b59b6'
     },
     test2: {
@@ -289,7 +326,7 @@ const CARDS = {
         cost: 0,
         value: 3,
         description: 'Восстанавливает 4 здоровья и дает 3 защиты',
-        icon: '🦝',
+        icon: 'img/iconCards/sneakAttack.png',
         color: '#9b59b6'
     },
 };
@@ -297,7 +334,7 @@ const CARDS = {
 // Инициализация игры
 function initGame() {
     // Сброс состояния игры
-    
+
     Game.player = {
         health: Game.player.health,
         maxHealth: GAME_CONFIG.player.maxHealth,
@@ -368,13 +405,13 @@ function drawCards(count) {
                 break;
             }
         }
-        const maxleght=5
+        const maxleght = 5
         // Берем карту из колоды
         const cardId = Game.player.deck.pop();
-        if (Game.player.hand.length<maxleght) {
+        if (Game.player.hand.length < maxleght) {
             Game.player.hand.push(cardId)
         }
-        else{
+        else {
             console.log('Массив достиг максимального размера!');
         }
 
@@ -386,7 +423,7 @@ function drawCards(count) {
 function updateHand() {
     const handContainer = document.getElementById('game-area__hand');
     handContainer.innerHTML = '';
-        
+
     Game.player.hand.forEach(cardId => {
         const card = CARDS[cardId];
         const cardElement = document.createElement('div');
@@ -419,9 +456,9 @@ function updateHand() {
         cardElement.innerHTML = `
             <div class="card-cost">${card.cost}</div>
             <div class="card-name">${card.name}</div>
-            <div class="card-icon">${card.icon}</div>
+            <div class="card-icon"><img src="${card.icon}" alt="card icon"/></div>
             <div class="card-description">${card.description}</div>
-            <div class="card-type">${card.type === 'attack' ? 'АТАКА' : card.type === 'defense' ? 'ЗАЩИТА' : 'ОСОБАЯ'}</div>
+            
         `;
 
         if (canPlay) {
@@ -638,17 +675,17 @@ function dealDamageToPlayer(damage, source) {
 // Проверка конца игры
 function checkGameOver() {
     if (Game.boss.health <= 0) {
-        if (GAME_LEVEL=== 4){
+        if (GAME_LEVEL === 4) {
             Game.gameOver = true;
             showResult(true);
-            
+
         }
-        if (Game.boss.health <= 0 && GAME_LEVEL<4){
-        const win_boss = document.getElementById('win_on_boss')
-        win_boss.style.display='flex'
-        document.getElementById('win_on_boss-btn').addEventListener('click',() => win_boss.style.display='none')
-        document.getElementById('win_on_boss-text').textContent=`вы победили ${Game.boss.name}! хотите продолжить путь?`
-    }
+        if (Game.boss.health <= 0 && GAME_LEVEL < 4) {
+            const win_boss = document.getElementById('win_on_boss')
+            win_boss.style.display = 'flex'
+            document.getElementById('win_on_boss-btn').addEventListener('click', () => win_boss.style.display = 'none')
+            document.getElementById('win_on_boss-text').textContent = `вы победили ${Game.boss.name}! хотите продолжить путь?`
+        }
         GAME_LEVEL += 1
         newStatsboss()
         initGame();
@@ -671,32 +708,38 @@ function showResult(isWin) {
 
     if (isWin) {
         title.textContent = 'ПОБЕДА!';
-        modal.style.backgroundImage =`url("img/win.jpg")`
+        modal.style.backgroundImage = `url("img/end-img-firstFrame.png")`
         modal.style.backgroundRepeat = 'no-repeat'
         modal.style.backgroundSize = 'cover'
+        setTimeout(() => {
+            modal.style.backgroundImage = `url("img/end-img-secondFrameWin.png")`;
+        }, 1500);
         message.textContent = `Вы победили ${Game.boss.name}! С Новым Годом!`;
         const button_container = document.createElement('div')
         button_container.className = 'button_container'
-        button_container.innerHTML= `
+        button_container.innerHTML = `
         <a class="btn" id = "btn-lose" href="index.html">ЗАВЕРШИТЬ ИГРУ</a>
         <a class="btn" id = "btn-lose" href="game.html">ПОВТОРИТЬ ИГРУ</a>
         `
         modal.appendChild(button_container)
         addToLog('Вы победили Снеговика-Воина! Поздравляем!');
     } else {
-        modal.style.backgroundImage =`url("img/win.jpg")`
+        modal.style.backgroundImage = `url("img/end-img-firstFrame.png")`
         modal.style.backgroundRepeat = 'no-repeat'
         modal.style.backgroundSize = 'cover'
+        setTimeout(() => {
+            modal.style.backgroundImage = `url("img/end-img-secondFrameLose.png")`;
+        }, 1500);
         title.textContent = 'ПОРАЖЕНИЕ!';
         const button_container = document.createElement('div')
         button_container.className = 'button_container'
-        button_container.innerHTML= `
+        button_container.innerHTML = `
         <a class="btn" id = "btn-lose" href="index.html">ЗАВЕРШИТЬ ИГРУ</a>
         <a class="btn" id = "btn-lose" href="game.html">ПОВТОРИТЬ ИГРУ</a>
         `
         modal.appendChild(button_container)
         message.textContent = `${Game.boss.name} оказался сильнее. Попробуйте еще раз!`;
-        message.className="lose"
+        message.className = "lose"
         addToLog('Вы проиграли. Снеговик-Воин победил!');
     }
 
@@ -822,8 +865,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btn-draw').addEventListener('click', drawTestCard);
 
     // Кнопка перезапуска игры
-    document.getElementById('restart-btn').addEventListener('click',() => location.reload());
-    
+    document.getElementById('restart-btn').addEventListener('click', () => location.reload());
+
     // Кнопка помощи (правила)
     // document.getElementById('help-btn').addEventListener('click', showRules);
 
