@@ -878,19 +878,161 @@ h6 {
   left: 0;
   right: 0;
   bottom: 0;
+  width: 100%;
+    height: 100%;
   position: fixed;
   display: none;
   justify-content: center;
+  align-items: center;
   z-index: 80;
-  opacity: 0.7;
-  background-color: #1c1e1f;
+  /* opacity: 0.7;
+  background-color: #1c1e1f; */
 }
+.win_on_boss-blur {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 1;
+}
+.win_on_boss-content {
+    background: rgba(255, 215, 215, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    padding: 40px;
+    max-width: 900px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 215, 0, 0.1),
+                inset 0 0 20px rgba(255, 215, 0, 0.05);
+    
+}
+.win_on_boss-image-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 300px;
+    margin: 0 auto 30px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+.win_on_boss-hero {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 15px;
+    transition: transform 0.5s ease;
+}
+.image-glow {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(
+        149deg, rgb(112, 169, 255) 0%,
+        rgb(57, 69, 175) 42%,
+        rgb(71, 15, 123) 72%,
+        rgb(111, 53, 134) 100%);
+    background-size: 300% 300%;
+    border-radius: 20px;
+    z-index: -1;
+    filter: blur(20px);
+    animation: gradient 5s ease infinite;
+}
+.win_on_boss-title {
+    color: #ffd700;
+    font-size: 3.5rem;
+    margin: 0 0 20px;
+    text-shadow: 0 0 30px rgba(255, 215, 0, 0.8),
+                 0 0 60px rgba(255, 140, 0, 0.4),
+                 2px 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
+    font-weight: 800;
+    animation: titleGlow 2s infinite alternate;
+}
+
 .win_on_boss-text {
   color: white;
+  font-size: 1.4rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    padding: 0 20px;
+    font-weight: 300;
 }
 .win_on_boss-btn {
-  width: 10rem;
-  height: 2rem;
-  color: black;
-  z-index: 81;
+     background: linear-gradient(145deg, 
+        rgba(255, 215, 0, 0.9), 
+        rgba(255, 140, 0, 0.9));
+        color: #000;
+    border: none;
+    padding: 20px 60px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 10px 30px rgba(255, 140, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    z-index: 81;
+}
+.win_on_boss-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(255, 140, 0, 0.6),
+                0 0 30px rgba(255, 215, 0, 0.3);
+    background: linear-gradient(145deg, 
+        rgba(255, 225, 0, 0.95), 
+        rgba(255, 160, 0, 0.95));
+}
+.win_on_boss-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.2), 
+        transparent);
+    transition: 0.5s;
+}
+
+.win_on_boss-btn:hover::before {
+    left: 100%;
+}
+@keyframes gradient{
+    0% {background-position: 80% 0;}
+    50%{background-position: 20% 100%;}
+    100%{background-position: 80% 0;}
+}
+@keyframes titleGlow {
+    from {
+        text-shadow: 0 0 30px rgba(255, 215, 0, 0.8),
+                     0 0 60px rgba(255, 140, 0, 0.4),
+                     2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    to {
+        text-shadow: 0 0 40px rgba(255, 215, 0, 1),
+                     0 0 80px rgba(255, 140, 0, 0.6),
+                     3px 3px 6px rgba(0, 0, 0, 0.5);
+    }
 }
