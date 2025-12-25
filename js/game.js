@@ -769,8 +769,9 @@ function bossTurn() {
         console.log(" третье условие выполнилось!");
         // Наносим оставшийся урон
         Game.boss.health = Math.max(0, Game.boss.health - fireDamage);
-        addToLog(`Босс получает ${fireDamage} урона огня, сейчас "${Game.boss.countFire}" жетон(ов) огня`);
         Game.boss.countFire -= 1;
+        addToLog(`Босс получает ${fireDamage} урона огня, сейчас "${Game.boss.countFire}" жетон(ов) огня`);
+        
     }
     // Переход к ходу игрока
     Game.turn = 'player';
@@ -899,8 +900,6 @@ function showResult(isWin) {
         const button_container = document.createElement('div')
         button_container.className = 'button_container'
         button_container.innerHTML = `
-        <a class="btn" id = "btn-lose" href="index.html">ЗАВЕРШИТЬ ИГРУ</a>
-        <a class="btn" id = "btn-lose" href="game.html">ПОВТОРИТЬ ИГРУ</a>
         `
         modal.appendChild(button_container)
         addToLog('Вы победили Снеговика-Воина! Поздравляем!');
@@ -915,8 +914,6 @@ function showResult(isWin) {
         const button_container = document.createElement('div')
         button_container.className = 'button_container'
         button_container.innerHTML = `
-        <a class="btn" id = "btn-lose" href="index.html">ЗАВЕРШИТЬ ИГРУ</a>
-        <a class="btn" id = "btn-lose" href="game.html">ПОВТОРИТЬ ИГРУ</a>
         `
         modal.appendChild(button_container)
         message.textContent = `${Game.boss.name} оказался сильнее. Попробуйте еще раз!`;
