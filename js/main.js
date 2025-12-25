@@ -14,6 +14,7 @@ const characterryasu = document.querySelector(".characterryasu");
 const characterjulia = document.querySelector(".characterjulia");
 const characterartemolen = document.querySelector(".characterartemolen");
 const playBtn = document.querySelector(".play-btn");
+const gameTitle = document.querySelector(".game-title");
 
 // Функция для анимации появления
 function animateElement(element, delay) {
@@ -35,35 +36,32 @@ function animateElement(element, delay) {
 }
 
 // Последовательность появления:
-// 1. Пряник через 1 секунду
+// 1. Заголовок игры первым
+setTimeout(() => {
+  animateElement(gameTitle, 0);
+}, 300);
+
+// 2. Пряник через 0.5 секунды
 setTimeout(() => {
   animateElement(character, 0);
 }, 500);
 
-// 2. Милиса и Рустам одновременно через 2 секунды
+// 3. Милиса и Рустам одновременно через 1 секунду
 setTimeout(() => {
   animateElement(charactermila, 0);
   animateElement(characterryasu, 0);
 }, 1000);
 
-// 3. Юля и Артём одновременно через 3 секунды
+// 4. Юля и Артём одновременно через 1.5 секунды
 setTimeout(() => {
   animateElement(characterjulia, 0);
   animateElement(characterartemolen, 0);
 }, 1500);
 
-// 4. Кнопка через 3.5 секунды (через 0.5s после последних персонажей)
+// 5. Кнопка через 2.5 секунды (через 1s после последних персонажей)
 setTimeout(() => {
   animateElement(playBtn, 0);
 }, 2500);
-
-
-
-
-
-
-
-
 
 // Максимально просто но ОЧЕНЬ много
 function createSuperSpark() {
@@ -97,15 +95,11 @@ if (!document.querySelector('#spark-pop-styles')) {
 // СУПЕР ЧАСТО - каждые 20ms!
 setInterval(createSuperSpark, 20);
 
-
-
 // Появление анимации при нажатии
-
 const loading = document.getElementById('loading');
 const loadingFirst = document.getElementById('first');
 const loadingSecond = document.getElementById('second');
 const loadingbtn = document.getElementById('loadingbtn');
-
 
 loadingbtn.addEventListener('click', () => {
     loading.style.display = "block";
@@ -115,9 +109,7 @@ loadingbtn.addEventListener('click', () => {
     loadingFirst.style.animation = "loading 5s forwards";
     loadingSecond.style.animation = "loading 4s forwards";
 
-setTimeout(() => {
-  window.location.replace('game.html');
-}, 2500);
-
-
-})
+    setTimeout(() => {
+      window.location.replace('game.html');
+    }, 2500);
+});
