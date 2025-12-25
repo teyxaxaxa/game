@@ -13,8 +13,8 @@ const heros = {
         startEnergy: 10,
         maxEnergy: 10,
         image: "img/characterRyasu-hero-card.png",
-        startDeck: ['snowball', 'snowball', 'snowball', 'frostShield', 'frostShield', 'icicle', 'glowingGarland', 'mulledWine', 'surpriseGift'],
-        description: "Очень проворный эльф плут Рясу! Из-за отсутствие брони и большое здоровье, Рясу имеет множество атакующий карт и имеет шанс увернуться от атак!",
+        startDeck: ['sneakAttack','sneakAttack','rangeAttack','rangeAttack','sandToss','sandToss','dirtyTrick'],
+        description: "Очень проворный эльф плут Рясу! Из-за отсутствие брони и большое здоровье, Рясу имеет множество атакующий карт. Получайте жетоны ловкости, чтобы увеличить шанс уклонение!",
     },
     hero2: {
         name: "Ульра",
@@ -38,7 +38,7 @@ const heros = {
     },
     hero4: {
         name: "Мила",
-        maxHealth: 50,
+        maxHealth: 10,
         maxShield: 30,
         startEnergy: 11,
         maxEnergy: 11,
@@ -249,14 +249,34 @@ const CARDS = {
         icon: 'img/iconCards/sneakAttack.png',
         color: '#e74c3c',
     },
-    snowball: {
-        id: 'snowball',
-        name: 'Снежок',
+    dirtyTrick: {
+        id: 'dirtyTrick',
+        name: 'Грязный трюк',
         type: 'attack',
-        cost: 10,
-        value: 500,
+        cost: 4,
+        value: 3,
+        description: 'Наносит 3 урона. Получите 1 жетон ловкости',
+        icon: 'img/iconCards/dirtyTrick.png',
+        color: '#e74c3c',
+    },
+    sandToss: {
+        id: 'sandToss',
+        name: 'Бросить песок',
+        type: 'attack',
+        cost: 2,
+        value: 5,
+        description: 'Наносит 2 урона. Получите 1 жетона ловкости',
+        icon: 'img/iconCards/sandToss.png',
+        color: '#e74c3c',
+    },
+    rangeAttack: {
+        id: 'rangeAttack',
+        name: 'Выстрел',
+        type: 'attack',
+        cost: 5,
+        value: 5,
         description: 'Наносит 5 урона',
-        icon: 'img/iconCards/sneakAttack.png',
+        icon: 'img/iconCards/rangeAttack.png',
         color: '#e74c3c',
     },
     frostShield: {
@@ -873,24 +893,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Закрытие модального окна правил
     // document.getElementById('close-rules-btn').addEventListener('click', hideRules);
 
-    // Перезапуск игры из модального окна результата
-    // document.getElementById('btn-next-game').addEventListener('click', () => {
-    //     document.getElementById('modal-overlay').style.display = 'none';
-    //     GAME_LEVEL += 1
-    //     newStatsboss()
-    //     initGame();
-
-    //     console.log(GAME_LEVEL)
-    // });
-
-    // Закрытие модальных окон при клике вне их
-    // document.querySelectorAll('.modal-overlay').forEach(modal => {
-    //     modal.addEventListener('click', (e) => {
-    //         if (e.target === modal) {
-    //             modal.style.display = 'none';
-    //         }
-    //     });
-    // });
 });
 
 // открытие меню 
