@@ -37,6 +37,57 @@ body {
   transition: transform 0.1s linear;
 }
 
+/* Стили для заголовка игры */
+.game-title {
+  position: fixed;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-30px) scale(0.9);
+  opacity: 0; /* Важно: изначально прозрачный */
+  
+  font-family: 'Rubik', sans-serif;
+  font-weight: 900;
+  font-size: 4.5rem;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-align: center;
+  text-shadow: 
+    0 2px 10px rgba(0, 0, 0, 0.8),
+    0 0 20px rgba(255, 100, 0, 0.5),
+    0 0 30px rgba(255, 50, 0, 0.3);
+  
+  z-index: 15;
+  --glow-color: 255, 100, 50;
+  pointer-events: none;
+  
+  /* Убедимся, что скрытый класс работает */
+  transition: opacity 0.3s ease;
+}
+
+/* Убедимся, что hidden класс скрывает элемент */
+.hidden {
+  opacity: 0 !important;
+  visibility: hidden;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 1200px) {
+  .game-title {
+    font-size: 4.5rem;
+    top: 12%;
+  }
+}
+
+@media (max-width: 768px) {
+  .game-title {
+    font-size: 3rem;
+    top: 10%;
+    letter-spacing: 2px;
+  }
+}
+
+
 /* ОБЩИЕ стили для всех персонажей */
 .character,
 .charactermila,
@@ -120,14 +171,16 @@ body {
   }
 }
 
-/* Анимация появления для всех персонажей */
+/* Анимация появления для всех персонажей И заголовка */
 .character.show,
 .charactermila.show,
 .characterryasu.show,
 .characterjulia.show,
 .characterartemolen.show,
-.play-btn.show {
+.play-btn.show,
+.game-title.show {
   animation: smoothAppear 1.5s ease-out forwards;
+  visibility: visible;
 }
 
 /* Цвета свечения для каждого персонажа */
@@ -476,10 +529,3 @@ body {
     display: none;
   }
 }
-
-
-
-
-
-
-
