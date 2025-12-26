@@ -1,3 +1,16 @@
+:root{
+    --color-red: #DA2C38;
+    --color-green: #226F54;
+    --color-firm-white: #F4F0BB;
+    --color-firm-dark: #131313;
+    --color-dark: #000;
+    --color-white: #fff;
+    --color-brow: #43291F;
+    --border-radius-1: 0.5rem;
+    --box-shadow: 0 2rem 3rem var(--color-dark);
+    --background: var(--color-white);
+}
+
 html {
   cursor: url('../img/Candycursor.png') 16 16, auto;
 }
