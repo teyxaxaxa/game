@@ -1,6 +1,5 @@
 html {
   cursor: url('../img/Candycursor.png') 16 16, auto;
-  /* 16 16 - координаты "горячей точки" (x y) */
 }
 
 /* Для разных состояний */
@@ -69,25 +68,21 @@ body {
   visibility: hidden;
 }
 
-
-
-/* Стили для бегущей строки партнеров */
+/* ОБЩИЕ стили для обоих контейнеров партнеров */
 .partners-container {
   position: fixed;
-  top: 4%; /* На одном уровне с заголовком */
-  left: 75%; /* Позиция справа */
-  width: 25%; /* Узкая полоска */
+  top: 4%; 
+  width: 25%; 
   height: 70px;
   overflow: hidden;
   z-index: 18;
   pointer-events: none;
   opacity: 0;
-  /* УБИРАЕМ начальный transform - анимация сама установит */
   mask-image: linear-gradient(
     to right,
     transparent 0%,
-    black 25%, /* Уже область появления */
-    black 75%, /* Уже область исчезновения */
+    black 25%,
+    black 75%, 
     transparent 100%
   );
   -webkit-mask-image: linear-gradient(
@@ -100,7 +95,18 @@ body {
   --glow-color: 255, 200, 100;
 }
 
-/* Отдельная анимация для бегущей строки (она не по центру!) */
+/* Левый контейнер */
+.partners-left {
+  left: 0; 
+}
+
+/* Правый контейнер */
+.partners-right {
+  right: 0; 
+  left: auto; 
+}
+
+/* анимация для бегущих строк */
 @keyframes partnersAppear {
   0% {
     transform: translateY(80px) scale(0.9);
@@ -127,13 +133,13 @@ body {
     filter: drop-shadow(0 0 8px rgba(var(--glow-color), 0.4));
   }
   100% {
-    transform: translateY(0) scale(1); /* Финальное положение - без смещения вниз! */
+    transform: translateY(0) scale(1);
     opacity: 1;
     filter: drop-shadow(0 0 5px rgba(var(--glow-color), 0.2));
   }
 }
 
-/* Только для бегущей строки своя анимация */
+/* Только для бегущих строк своя анимация */
 .partners-container.show {
   animation: partnersAppear 1.5s ease-out forwards;
   visibility: visible;
@@ -147,14 +153,6 @@ body {
   position: relative;
 }
 
-/* Трек с логотипами */
-.partners-track {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  animation: marquee 15s linear infinite; /* Быстрее для узкой полоски */
-  will-change: transform;
-}
 
 /* Отдельный логотип партнера */
 .partner-logo {
@@ -178,15 +176,7 @@ body {
   filter: brightness(1.1) contrast(1.05);
 }
 
-/* Анимация бегущей строки */
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
+
 
 /* Пауза при наведении */
 .partners-marquee:hover .partners-track {
@@ -202,7 +192,6 @@ body {
   
   .partners-container {
     top: 8%;
-    left: 70%;
     width: 30%;
     height: 60px;
     mask-image: linear-gradient(
@@ -326,7 +315,7 @@ body {
   }
 }
 
-/* Анимация появления для всех элементов кроме бегущей строки */
+/* Анимация появления для всех элементов кроме бегущих строк */
 .character.show,
 .charactermila.show,
 .characterryasu.show,
@@ -660,5 +649,85 @@ body {
     display: none;
   }
 }
+/* Контейнер */
+.partners-container {
+  position: fixed;
+  top: 4%;
+  width: 25%;
+  height: 70px;
+  overflow: hidden;
+  z-index: 18;
+  opacity: 0;
 
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 25%,
+    black 75%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 25%,
+    black 75%,
+    transparent 100%
+  );
+}
 
+/* Лево / право */
+.partners-left { left: 0; }
+.partners-right { right: 0; }
+
+/* Marquee */
+.partners-marquee {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Трек */
+.partners-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 18s linear infinite;
+}
+
+/* Группы логотипов */
+.partners-group {
+  display: flex;
+  align-items: center;
+}
+
+/* Логотип */
+.partner-logo {
+  flex-shrink: 0;
+  margin: 0 15px;
+  opacity: 0.8;
+}
+
+.partner-logo img {
+  height: 45px;
+  max-width: 100px;
+  object-fit: contain;
+}
+
+/* Анимация БЕЗ СКАЧКА */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Обратное направление для левой */
+.partners-left .partners-track {
+  animation-direction: reverse;
+}
+
+/* Появление */
+.partners-container.show {
+  animation: partnersAppear 1.5s ease-out forwards;
+}

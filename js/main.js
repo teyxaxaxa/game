@@ -15,7 +15,8 @@ const characterjulia = document.querySelector(".characterjulia");
 const characterartemolen = document.querySelector(".characterartemolen");
 const playBtn = document.querySelector(".play-btn");
 const gameTitle = document.querySelector(".game-title");
-const partnersContainer = document.querySelector(".partners-container");
+const partnersLeft = document.querySelector(".partners-left");
+const partnersRight = document.querySelector(".partners-right");
 
 // Функция для анимации появления
 function animateElement(element, delay, addIdle = true) {
@@ -31,8 +32,9 @@ function animateElement(element, delay, addIdle = true) {
 
     setTimeout(() => {
       element.classList.remove("show");
-      // Для заголовка и партнеров не добавляем idle, для остальных - добавляем
-      if (addIdle && element !== gameTitle && element !== partnersContainer) {
+      // Для заголовка и партнеров не добавляем idle
+      if (addIdle && element !== gameTitle && 
+          element !== partnersLeft && element !== partnersRight) {
         element.classList.add("idle");
       }
     }, 1500);
@@ -40,14 +42,15 @@ function animateElement(element, delay, addIdle = true) {
 }
 
 // Последовательность появления:
-// 1. Заголовок игры первым (БЕЗ анимации дыхания)
+// 1. Заголовок игры первым
 setTimeout(() => {
   animateElement(gameTitle, 0, false);
 }, 300);
 
-// 2. Бегущая строка партнеров
+// 2. Бегущие строки партнеров слева и справа одновременно
 setTimeout(() => {
-  animateElement(partnersContainer, 0, false);
+  animateElement(partnersLeft, 0, false);
+  animateElement(partnersRight, 0, false);
 }, 300);
 
 // 3. Пряник через 0.9 секунды
@@ -72,6 +75,7 @@ setTimeout(() => {
   animateElement(playBtn, 0);
 }, 2500);
 
+// Остальной JavaScript код без изменений...
 // Максимально просто но ОЧЕНЬ много
 function createSuperSpark() {
   const spark = document.createElement('div');
@@ -79,8 +83,8 @@ function createSuperSpark() {
     position: fixed;
     left: ${Math.random() * 100}vw;
     top: ${Math.random() * 100}vh;
-    width: 4px;
-    height: 4px;
+    width: 5px;
+    height: 5px;
     background: #ffb48eff;
     border-radius: 50%;
     pointer-events: none;
@@ -101,8 +105,7 @@ if (!document.querySelector('#spark-pop-styles')) {
   document.head.appendChild(style);
 }
 
-// СУПЕР ЧАСТО - каждые 20ms!
-setInterval(createSuperSpark, 20);
+setInterval(createSuperSpark, 50);
 
 // Появление анимации при нажатии
 const loading = document.getElementById('loading');
